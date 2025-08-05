@@ -831,24 +831,13 @@
     </footer>
 
     <script>
-        // Improved scroll handling - only scroll to top if there's no hash in URL
+        // Handle page load behavior - only scroll to top if there's no hash
         window.addEventListener('load', function() {
-            // Only scroll to top if there's no hash in the URL
             if (!window.location.hash) {
+                // No hash in URL, scroll to top
                 window.scrollTo(0, 0);
-            } else {
-                // If there's a hash, scroll to it after a brief delay to ensure elements are loaded
-                setTimeout(() => {
-                    const target = document.querySelector(window.location.hash);
-                    if (target) {
-                        const offsetTop = target.offsetTop - 80;
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 100);
             }
+            // If there's a hash, let the browser handle it naturally
         });
 
         // Set scroll restoration to manual for better control
@@ -971,4 +960,9 @@
             
             input.addEventListener('blur', function() {
                 const viewport = document.querySelector('meta[name="viewport"]');
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+            });
+        });
+    </script>
+</body>
+</html>
