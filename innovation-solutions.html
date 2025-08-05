@@ -331,6 +331,56 @@
             margin: 0 -20px;
         }
 
+        .tech-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .tech-video {
+            background: #ffffff;
+            height: 400px;
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tech-video-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #000;
+            position: relative;
+        }
+
+        .tech-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .tech-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .tech-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -541,6 +591,30 @@
                 padding: 2rem;
             }
 
+            /* Technologies Section */
+            .tech-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .tech-video {
+                height: 250px;
+                order: -1;
+                padding: 10px;
+            }
+
+            .tech-video iframe {
+                border-radius: 8px;
+            }
+
+            .tech-text h3 {
+                font-size: 1.8rem;
+            }
+
+            .tech-text p {
+                font-size: 1rem;
+            }
+
             .tech-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -678,6 +752,27 @@
             <div class="container">
                 <h2 class="section-title">Medical Technologies We Specialize In</h2>
                 <p class="section-subtitle">We leverage the latest medical technologies and healthcare platforms to deliver innovative solutions that advance patient care and medical research.</p>
+                
+                <div class="tech-content">
+                    <div class="tech-text">
+                        <h3>Cutting-Edge Healthcare Innovation</h3>
+                        <p>Our medical technology solutions are designed to revolutionize healthcare delivery, improve patient outcomes, and streamline clinical workflows through advanced digital health platforms.</p>
+                        <p>From AI-powered diagnostics to telemedicine platforms, we implement the most advanced healthcare technologies to transform your medical practice.</p>
+                    </div>
+                    <div class="tech-video">
+                        <div class="tech-video-wrapper">
+                            <iframe 
+                                width="560" 
+                                height="315" 
+                                src="https://www.youtube.com/embed/xYHRrmhjznI?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&fs=0" 
+                                title="Medical Innovation Video" 
+                                frameborder="0" 
+                                allow="autoplay; encrypted-media" 
+                                allowfullscreen="false">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="tech-grid">
                     <div class="tech-card">
@@ -863,7 +958,7 @@
         }, observerOptions);
 
         // Observe elements for animation
-        document.querySelectorAll('.solution-detail, .tech-card, .timeline-step').forEach(el => {
+        document.querySelectorAll('.solution-detail, .tech-card, .timeline-step, .tech-text, .tech-video').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
