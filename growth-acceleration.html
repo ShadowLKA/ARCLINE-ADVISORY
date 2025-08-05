@@ -773,13 +773,25 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
+        // Mobile menu toggle with proper animations
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
         mobileMenuBtn.addEventListener('click', function() {
             this.classList.toggle('active');
             mobileMenu.classList.toggle('active');
+            
+            // Animate hamburger to X
+            const spans = this.querySelectorAll('span');
+            if (this.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         });
 
         // Close mobile menu when clicking on a link
@@ -787,6 +799,12 @@
             link.addEventListener('click', function() {
                 mobileMenuBtn.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                
+                // Reset hamburger animation
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             });
         });
 
@@ -795,6 +813,12 @@
             if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
                 mobileMenuBtn.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                
+                // Reset hamburger animation
+                const spans = mobileMenuBtn.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             }
         });
 
@@ -832,20 +856,5 @@
             el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
             observer.observe(el);
         });
-
-        // Mobile menu animation
-        mobileMenuBtn.addEventListener('click', function() {
-            const spans = this.querySelectorAll('span');
-            if (this.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
-    </script>
 </body>
 </html>
