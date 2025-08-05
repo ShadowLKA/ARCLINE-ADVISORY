@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARCLINE ADVISORY - Analytics Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: inline-block;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .stat-detail {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        .charts-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 2rem;
+        }
+
+        .charts-section h2 {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .visit-log {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .visit-entry {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .visit-entry:last-child {
+            border-bottom: none;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn.danger {
+            background: rgba(255, 99, 99, 0.3);
+        }
+
+        .btn.danger:hover {
+            background: rgba(255, 99, 99, 0.4);
+        }
+
+        .page-visits {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .page-visit-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .page-visit-card h4 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .page-visit-count {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Analytics Dashboard</h1>
+            <p>Website Traffic & Visitor Analytics</p>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">🏠 Back to Homepage</a>
+            <a href="#" class="nav-btn" onclick="refreshData()">🔄 Refresh Data</a>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalVisits">0</div>
+                <div class="stat-label">Total Visits</div>
+                <div class="stat-detail">All time page views</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="todayVisits">0</div>
+                <div class="stat-label">Today's Visits</div>
+                <div class="stat-detail">Visits in the last 24 hours</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="uniqueVisitors">0</div>
+                <div class="stat-label">Unique Visitors</div>
+                <div class="stat-detail">Estimated unique users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="averageDaily">0</div>
+                <div class="stat-label">Daily Average</div>
+                <div class="stat-detail">Average visits per day</div>
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <h2>📈 Page Visit Breakdown</h2>
+            <div class="page-visits" id="pageVisits">
+                <!-- Page visit cards will be inserted here -->
+            </div>
+        </div>
+
+        <div class="charts-section">
+            <h2>📋 Recent Visit Log</h2>
+            <div class="visit-log" id="visitLog">
+                <!-- Visit entries will be inserted here -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="exportData()">📥 Export Data</button>
+            <button class="btn" onclick="simulateVisit()">🧪 Add Test Visit</button>
+            <button class="btn danger" onclick="clearData()">🗑️ Clear All Data</button>
+        </div>
+    </div>
+
+    <script>
+        // Analytics system using localStorage
+        class WebsiteAnalytics {
+            constructor() {
+                this.storageKey = 'arcline_analytics';
+                this.initializeData();
+                this.loadData();
+            }
+
+            initializeData() {
+                if (!localStorage.getItem(this.storageKey)) {
+                    const initialData = {
+                        visits: [],
+                        pageViews: {
+                            'Home': 0,
+                            'About': 0,
+                            'Services': 0,
+                            'Contact': 0,
+                            'Dashboard': 0
+                        },
+                        firstVisit: new Date().toISOString()
+                    };
+                    localStorage.setItem(this.storageKey, JSON.stringify(initialData));
+                }
+            }
+
+            loadData() {
+                try {
+                    this.data = JSON.parse(localStorage.getItem(this.storageKey));
+                } catch (e) {
+                    this.initializeData();
+                    this.data = JSON.parse(localStorage.getItem(this.storageKey));
+                }
+            }
+
+            saveData() {
+                localStorage.setItem(this.storageKey, JSON.stringify(this.data));
+            }
+
+            addVisit(page = 'Dashboard', userAgent = navigator.userAgent) {
+                const visit = {
+                    page: page,
+                    timestamp: new Date().toISOString(),
+                    userAgent: userAgent.substring(0, 100), // Truncate for storage
+                    url: window.location.href
+                };
+                
+                this.data.visits.push(visit);
+                this.data.pageViews[page] = (this.data.pageViews[page] || 0) + 1;
+                this.saveData();
+                this.updateDisplay();
+            }
+
+            getTotalVisits() {
+                return this.data.visits.length;
+            }
+
+            getTodayVisits() {
+                const today = new Date().toDateString();
+                return this.data.visits.filter(visit => 
+                    new Date(visit.timestamp).toDateString() === today
+                ).length;
+            }
+
+            getUniqueVisitors() {
+                // Simple estimation based on user agents (not perfect but gives an idea)
+                const uniqueAgents = new Set(this.data.visits.map(visit => visit.userAgent));
+                return uniqueAgents.size;
+            }
+
+            getDailyAverage() {
+                const firstVisit = new Date(this.data.firstVisit);
+                const now = new Date();
+                const daysDiff = Math.max(1, Math.ceil((now - firstVisit) / (1000 * 60 * 60 * 24)));
+                return Math.round(this.getTotalVisits() / daysDiff);
+            }
+
+            updateDisplay() {
+                // Update stats
+                document.getElementById('totalVisits').textContent = this.getTotalVisits();
+                document.getElementById('todayVisits').textContent = this.getTodayVisits();
+                document.getElementById('uniqueVisitors').textContent = this.getUniqueVisitors();
+                document.getElementById('averageDaily').textContent = this.getDailyAverage();
+
+                // Update page visits
+                this.updatePageVisits();
+                
+                // Update visit log
+                this.updateVisitLog();
+            }
+
+            updatePageVisits() {
+                const container = document.getElementById('pageVisits');
+                container.innerHTML = '';
+                
+                Object.entries(this.data.pageViews).forEach(([page, count]) => {
+                    const card = document.createElement('div');
+                    card.className = 'page-visit-card';
+                    card.innerHTML = `
+                        <h4>${page} Page</h4>
+                        <div class="page-visit-count">${count}</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            updateVisitLog() {
+                const container = document.getElementById('visitLog');
+                container.innerHTML = '';
+                
+                // Show last 20 visits
+                const recentVisits = this.data.visits.slice(-20).reverse();
+                
+                recentVisits.forEach(visit => {
+                    const entry = document.createElement('div');
+                    entry.className = 'visit-entry';
+                    
+                    const date = new Date(visit.timestamp);
+                    const timeString = date.toLocaleString();
+                    
+                    entry.innerHTML = `
+                        <div>
+                            <strong>${visit.page}</strong> - ${timeString}
+                        </div>
+                        <div style="opacity: 0.7; font-size: 0.9rem;">
+                            ${visit.userAgent.substring(0, 50)}...
+                        </div>
+                    `;
+                    container.appendChild(entry);
+                });
+
+                if (recentVisits.length === 0) {
+                    container.innerHTML = '<div style="text-align: center; opacity: 0.7; padding: 2rem;">No visits recorded yet</div>';
+                }
+            }
+
+            clearAllData() {
+                if (confirm('Are you sure you want to clear all analytics data? This cannot be undone.')) {
+                    localStorage.removeItem(this.storageKey);
+                    this.initializeData();
+                    this.loadData();
+                    this.updateDisplay();
+                    alert('All data has been cleared!');
+                }
+            }
+
+            exportData() {
+                const dataStr = JSON.stringify(this.data, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `arcline_analytics_${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+            }
+
+            simulateVisit() {
+                const pages = ['Home', 'About', 'Services', 'Contact'];
+                const randomPage = pages[Math.floor(Math.random() * pages.length)];
+                this.addVisit(randomPage, 'Test User Agent - Simulated Visit');
+                alert(`Added a test visit to ${randomPage} page!`);
+            }
+        }
+
+        // Initialize analytics
+        const analytics = new WebsiteAnalytics();
+
+        // Record this dashboard visit
+        analytics.addVisit('Dashboard');
+
+        // Global functions
+        function refreshData() {
+            analytics.loadData();
+            analytics.updateDisplay();
+            alert('Data refreshed!');
+        }
+
+        function clearData() {
+            analytics.clearAllData();
+        }
+
+        function exportData() {
+            analytics.exportData();
+        }
+
+        function simulateVisit() {
+            analytics.simulateVisit();
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(() => {
+            analytics.loadData();
+            analytics.updateDisplay();
+        }, 30000);
+    </script>
+</body>
+</html>
