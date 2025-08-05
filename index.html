@@ -310,12 +310,16 @@
             font-size: 1.2rem;
             text-align: center;
             overflow: hidden;
+            position: relative;
         }
 
         .about-video iframe {
             width: 100%;
             height: 100%;
             border-radius: 20px;
+            border: none;
+            outline: none;
+            box-shadow: none;
         }
 
         /* Services Section */
@@ -530,6 +534,10 @@
                 order: -1;
             }
 
+            .about-video iframe {
+                border-radius: 15px;
+            }
+
             /* Services Section */
             .services-grid {
                 grid-template-columns: 1fr;
@@ -607,6 +615,10 @@
 
             .about-video {
                 height: 200px;
+            }
+
+            .about-video iframe {
+                border-radius: 10px;
             }
 
             .btn-primary,
