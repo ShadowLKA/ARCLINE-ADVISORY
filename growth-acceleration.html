@@ -260,9 +260,26 @@
         /* Growth Areas Grid */
         .growth-areas {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2.5rem;
             margin-bottom: 4rem;
+        }
+
+        .growth-area:nth-child(3) {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .growth-area:nth-child(3) .growth-area-icon {
+            grid-column: 1;
+            margin: 0;
+        }
+
+        .growth-area:nth-child(3) .growth-content {
+            grid-column: 2;
         }
 
         .growth-area {
@@ -383,9 +400,27 @@
 
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 3rem;
+        }
+
+        .metric-card:nth-child(4),
+        .metric-card:nth-child(5),
+        .metric-card:nth-child(6) {
+            grid-column: span 1;
+        }
+
+        .metric-card:nth-child(4) {
+            grid-column: 1 / 2;
+        }
+
+        .metric-card:nth-child(5) {
+            grid-column: 2 / 3;
+        }
+
+        .metric-card:nth-child(6) {
+            grid-column: 3 / 4;
         }
 
         .metric-card {
@@ -589,6 +624,15 @@
                 gap: 2rem;
             }
 
+            .growth-area:nth-child(3) {
+                grid-column: span 1;
+                display: block;
+            }
+
+            .growth-area:nth-child(3) .growth-area-icon {
+                margin: 0 auto 2rem;
+            }
+
             .growth-area {
                 padding: 2rem;
             }
@@ -744,14 +788,16 @@
 
                     <div class="growth-area">
                         <div class="growth-area-icon">💰</div>
-                        <h3>Healthcare Revenue Optimization</h3>
-                        <p>Maximize your medical practice revenue through comprehensive healthcare financial strategies, including revenue cycle optimization, billing improvements, and new revenue stream development.</p>
-                        <ul class="growth-features">
-                            <li>Medical billing and coding optimization</li>
-                            <li>Insurance reimbursement maximization</li>
-                            <li>Healthcare pricing strategy development</li>
-                            <li>Alternative revenue stream identification</li>
-                        </ul>
+                        <div class="growth-content">
+                            <h3>Healthcare Revenue Optimization</h3>
+                            <p>Maximize your medical practice revenue through comprehensive healthcare financial strategies, including revenue cycle optimization, billing improvements, and new revenue stream development.</p>
+                            <ul class="growth-features">
+                                <li>Medical billing and coding optimization</li>
+                                <li>Insurance reimbursement maximization</li>
+                                <li>Healthcare pricing strategy development</li>
+                                <li>Alternative revenue stream identification</li>
+                            </ul>
+                        </div>
                     </div>
 
                     <div class="growth-area">
@@ -776,11 +822,6 @@
                 <p class="section-subtitle">Track and measure your medical practice growth with key healthcare performance indicators that matter most for clinical and financial success.</p>
                 
                 <div class="metrics-content">
-                    <div class="metrics-text">
-                        <h3>Accelerated Healthcare Growth</h3>
-                        <p>Our proven healthcare growth strategies deliver measurable results that transform medical practices and accelerate patient acquisition while maintaining exceptional care quality.</p>
-                        <p>From revenue optimization to operational efficiency, we implement data-driven solutions that scale your healthcare organization sustainably.</p>
-                    </div>
                     <div>
                         <div style="text-align: center; margin-bottom: 1rem;">
                             <p style="font-size: 0.85rem; color: #888; font-style: italic;">
@@ -800,6 +841,11 @@
                                 </iframe>
                             </div>
                         </div>
+                    </div>
+                    <div class="metrics-text">
+                        <h3>Accelerated Healthcare Growth</h3>
+                        <p>Our proven healthcare growth strategies deliver measurable results that transform medical practices and accelerate patient acquisition while maintaining exceptional care quality.</p>
+                        <p>From revenue optimization to operational efficiency, we implement data-driven solutions that scale your healthcare organization sustainably.</p>
                     </div>
                 </div>
                 
