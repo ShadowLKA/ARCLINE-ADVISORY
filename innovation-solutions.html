@@ -101,6 +101,18 @@
             transition: 0.3s;
         }
 
+        .mobile-menu-btn.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-btn.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
         .mobile-menu {
             display: none;
             position: fixed;
@@ -113,6 +125,10 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
+        .mobile-menu.active {
+            display: block;
+        }
+
         .mobile-menu ul {
             list-style: none;
             text-align: center;
@@ -120,6 +136,18 @@
 
         .mobile-menu ul li {
             margin: 1rem 0;
+        }
+
+        .mobile-menu ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: #667eea;
         }
 
         /* Hero Section */
@@ -571,7 +599,7 @@
                     <a href="index.html">Home</a> / <span>Innovation Solutions</span>
                 </div>
                 <h1>💡 Innovation Solutions</h1>
-                <p>Transform your business with cutting-edge solutions designed to drive efficiency, enhance productivity, and unlock new opportunities for growth in the digital age.</p>
+                <p>Transform healthcare delivery with cutting-edge medical innovations designed to improve patient outcomes, enhance clinical efficiency, and advance medical research in today's rapidly evolving healthcare landscape.</p>
             </div>
         </div>
     </section>
@@ -581,55 +609,55 @@
         <div class="container">
             <!-- Overview Section -->
             <section class="section">
-                <h2 class="section-title">Innovative Excellence</h2>
-                <p class="section-subtitle">Our comprehensive innovation solutions are designed to modernize your operations, streamline processes, and position your business at the forefront of industry advancement.</p>
+                <h2 class="section-title">Medical Innovation Excellence</h2>
+                <p class="section-subtitle">Our comprehensive healthcare innovation solutions are designed to modernize medical practices, improve patient care, and position healthcare organizations at the forefront of medical advancement.</p>
                 
                 <div class="solutions-detailed">
                     <div class="solution-detail">
-                        <div class="solution-detail-icon">🤖</div>
-                        <h3>Process Automation</h3>
-                        <p>Streamline your operations with intelligent automation solutions that reduce manual work, eliminate errors, and increase productivity across all business functions.</p>
+                        <div class="solution-detail-icon">🏥</div>
+                        <h3>Healthcare Technology Integration</h3>
+                        <p>Streamline healthcare operations with intelligent technology solutions that reduce administrative burden, eliminate errors, and improve patient care coordination across all medical specialties.</p>
                         <ul class="solution-features">
-                            <li>Workflow automation and optimization</li>
-                            <li>AI-powered decision making systems</li>
-                            <li>Integration with existing systems</li>
-                            <li>Custom automation solutions</li>
+                            <li>Electronic Health Records (EHR) optimization</li>
+                            <li>AI-powered diagnostic assistance systems</li>
+                            <li>Integration with medical devices and equipment</li>
+                            <li>Custom healthcare workflow solutions</li>
+                        </ul>
+                    </div>
+
+                    <div class="solution-detail">
+                        <div class="solution-detail-icon">🔬</div>
+                        <h3>Medical Research & Analytics</h3>
+                        <p>Accelerate medical research and clinical decision-making with advanced data analytics, machine learning, and research management platforms designed for healthcare professionals.</p>
+                        <ul class="solution-features">
+                            <li>Clinical data analysis and visualization</li>
+                            <li>Research database management systems</li>
+                            <li>Patient outcome tracking and reporting</li>
+                            <li>Predictive healthcare analytics</li>
                         </ul>
                     </div>
 
                     <div class="solution-detail">
                         <div class="solution-detail-icon">📱</div>
-                        <h3>Digital Transformation</h3>
-                        <p>Modernize your business with comprehensive digital transformation strategies that enhance customer experience and operational efficiency.</p>
+                        <h3>Telemedicine & Patient Engagement</h3>
+                        <p>Enhance patient accessibility and engagement through comprehensive telemedicine platforms and patient portal solutions that improve healthcare delivery and patient satisfaction.</p>
                         <ul class="solution-features">
-                            <li>Cloud migration and infrastructure</li>
-                            <li>Mobile and web application development</li>
-                            <li>Digital customer experience platforms</li>
-                            <li>Data analytics and insights</li>
-                        </ul>
-                    </div>
-
-                    <div class="solution-detail">
-                        <div class="solution-detail-icon">🔧</div>
-                        <h3>Custom Software Solutions</h3>
-                        <p>Get tailor-made software solutions designed specifically for your business needs, ensuring perfect alignment with your processes and goals.</p>
-                        <ul class="solution-features">
-                            <li>Bespoke application development</li>
-                            <li>System integration and APIs</li>
-                            <li>Database design and management</li>
-                            <li>Ongoing support and maintenance</li>
+                            <li>Telemedicine platform development</li>
+                            <li>Patient portal and mobile health apps</li>
+                            <li>Remote patient monitoring systems</li>
+                            <li>Digital patient communication tools</li>
                         </ul>
                     </div>
 
                     <div class="solution-detail">
                         <div class="solution-detail-icon">🛡️</div>
-                        <h3>Cybersecurity & Compliance</h3>
-                        <p>Protect your business with robust cybersecurity solutions and ensure compliance with industry regulations and standards.</p>
+                        <h3>Medical Data Security & Compliance</h3>
+                        <p>Protect sensitive medical information with robust cybersecurity solutions specifically designed for healthcare, ensuring HIPAA compliance and patient data protection.</p>
                         <ul class="solution-features">
-                            <li>Security assessment and auditing</li>
-                            <li>Data protection and encryption</li>
-                            <li>Compliance management systems</li>
-                            <li>Incident response and recovery</li>
+                            <li>HIPAA compliance management systems</li>
+                            <li>Medical data encryption and protection</li>
+                            <li>Healthcare security auditing</li>
+                            <li>Medical incident response and recovery</li>
                         </ul>
                     </div>
                 </div>
@@ -639,44 +667,44 @@
         <!-- Technologies Section -->
         <section class="tech-section">
             <div class="container">
-                <h2 class="section-title">Technologies We Master</h2>
-                <p class="section-subtitle">We leverage the latest technologies and platforms to deliver cutting-edge solutions that drive your business forward.</p>
+                <h2 class="section-title">Medical Technologies We Specialize In</h2>
+                <p class="section-subtitle">We leverage the latest medical technologies and healthcare platforms to deliver innovative solutions that advance patient care and medical research.</p>
                 
                 <div class="tech-grid">
                     <div class="tech-card">
-                        <div class="tech-icon">☁️</div>
-                        <h4>Cloud Computing</h4>
-                        <p>AWS, Azure, Google Cloud platforms for scalable infrastructure</p>
+                        <div class="tech-icon">🏥</div>
+                        <h4>Electronic Health Records</h4>
+                        <p>EHR systems, EPIC, Cerner, and custom medical databases</p>
                     </div>
                     
                     <div class="tech-card">
-                        <div class="tech-icon">🧠</div>
-                        <h4>Artificial Intelligence</h4>
-                        <p>Machine learning, AI automation, and predictive analytics</p>
+                        <div class="tech-icon">🧬</div>
+                        <h4>Medical AI & Machine Learning</h4>
+                        <p>Diagnostic AI, predictive analytics, and medical imaging analysis</p>
                     </div>
                     
                     <div class="tech-card">
                         <div class="tech-icon">📊</div>
-                        <h4>Data Analytics</h4>
-                        <p>Business intelligence, data visualization, and insights</p>
+                        <h4>Clinical Data Analytics</h4>
+                        <p>Patient outcome analysis, clinical research data, and reporting</p>
                     </div>
                     
                     <div class="tech-card">
-                        <div class="tech-icon">🌐</div>
-                        <h4>Web Technologies</h4>
-                        <p>Modern web frameworks, responsive design, PWAs</p>
+                        <div class="tech-icon">💊</div>
+                        <h4>Pharmacy & Drug Management</h4>
+                        <p>Medication management systems, drug interaction databases</p>
                     </div>
                     
                     <div class="tech-card">
                         <div class="tech-icon">📱</div>
-                        <h4>Mobile Development</h4>
-                        <p>Native and cross-platform mobile applications</p>
+                        <h4>Telemedicine Platforms</h4>
+                        <p>Remote consultation, patient monitoring, and mobile health apps</p>
                     </div>
                     
                     <div class="tech-card">
-                        <div class="tech-icon">🔗</div>
-                        <h4>API Integration</h4>
-                        <p>RESTful APIs, microservices, system connectivity</p>
+                        <div class="tech-icon">🔒</div>
+                        <h4>HIPAA Compliance</h4>
+                        <p>Medical data security, patient privacy, and regulatory compliance</p>
                     </div>
                 </div>
             </div>
@@ -685,44 +713,44 @@
         <!-- Innovation Process -->
         <section class="innovation-process">
             <div class="container">
-                <h2 class="section-title">Our Innovation Process</h2>
-                <p class="section-subtitle">We follow a proven methodology to ensure successful implementation of innovative solutions that deliver measurable results.</p>
+                <h2 class="section-title">Our Medical Innovation Process</h2>
+                <p class="section-subtitle">We follow a proven methodology specifically designed for healthcare environments to ensure successful implementation of medical innovations that improve patient outcomes.</p>
                 
                 <div class="process-timeline">
                     <div class="timeline-step">
                         <div class="step-number">1</div>
-                        <h4>Discovery & Analysis</h4>
-                        <p>We analyze your current systems, identify pain points, and understand your specific business requirements and objectives.</p>
+                        <h4>Clinical Assessment</h4>
+                        <p>We analyze your current medical systems, identify clinical pain points, and understand specific healthcare requirements and patient needs.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">2</div>
-                        <h4>Solution Design</h4>
-                        <p>Our experts design innovative solutions tailored to your needs, incorporating the latest technologies and best practices.</p>
+                        <h4>Medical Solution Design</h4>
+                        <p>Our healthcare experts design innovative medical solutions incorporating the latest healthcare technologies and clinical best practices.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">3</div>
-                        <h4>Prototype Development</h4>
-                        <p>We create prototypes and proof-of-concepts to validate solutions before full-scale implementation begins.</p>
+                        <h4>Clinical Prototype Testing</h4>
+                        <p>We create medical prototypes and conduct clinical proof-of-concepts to validate solutions in real healthcare environments.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">4</div>
-                        <h4>Implementation</h4>
-                        <p>Our team implements the solution with minimal disruption to your operations, ensuring smooth transition and adoption.</p>
+                        <h4>Healthcare Implementation</h4>
+                        <p>Our team implements the medical solution with minimal disruption to patient care, ensuring smooth clinical workflow integration.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">5</div>
-                        <h4>Testing & Optimization</h4>
-                        <p>Comprehensive testing and optimization ensure the solution performs flawlessly and meets all requirements.</p>
+                        <h4>Clinical Testing & Validation</h4>
+                        <p>Comprehensive clinical testing and validation ensure the solution meets medical standards and improves patient outcomes.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">6</div>
-                        <h4>Launch & Support</h4>
-                        <p>We provide training, documentation, and ongoing support to ensure successful adoption and continued success.</p>
+                        <h4>Medical Training & Support</h4>
+                        <p>We provide clinical training, medical documentation, and ongoing healthcare support to ensure successful adoption by medical staff.</p>
                     </div>
                 </div>
             </div>
@@ -731,10 +759,10 @@
         <!-- CTA Section -->
         <section class="cta-section">
             <div class="container">
-                <h2>Ready to Innovate Your Business?</h2>
-                <p>Let's discuss how our innovation solutions can transform your operations and drive your business into the future.</p>
+                <h2>Ready to Innovate Healthcare?</h2>
+                <p>Let's discuss how our medical innovation solutions can transform your healthcare practice and improve patient outcomes.</p>
                 <div class="cta-buttons">
-                    <a href="index.html#contact" class="btn-primary">Start Your Innovation Journey</a>
+                    <a href="index.html#contact" class="btn-primary">Start Your Medical Innovation Journey</a>
                     <a href="index.html#about" class="btn-secondary">Learn More About Us</a>
                 </div>
             </div>
