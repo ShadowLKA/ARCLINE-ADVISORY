@@ -834,13 +834,20 @@
     </footer>
 
     <script>
-        // Handle page load behavior - only scroll to top if there's no hash
+        // Handle page load behavior - only scroll to top on fresh page loads, not refreshes
+        let isPageRefresh = false;
+        
+        // Check if this is a page refresh by detecting if user has scrolled before
+        if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+            isPageRefresh = true;
+        }
+
         window.addEventListener('load', function() {
-            if (!window.location.hash) {
-                // No hash in URL, scroll to top
+            // Only scroll to top if it's a fresh page load (not a refresh) and no hash in URL
+            if (!isPageRefresh && !window.location.hash && window.scrollY === 0) {
                 window.scrollTo(0, 0);
             }
-            // If there's a hash, let the browser handle it naturally
+            // If there's a hash or it's a refresh, let the browser handle positioning naturally
         });
 
         // Set scroll restoration to manual for better control
