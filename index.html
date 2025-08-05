@@ -831,17 +831,27 @@
     </footer>
 
     <script>
-        // Scroll to top on page load/refresh
+        // Improved scroll handling - only scroll to top if there's no hash in URL
         window.addEventListener('load', function() {
-            window.scrollTo(0, 0);
+            // Only scroll to top if there's no hash in the URL
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+            } else {
+                // If there's a hash, scroll to it after a brief delay to ensure elements are loaded
+                setTimeout(() => {
+                    const target = document.querySelector(window.location.hash);
+                    if (target) {
+                        const offsetTop = target.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100);
+            }
         });
 
-        // Also handle browser back/forward navigation
-        window.addEventListener('beforeunload', function() {
-            window.scrollTo(0, 0);
-        });
-
-        // Force scroll to top on page reload
+        // Set scroll restoration to manual for better control
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         }
@@ -961,9 +971,4 @@
             
             input.addEventListener('blur', function() {
                 const viewport = document.querySelector('meta[name="viewport"]');
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
-            });
-        });
-    </script>
-</body>
-</html>
+                viewport.setAttribute('content', 'width=device-width, initial-scale=1
