@@ -769,15 +769,17 @@
             <h2 class="section-title">Our Services</h2>
             <p class="section-subtitle">Comprehensive solutions tailored to your business needs</p>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card" onclick="window.location.href='strategy-consulting.html'" style="cursor: pointer;">
                     <div class="service-icon">🚀</div>
                     <h3>Strategy & Consulting</h3>
                     <p>Expert guidance to help you navigate challenges and identify growth opportunities in your market.</p>
+                    <a href="strategy-consulting.html" style="display: inline-block; margin-top: 1rem; color: #667eea; font-weight: 600; text-decoration: none;">Learn More →</a>
                 </div>
-                <div class="service-card">
+                <div class="service-card" onclick="window.location.href='innovation-solutions.html'" style="cursor: pointer;">
                     <div class="service-icon">💡</div>
                     <h3>Innovation Solutions</h3>
                     <p>Cutting-edge solutions designed to transform your business processes and drive efficiency.</p>
+                    <a href="innovation-solutions.html" style="display: inline-block; margin-top: 1rem; color: #667eea; font-weight: 600; text-decoration: none;">Learn More →</a>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">📈</div>
@@ -831,17 +833,16 @@
     </footer>
 
     <script>
-        // Scroll to top on page load/refresh
+        // Handle page load behavior - only scroll to top if there's no hash
         window.addEventListener('load', function() {
-            window.scrollTo(0, 0);
+            if (!window.location.hash) {
+                // No hash in URL, scroll to top
+                window.scrollTo(0, 0);
+            }
+            // If there's a hash, let the browser handle it naturally
         });
 
-        // Also handle browser back/forward navigation
-        window.addEventListener('beforeunload', function() {
-            window.scrollTo(0, 0);
-        });
-
-        // Force scroll to top on page reload
+        // Set scroll restoration to manual for better control
         if (history.scrollRestoration) {
             history.scrollRestoration = 'manual';
         }
