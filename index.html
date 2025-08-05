@@ -831,6 +831,21 @@
     </footer>
 
     <script>
+        // Scroll to top on page load/refresh
+        window.addEventListener('load', function() {
+            window.scrollTo(0, 0);
+        });
+
+        // Also handle browser back/forward navigation
+        window.addEventListener('beforeunload', function() {
+            window.scrollTo(0, 0);
+        });
+
+        // Force scroll to top on page reload
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+
         // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
