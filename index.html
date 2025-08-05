@@ -701,7 +701,6 @@
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#contact">Contact</a></li>
-                    <li><a href="dashboard.html">Analytics</a></li>
                 </ul>
                 <a href="#contact" class="cta-button">Get Started</a>
                 <div class="mobile-menu-btn" id="mobileMenuBtn">
@@ -717,7 +716,6 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="dashboard.html">Analytics</a></li>
             </ul>
         </div>
     </nav>
@@ -834,81 +832,6 @@
     </footer>
 
     <script>
-        // Initialize visitor tracking
-        class VisitorTracker {
-            constructor() {
-                this.storageKey = 'arcline_analytics';
-                this.initializeData();
-                this.trackVisit();
-            }
-
-            initializeData() {
-                if (!localStorage.getItem(this.storageKey)) {
-                    const initialData = {
-                        visits: [],
-                        pageViews: {
-                            'Home': 0,
-                            'About': 0,
-                            'Services': 0,
-                            'Contact': 0,
-                            'Dashboard': 0
-                        },
-                        firstVisit: new Date().toISOString()
-                    };
-                    localStorage.setItem(this.storageKey, JSON.stringify(initialData));
-                }
-            }
-
-            trackVisit() {
-                try {
-                    const data = JSON.parse(localStorage.getItem(this.storageKey));
-                    const visit = {
-                        page: 'Home',
-                        timestamp: new Date().toISOString(),
-                        userAgent: navigator.userAgent.substring(0, 100),
-                        url: window.location.href
-                    };
-                    
-                    data.visits.push(visit);
-                    data.pageViews['Home'] = (data.pageViews['Home'] || 0) + 1;
-                    localStorage.setItem(this.storageKey, JSON.stringify(data));
-                } catch (e) {
-                    console.log('Analytics tracking error:', e);
-                }
-            }
-
-            trackPageView(page) {
-                try {
-                    const data = JSON.parse(localStorage.getItem(this.storageKey));
-                    data.pageViews[page] = (data.pageViews[page] || 0) + 1;
-                    localStorage.setItem(this.storageKey, JSON.stringify(data));
-                } catch (e) {
-                    console.log('Page view tracking error:', e);
-                }
-            }
-        }
-
-        // Initialize visitor tracking
-        const tracker = new VisitorTracker();
-
-        // Track section views when user scrolls to them
-        const sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const sectionId = entry.target.id;
-                    let pageName = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-                    if (pageName === 'Home') return; // Already tracked on page load
-                    tracker.trackPageView(pageName);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        // Observe main sections
-        ['about', 'services', 'contact'].forEach(id => {
-            const element = document.getElementById(id);
-            if (element) sectionObserver.observe(element);
-        });
-
         // Handle page load behavior - only scroll to top if there's no hash
         window.addEventListener('load', function() {
             if (!window.location.hash) {
