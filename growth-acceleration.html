@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Growth Acceleration - ARCLINE ADVISORY</title>
     <style>
         * {
@@ -12,77 +12,80 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: #2d3748;
+            font-size: 14px;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
-        /* Navigation */
+        /* Compact Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
             z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            padding: 8px 0;
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 48px;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 18px;
+            font-weight: 700;
+            color: #4c51bf;
             text-decoration: none;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 24px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #4a5568;
             font-weight: 500;
-            transition: color 0.3s ease;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: #667eea;
+            background: #ebf4ff;
+            color: #4c51bf;
         }
 
         .cta-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #4c51bf;
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
+            padding: 8px 16px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            background: #434190;
+            transform: translateY(-1px);
         }
 
         /* Mobile Menu */
@@ -90,27 +93,27 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 5px;
+            padding: 4px;
         }
 
         .mobile-menu-btn span {
-            width: 25px;
-            height: 3px;
-            background: #333;
-            margin: 3px 0;
+            width: 20px;
+            height: 2px;
+            background: #4a5568;
+            margin: 2px 0;
             transition: 0.3s;
         }
 
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 80px;
+            top: 64px;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .mobile-menu.active {
@@ -119,172 +122,173 @@
 
         .mobile-menu ul {
             list-style: none;
-            text-align: center;
         }
 
         .mobile-menu ul li {
-            margin: 1rem 0;
+            margin: 8px 0;
         }
 
         .mobile-menu ul li a {
             text-decoration: none;
-            color: #333;
-            font-size: 1.2rem;
+            color: #4a5568;
             font-weight: 500;
-            transition: color 0.3s ease;
+            padding: 8px 0;
+            display: block;
         }
 
-        /* Hero Section */
+        /* Compact Hero */
         .hero {
-            height: 70vh;
-            min-height: 500px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 80px;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
             color: white;
-            z-index: 10;
-            position: relative;
+            padding: 80px 0 40px;
+            margin-top: 64px;
             text-align: center;
-            width: 100%;
         }
 
         .breadcrumb {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 12px;
         }
 
         .breadcrumb a {
             color: white;
             text-decoration: none;
-            opacity: 0.8;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: slideUp 1s ease 0.3s forwards;
+            margin-bottom: 16px;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: slideUp 1s ease 0.5s forwards;
-            max-width: 700px;
+            font-size: 16px;
+            margin-bottom: 24px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.95;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Main Content */
+        /* Compact Main Content */
         .main-content {
-            padding: 5rem 0;
+            padding: 32px 0;
         }
 
         .section {
-            margin-bottom: 5rem;
+            margin-bottom: 48px;
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 2rem;
-            color: #333;
+            margin-bottom: 8px;
+            color: #2d3748;
             text-align: center;
         }
 
         .section-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 3rem;
+            font-size: 15px;
+            color: #718096;
+            margin-bottom: 32px;
             text-align: center;
-            max-width: 600px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Growth Areas Grid - Different Layout */
+        /* Compact Growth Areas Grid */
         .growth-areas {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2.5rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .growth-area:nth-child(3) {
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 3rem;
-            align-items: center;
+        /* Desktop scrolling - show when content overflows */
+        @media (min-width: 769px) {
+            .growth-areas {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                padding-bottom: 8px;
+            }
+            
+            .growth-area {
+                flex: 0 0 280px;
+                scroll-snap-align: start;
+            }
+            
+            /* Desktop scrollbar styling */
+            .growth-areas::-webkit-scrollbar {
+                height: 6px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-track {
+                background: #f1f5f9;
+                border-radius: 3px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 3px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-thumb:hover {
+                background: #a0aec0;
+            }
         }
 
         .growth-area {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
         }
 
         .growth-area:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .growth-area-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
         }
 
         .growth-area-icon {
-            width: 100px;
-            height: 100px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
+            font-size: 18px;
             color: white;
+            flex-shrink: 0;
         }
 
         .growth-area h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
         }
 
         .growth-area p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-size: 14px;
         }
 
         .growth-features {
@@ -292,319 +296,349 @@
         }
 
         .growth-features li {
-            padding: 0.5rem 0;
+            padding: 4px 0;
             position: relative;
-            padding-left: 2rem;
-            color: #555;
+            padding-left: 20px;
+            color: #4a5568;
+            font-size: 13px;
         }
 
         .growth-features li::before {
             content: '✓';
             position: absolute;
             left: 0;
-            color: #667eea;
+            color: #48bb78;
             font-weight: bold;
         }
 
-        /* Metrics Section with Video */
+        /* Compact Metrics Section */
         .metrics-section {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-            padding: 5rem 0;
-            margin: 0 -20px;
+            background: #f7fafc;
+            padding: 40px 0;
+            margin: 0 -16px;
         }
 
         .metrics-content {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 400px 1fr;
+            gap: 32px;
             align-items: center;
-            margin-bottom: 4rem;
+            margin-bottom: 32px;
         }
 
         .metrics-video {
-            background: #ffffff;
-            height: 400px;
-            border-radius: 20px;
-            padding: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(102, 126, 234, 0.1);
+            background: white;
+            height: 250px;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
         }
 
         .metrics-video-wrapper {
             width: 100%;
             height: 100%;
-            border-radius: 15px;
+            border-radius: 4px;
             overflow: hidden;
             background: #000;
-            position: relative;
         }
 
         .metrics-video iframe {
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 15px;
+        }
+
+        .video-disclaimer {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .video-disclaimer p {
+            font-size: 11px;
+            color: #a0aec0;
+            font-style: italic;
         }
 
         .metrics-text h3 {
-            font-size: 2.2rem;
-            margin-bottom: 1.5rem;
-            color: #333;
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #2d3748;
             font-weight: 700;
         }
 
         .metrics-text p {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 2rem;
-            line-height: 1.8;
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 16px;
+            line-height: 1.6;
         }
 
-        /* Metrics Grid */
+        /* Compact Metrics Grid */
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
         }
 
         .metric-card {
             background: white;
-            padding: 3rem 2rem;
-            border-radius: 25px;
+            padding: 20px 16px;
+            border-radius: 8px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-            transition: all 0.4s ease;
-            border: 1px solid rgba(102, 126, 234, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .metric-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            transform: translateX(-100%);
-            transition: transform 0.4s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
         }
 
         .metric-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
-        }
-
-        .metric-card:hover::before {
-            transform: translateX(0);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .metric-icon {
-            width: 80px;
-            height: 80px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 2rem;
+            margin: 0 auto 12px;
+            font-size: 14px;
             color: white;
         }
 
         .metric-number {
-            font-size: 3.5rem;
+            font-size: 28px;
             font-weight: 800;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 0.5rem;
+            color: #4c51bf;
+            margin-bottom: 4px;
             line-height: 1;
         }
 
         .metric-label {
-            font-size: 1.2rem;
+            font-size: 13px;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 0.8rem;
+            color: #2d3748;
+            margin-bottom: 6px;
         }
 
         .metric-description {
-            font-size: 1rem;
-            color: #666;
-            line-height: 1.6;
+            font-size: 12px;
+            color: #718096;
+            line-height: 1.4;
         }
 
-        /* Strategy Timeline */
+        /* Compact Strategy Timeline */
         .strategy-timeline {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 5rem 0;
-            margin: 5rem -20px;
+            background: #f7fafc;
+            padding: 40px 0;
+            margin: 32px -16px;
         }
 
         .timeline-steps {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
         }
 
         .timeline-step {
             background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
             text-align: center;
-        }
-
-        .timeline-step::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
+            position: relative;
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 14px;
             font-weight: bold;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 12px;
         }
 
         .timeline-step h4 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #333;
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
         }
 
         .timeline-step p {
-            color: #666;
-            line-height: 1.6;
+            color: #718096;
+            line-height: 1.5;
+            font-size: 13px;
         }
 
-        /* CTA Section */
+        /* Compact CTA Section */
         .cta-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 5rem 0;
+            padding: 40px 0;
             text-align: center;
-            margin: 5rem -20px 0;
+            margin: 32px -16px 0;
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 24px;
+            margin-bottom: 8px;
         }
 
         .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 15px;
+            margin-bottom: 24px;
             opacity: 0.9;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn-primary {
             background: white;
-            color: #667eea;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            color: #4c51bf;
+            padding: 12px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .btn-secondary {
             background: transparent;
             color: white;
             border: 2px solid white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            padding: 10px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
 
         .btn-secondary:hover {
             background: white;
-            color: #667eea;
+            color: #4c51bf;
         }
 
         /* Footer */
         footer {
-            background: #333;
-            color: white;
+            background: #2d3748;
+            color: #e2e8f0;
             text-align: center;
-            padding: 2rem 0;
+            padding: 24px 0;
         }
 
-        /* Mobile Styles */
+        footer p {
+            font-size: 13px;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .container { padding: 0 15px; }
-            nav { padding: 0.75rem 0; }
+            .container { padding: 0 12px; }
             .nav-links { display: none; }
             .mobile-menu-btn { display: flex; }
             .cta-button { display: none; }
-            .logo { font-size: 1.5rem; }
-            .hero { margin-top: 70px; }
-            .hero h1 { font-size: 2.5rem; }
-            .hero p { font-size: 1.1rem; }
-            .section-title { font-size: 2rem; }
-            .growth-areas { grid-template-columns: 1fr; gap: 2rem; }
-            .growth-area:nth-child(3) { grid-column: span 1; display: block; }
-            .growth-area:nth-child(3) .growth-area-icon { margin: 0 auto 2rem; }
-            .growth-area { padding: 2rem; }
-            .metrics-content { grid-template-columns: 1fr; gap: 3rem; }
-            .metrics-video { height: 250px; order: -1; padding: 12px; }
-            .metrics-text h3 { font-size: 1.8rem; text-align: center; }
-            .metrics-text p { font-size: 1rem; text-align: center; }
-            .metrics-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
-            .metric-card { padding: 2.5rem 1.5rem; }
-            .metric-icon { width: 60px; height: 60px; font-size: 1.5rem; margin-bottom: 1rem; }
-            .metric-number { font-size: 2.8rem; }
-            .metric-label { font-size: 1rem; margin-bottom: 0.5rem; }
-            .metric-description { font-size: 0.85rem; }
+            .logo { font-size: 16px; }
+            .hero { padding: 60px 0 32px; margin-top: 56px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 15px; }
+            .section-title { font-size: 20px; }
+            
+            /* Horizontal scrolling grid for mobile */
+            .growth-areas {
+                display: flex;
+                gap: 16px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding-bottom: 16px;
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .growth-area { 
+                flex: 0 0 280px;
+                padding: 16px;
+                scroll-snap-align: start;
+            }
+            
+            /* Scrollbar styling for mobile cards */
+            .growth-areas::-webkit-scrollbar {
+                height: 4px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-track {
+                background: #f1f5f9;
+                border-radius: 2px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 2px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-thumb:hover {
+                background: #a0aec0;
+            }
+            
+            .metrics-content { 
+                grid-template-columns: 1fr; 
+                gap: 24px;
+                text-align: center;
+            }
+            .metrics-video { 
+                height: 200px; 
+                order: -1; 
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            .metrics-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .metric-card { padding: 16px 12px; }
             .timeline-steps { grid-template-columns: 1fr; }
             .cta-buttons { flex-direction: column; align-items: center; }
-            .btn-primary, .btn-secondary { width: 250px; text-align: center; }
-            .metrics-section, .strategy-timeline, .cta-section { margin: 3rem -15px; }
+            .btn-primary, .btn-secondary { width: 200px; text-align: center; }
+            .metrics-section, .strategy-timeline, .cta-section { margin-left: -12px; margin-right: -12px; }
         }
 
         @media (max-width: 480px) {
-            .metrics-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            .metric-card { padding: 2rem 1.5rem; }
-            .metric-number { font-size: 3rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 1.75rem; }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
         }
     </style>
 </head>
@@ -641,13 +675,11 @@
 
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="breadcrumb">
-                    <a href="index.html">Home</a> / <span>Growth Acceleration</span>
-                </div>
-                <h1>📈 Growth Acceleration</h1>
-                <p>Accelerate your healthcare organization's growth with proven medical strategies and tools designed to scale your practice, maximize patient satisfaction, and optimize your return on investment in today's competitive healthcare market.</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Growth Acceleration</span>
             </div>
+            <h1>📈 Growth Acceleration</h1>
+            <p>Accelerate your healthcare organization's growth with proven medical strategies and tools designed to scale your practice, maximize patient satisfaction, and optimize ROI.</p>
         </div>
     </section>
 
@@ -655,56 +687,90 @@
         <div class="container">
             <section class="section">
                 <h2 class="section-title">Healthcare Growth Excellence</h2>
-                <p class="section-subtitle">Our comprehensive healthcare growth acceleration services are designed to scale your medical practice and maximize patient outcomes through strategic healthcare initiatives.</p>
+                <p class="section-subtitle">Comprehensive growth acceleration services designed to scale your medical practice and maximize patient outcomes.</p>
                 
                 <div class="growth-areas">
                     <div class="growth-area">
-                        <div class="growth-area-icon">🏥</div>
-                        <h3>Medical Practice Expansion</h3>
-                        <p>Scale your healthcare practice efficiently with proven medical growth strategies that increase patient capacity, expand service offerings, and optimize clinical operations for sustainable growth.</p>
-                        <ul class="growth-features">
-                            <li>Multi-location medical practice development</li>
-                            <li>Healthcare service line expansion</li>
-                            <li>Medical staff recruitment and scaling</li>
-                            <li>Clinical capacity optimization</li>
-                        </ul>
-                    </div>
-
-                    <div class="growth-area">
-                        <div class="growth-area-icon">👥</div>
-                        <h3>Patient Acquisition & Retention</h3>
-                        <p>Grow your patient base and improve retention rates through comprehensive healthcare marketing strategies and patient engagement programs that drive long-term medical practice success.</p>
-                        <ul class="growth-features">
-                            <li>Healthcare digital marketing and SEO</li>
-                            <li>Patient referral program development</li>
-                            <li>Medical reputation management</li>
-                            <li>Patient satisfaction and loyalty programs</li>
-                        </ul>
-                    </div>
-
-                    <div class="growth-area">
-                        <div class="growth-area-icon">💰</div>
-                        <div class="growth-content">
-                            <h3>Healthcare Revenue Optimization</h3>
-                            <p>Maximize your medical practice revenue through comprehensive healthcare financial strategies, including revenue cycle optimization, billing improvements, and new revenue stream development.</p>
-                            <ul class="growth-features">
-                                <li>Medical billing and coding optimization</li>
-                                <li>Insurance reimbursement maximization</li>
-                                <li>Healthcare pricing strategy development</li>
-                                <li>Alternative revenue stream identification</li>
-                            </ul>
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">🏥</div>
+                            <h3>Medical Practice Expansion</h3>
                         </div>
+                        <p>Scale your healthcare practice efficiently with proven growth strategies that increase capacity and optimize operations.</p>
+                        <ul class="growth-features">
+                            <li>Multi-location practice development</li>
+                            <li>Service line expansion</li>
+                            <li>Staff recruitment and scaling</li>
+                            <li>Capacity optimization</li>
+                        </ul>
                     </div>
 
                     <div class="growth-area">
-                        <div class="growth-area-icon">📊</div>
-                        <h3>Clinical Performance Analytics</h3>
-                        <p>Leverage healthcare data analytics to drive growth decisions, improve patient outcomes, and identify opportunities for medical practice expansion and optimization.</p>
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">👥</div>
+                            <h3>Patient Acquisition & Retention</h3>
+                        </div>
+                        <p>Grow your patient base through comprehensive marketing strategies and engagement programs.</p>
                         <ul class="growth-features">
-                            <li>Healthcare KPI tracking and analysis</li>
-                            <li>Patient outcome measurement systems</li>
-                            <li>Clinical efficiency metrics</li>
-                            <li>Medical practice benchmarking</li>
+                            <li>Digital marketing and SEO</li>
+                            <li>Referral program development</li>
+                            <li>Reputation management</li>
+                            <li>Patient loyalty programs</li>
+                        </ul>
+                    </div>
+
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">💰</div>
+                            <h3>Revenue Optimization</h3>
+                        </div>
+                        <p>Maximize practice revenue through financial strategies and billing improvements.</p>
+                        <ul class="growth-features">
+                            <li>Billing and coding optimization</li>
+                            <li>Insurance reimbursement maximization</li>
+                            <li>Pricing strategy development</li>
+                            <li>Alternative revenue streams</li>
+                        </ul>
+                    </div>
+
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">📊</div>
+                            <h3>Performance Analytics</h3>
+                        </div>
+                        <p>Leverage data analytics to drive growth decisions and improve patient outcomes.</p>
+                        <ul class="growth-features">
+                            <li>KPI tracking and analysis</li>
+                            <li>Outcome measurement systems</li>
+                            <li>Efficiency metrics</li>
+                            <li>Practice benchmarking</li>
+                        </ul>
+                    </div>
+
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">🔧</div>
+                            <h3>Operational Excellence</h3>
+                        </div>
+                        <p>Streamline healthcare operations and improve efficiency through process optimization and technology integration.</p>
+                        <ul class="growth-features">
+                            <li>Workflow process optimization</li>
+                            <li>Healthcare technology integration</li>
+                            <li>Quality improvement programs</li>
+                            <li>Compliance and risk management</li>
+                        </ul>
+                    </div>
+
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">🎯</div>
+                            <h3>Strategic Planning</h3>
+                        </div>
+                        <p>Develop comprehensive strategic plans that align with your healthcare organization's vision and market opportunities.</p>
+                        <ul class="growth-features">
+                            <li>Market analysis and positioning</li>
+                            <li>Competitive strategy development</li>
+                            <li>Long-term growth roadmapping</li>
+                            <li>Change management support</li>
                         </ul>
                     </div>
                 </div>
@@ -714,14 +780,12 @@
         <section class="metrics-section">
             <div class="container">
                 <h2 class="section-title">Healthcare Growth Impact</h2>
-                <p class="section-subtitle">Measurable results that transform medical practices and accelerate sustainable growth in today's competitive healthcare landscape.</p>
+                <p class="section-subtitle">Measurable results that transform medical practices and accelerate sustainable growth.</p>
                 
                 <div class="metrics-content">
                     <div>
-                        <div style="text-align: center; margin-bottom: 1rem;">
-                            <p style="font-size: 0.85rem; color: #888; font-style: italic;">
-                                *Video used for demonstration and UI design purposes only
-                            </p>
+                        <div class="video-disclaimer">
+                            <p>*Video used for demonstration purposes only</p>
                         </div>
                         <div class="metrics-video">
                             <div class="metrics-video-wrapper">
@@ -731,16 +795,15 @@
                                     src="https://www.youtube.com/embed/zXPEBbEZLB8?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&fs=0&loop=1&playlist=zXPEBbEZLB8" 
                                     title="Healthcare Growth Video" 
                                     frameborder="0" 
-                                    allow="autoplay; encrypted-media" 
-                                    allowfullscreen="false">
+                                    allow="autoplay; encrypted-media">
                                 </iframe>
                             </div>
                         </div>
                     </div>
                     <div class="metrics-text">
                         <h3>Accelerated Healthcare Growth</h3>
-                        <p>Our proven healthcare growth strategies deliver measurable results that transform medical practices and accelerate patient acquisition while maintaining exceptional care quality.</p>
-                        <p>From revenue optimization to operational efficiency, we implement data-driven solutions that scale your healthcare organization sustainably and profitably.</p>
+                        <p>Our proven strategies deliver measurable results that transform medical practices while maintaining exceptional care quality.</p>
+                        <p>From revenue optimization to operational efficiency, we implement data-driven solutions that scale sustainably.</p>
                     </div>
                 </div>
                 
@@ -749,42 +812,42 @@
                         <div class="metric-icon">📈</div>
                         <div class="metric-number">30%</div>
                         <div class="metric-label">Patient Volume Growth</div>
-                        <div class="metric-description">Average increase in patient appointments and new patient acquisitions within first 12 months</div>
+                        <div class="metric-description">Average increase in patient appointments within 12 months</div>
                     </div>
                     
                     <div class="metric-card">
                         <div class="metric-icon">💰</div>
                         <div class="metric-number">25%</div>
                         <div class="metric-label">Revenue Enhancement</div>
-                        <div class="metric-description">Typical medical practice revenue improvement through optimized operations and pricing strategies</div>
+                        <div class="metric-description">Practice revenue improvement through optimized operations</div>
                     </div>
                     
                     <div class="metric-card">
                         <div class="metric-icon">⚡</div>
                         <div class="metric-number">40%</div>
                         <div class="metric-label">Efficiency Gains</div>
-                        <div class="metric-description">Healthcare workflow optimization reducing administrative burden and improving patient care delivery</div>
+                        <div class="metric-description">Workflow optimization reducing administrative burden</div>
                     </div>
                     
                     <div class="metric-card">
                         <div class="metric-icon">😊</div>
                         <div class="metric-number">95%</div>
                         <div class="metric-label">Patient Satisfaction</div>
-                        <div class="metric-description">Consistently high patient satisfaction scores through improved care coordination and service quality</div>
+                        <div class="metric-description">High satisfaction through improved care coordination</div>
                     </div>
                     
                     <div class="metric-card">
                         <div class="metric-icon">⏱️</div>
                         <div class="metric-number">6</div>
                         <div class="metric-label">Months to ROI</div>
-                        <div class="metric-description">Average timeframe to achieve positive return on investment from growth acceleration initiatives</div>
+                        <div class="metric-description">Average timeframe to achieve positive ROI</div>
                     </div>
                     
                     <div class="metric-card">
                         <div class="metric-icon">👨‍⚕️</div>
                         <div class="metric-number">85%</div>
                         <div class="metric-label">Staff Retention Rate</div>
-                        <div class="metric-description">Improved workplace satisfaction and reduced turnover through optimized workflows and team development</div>
+                        <div class="metric-description">Improved satisfaction and reduced turnover</div>
                     </div>
                 </div>
             </div>
@@ -793,31 +856,31 @@
         <section class="strategy-timeline">
             <div class="container">
                 <h2 class="section-title">Our Growth Process</h2>
-                <p class="section-subtitle">A systematic approach to accelerating your healthcare practice growth through proven methodologies.</p>
+                <p class="section-subtitle">A systematic approach to accelerating healthcare practice growth.</p>
                 
                 <div class="timeline-steps">
                     <div class="timeline-step">
                         <div class="step-number">1</div>
                         <h4>Assessment & Analysis</h4>
-                        <p>Comprehensive evaluation of your current practice operations, patient flow, and growth potential to identify key opportunities.</p>
+                        <p>Comprehensive evaluation of current operations and growth potential to identify key opportunities.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">2</div>
                         <h4>Strategy Development</h4>
-                        <p>Create customized growth strategies tailored to your practice's unique needs, market position, and expansion goals.</p>
+                        <p>Create customized growth strategies tailored to your practice's unique needs and goals.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">3</div>
                         <h4>Implementation</h4>
-                        <p>Execute growth initiatives with dedicated support, ensuring smooth integration with existing operations.</p>
+                        <p>Execute growth initiatives with dedicated support and smooth integration.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">4</div>
                         <h4>Monitoring & Optimization</h4>
-                        <p>Continuous tracking of performance metrics with ongoing adjustments to maximize growth outcomes.</p>
+                        <p>Continuous performance tracking with ongoing adjustments to maximize outcomes.</p>
                     </div>
                 </div>
             </div>
@@ -860,7 +923,7 @@
 
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
+            if (window.scrollY > 50) {
                 navbar.style.background = 'rgba(255, 255, 255, 0.98)';
             } else {
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
