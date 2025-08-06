@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARCLINE ADVISORY - Innovation Starts Here</title>
+    <title>ARCLINE ADVISORY - Healthcare Innovation & Growth Solutions</title>
+    <meta name="description" content="Transform your healthcare practice with proven growth strategies, medical innovation solutions, and expert consulting services.">
     <style>
         * {
             margin: 0;
@@ -211,34 +212,77 @@
         }
 
         .btn-primary {
-            background: white;
-            color: #667eea;
+            background: white !important;
+            color: #667eea !important;
             padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
+            border: none;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            display: inline-block;
+            cursor: pointer;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            background: white !important;
+            color: #667eea !important;
+        }
+
+        .btn-primary:active,
+        .btn-primary:focus {
+            background: white !important;
+            color: #667eea !important;
+            outline: none;
+            border: none;
         }
 
         .btn-secondary {
-            background: transparent;
-            color: white;
+            background: transparent !important;
+            color: white !important;
             border: 2px solid white;
             padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
+            outline: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            display: inline-block;
+            cursor: pointer;
         }
 
         .btn-secondary:hover {
-            background: white;
-            color: #667eea;
+            background: white !important;
+            color: #667eea !important;
+        }
+
+        .btn-secondary:active,
+        .btn-secondary:focus {
+            background: transparent !important;
+            color: white !important;
+            outline: none;
+            border: 2px solid white;
         }
 
         @keyframes slideUp {
@@ -330,48 +374,196 @@
         }
 
         /* Services Section */
+        .services-container {
+            position: relative;
+        }
+
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Mobile Carousel Styles */
+        .services-carousel {
+            display: none;
+            position: relative;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .carousel-wrapper {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .services-track {
+            display: flex;
+            width: 300%;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .carousel-slide {
+            width: calc(100% / 3);
+            flex-shrink: 0;
+        }
+
+        .carousel-slide .service-card {
+            margin: 0;
+            box-shadow: none;
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            padding: 32px 24px;
+            transform: none !important;
+            transition: none;
+        }
+
+        .carousel-slide .service-card:hover {
+            transform: none !important;
+            box-shadow: none;
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            background: #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .carousel-dot.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            width: 32px;
+        }
+
+        .carousel-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: none;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(102, 126, 234, 0.15);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            color: #667eea;
+            font-size: 16px;
+            font-weight: 600;
+            pointer-events: all;
+        }
+
+        .carousel-arrow:hover {
+            background: white;
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .carousel-arrow.prev {
+            left: -50px;
+        }
+
+        .carousel-arrow.next {
+            right: -50px;
+        }
+
+        /* Remove any unwanted elements or decorations */
+        .carousel-progress {
+            display: none;
+        }
+
+        .carousel-progress-bar {
+            display: none;
         }
 
         .service-card {
             background: white;
-            padding: 2.5rem;
+            padding: 2.5rem 2rem;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
         .service-icon {
-            width: 80px;
-            height: 80px;
+            width: 70px;
+            height: 70px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: white;
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             color: #333;
+            font-weight: 600;
         }
 
         .service-card p {
             color: #666;
             line-height: 1.6;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .service-card .learn-more {
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .service-card .learn-more:hover {
+            color: #764ba2;
+            text-decoration: underline;
         }
 
         /* Contact Section */
@@ -421,8 +613,8 @@
         }
 
         .submit-btn {
-            background: white;
-            color: #667eea;
+            background: white !important;
+            color: #667eea !important;
             padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
@@ -430,11 +622,22 @@
             cursor: pointer;
             transition: all 0.3s ease;
             width: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            background: white !important;
+            color: #667eea !important;
+        }
+
+        .submit-btn:active,
+        .submit-btn:focus {
+            background: white !important;
+            color: #667eea !important;
+            outline: none;
+            border: none;
         }
 
         .contact-info h3 {
@@ -456,26 +659,12 @@
             padding: 2rem 0;
         }
 
-        /* Additional iframe fixes for mobile */
-        iframe {
-            border: 0 !important;
-            outline: 0 !important;
-            box-shadow: none !important;
-            -webkit-box-shadow: none !important;
-            -moz-box-shadow: none !important;
-        }
-
-        /* Remove any potential container borders */
-        .about-video * {
-            border: none !important;
-            outline: none !important;
-        }
+        /* Mobile Styles */
         @media (max-width: 768px) {
             .container {
                 padding: 0 15px;
             }
 
-            /* Navigation */
             .nav-links {
                 display: none;
             }
@@ -492,7 +681,6 @@
                 font-size: 1.5rem;
             }
 
-            /* Hero Section */
             .hero {
                 min-height: 80vh;
                 padding: 2rem 0;
@@ -520,7 +708,6 @@
                 text-align: center;
             }
 
-            /* Sections */
             section {
                 padding: 3rem 0;
             }
@@ -535,7 +722,6 @@
                 margin-bottom: 3rem;
             }
 
-            /* About Section */
             .about-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -559,27 +745,18 @@
                 border-radius: 8px;
             }
 
-            /* Services Section */
             .services-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+                display: none;
             }
 
-            .service-card {
-                padding: 2rem;
+            .services-carousel {
+                display: block;
             }
 
-            .service-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
+            .carousel-arrows {
+                display: block;
             }
 
-            .service-card h3 {
-                font-size: 1.3rem;
-            }
-
-            /* Contact Section */
             .contact-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -602,7 +779,6 @@
                 padding: 1.5rem;
             }
 
-            /* Footer */
             footer p {
                 font-size: 0.9rem;
                 padding: 0 1rem;
@@ -649,49 +825,9 @@
                 padding: 0.8rem 1.5rem;
             }
         }
-
-        /* Landscape orientation fixes for mobile */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .hero {
-                height: auto;
-                min-height: 100vh;
-                padding: 6rem 0 2rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-            }
-        }
-
-        /* Touch-friendly improvements */
-        @media (hover: none) and (pointer: coarse) {
-            .service-card:hover {
-                transform: none;
-            }
-
-            .btn-primary:hover,
-            .btn-secondary:hover,
-            .cta-button:hover {
-                transform: none;
-            }
-
-            .service-card,
-            .btn-primary,
-            .btn-secondary,
-            .cta-button,
-            .submit-btn {
-                cursor: pointer;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
@@ -720,7 +856,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
@@ -734,7 +869,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
             <h2 class="section-title">About Us</h2>
@@ -763,35 +897,78 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section class="services" id="services">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <p class="section-subtitle">Comprehensive solutions tailored to your business needs</p>
-            <div class="services-grid">
-                <div class="service-card" onclick="window.location.href='strategy-consulting.html'" style="cursor: pointer;">
-                    <div class="service-icon">🚀</div>
-                    <h3>Strategy & Consulting</h3>
-                    <p>Expert guidance to help you navigate challenges and identify growth opportunities in your market.</p>
-                    <a href="strategy-consulting.html" style="display: inline-block; margin-top: 1rem; color: #667eea; font-weight: 600; text-decoration: none;">Learn More →</a>
+            
+            <div class="services-container">
+                <!-- Desktop Grid -->
+                <div class="services-grid">
+                    <div class="service-card" onclick="window.location.href='strategy-consulting.html'" style="cursor: pointer;">
+                        <div class="service-icon">🚀</div>
+                        <h3>Strategy & Consulting</h3>
+                        <p>Expert guidance to help you navigate challenges and identify growth opportunities in your market.</p>
+                        <a href="strategy-consulting.html" class="learn-more">Learn More →</a>
+                    </div>
+                    <div class="service-card" onclick="window.location.href='innovation-solutions.html'" style="cursor: pointer;">
+                        <div class="service-icon">💡</div>
+                        <h3>Innovation Solutions</h3>
+                        <p>Cutting-edge solutions designed to transform your business processes and drive efficiency.</p>
+                        <a href="innovation-solutions.html" class="learn-more">Learn More →</a>
+                    </div>
+                    <div class="service-card" onclick="window.location.href='growth-acceleration.html'" style="cursor: pointer;">
+                        <div class="service-icon">📈</div>
+                        <h3>Growth Acceleration</h3>
+                        <p>Proven strategies and tools to scale your business and maximize your return on investment.</p>
+                        <a href="growth-acceleration.html" class="learn-more">Learn More →</a>
+                    </div>
                 </div>
-                <div class="service-card" onclick="window.location.href='innovation-solutions.html'" style="cursor: pointer;">
-                    <div class="service-icon">💡</div>
-                    <h3>Innovation Solutions</h3>
-                    <p>Cutting-edge solutions designed to transform your business processes and drive efficiency.</p>
-                    <a href="innovation-solutions.html" style="display: inline-block; margin-top: 1rem; color: #667eea; font-weight: 600; text-decoration: none;">Learn More →</a>
-                </div>
-                <div class="service-card" onclick="window.location.href='growth-acceleration.html'" style="cursor: pointer;">
-                    <div class="service-icon">📈</div>
-                    <h3>Growth Acceleration</h3>
-                    <p>Proven strategies and tools to scale your business and maximize your return on investment.</p>
-                    <a href="growth-acceleration.html" style="display: inline-block; margin-top: 1rem; color: #667eea; font-weight: 600; text-decoration: none;">Learn More →</a>
+
+                <!-- Mobile Carousel -->
+                <div class="services-carousel">
+                    <div class="carousel-wrapper">
+                        <div class="services-track" id="servicesTrack">
+                            <div class="carousel-slide">
+                                <div class="service-card" onclick="window.location.href='strategy-consulting.html'" style="cursor: pointer;">
+                                    <div class="service-icon">🚀</div>
+                                    <h3>Strategy & Consulting</h3>
+                                    <p>Expert guidance to help you navigate challenges and identify growth opportunities in your market.</p>
+                                    <a href="strategy-consulting.html" class="learn-more">Learn More →</a>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="service-card" onclick="window.location.href='innovation-solutions.html'" style="cursor: pointer;">
+                                    <div class="service-icon">💡</div>
+                                    <h3>Innovation Solutions</h3>
+                                    <p>Cutting-edge solutions designed to transform your business processes and drive efficiency.</p>
+                                    <a href="innovation-solutions.html" class="learn-more">Learn More →</a>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <div class="service-card" onclick="window.location.href='growth-acceleration.html'" style="cursor: pointer;">
+                                    <div class="service-icon">📈</div>
+                                    <h3>Growth Acceleration</h3>
+                                    <p>Proven strategies and tools to scale your business and maximize your return on investment.</p>
+                                    <a href="growth-acceleration.html" class="learn-more">Learn More →</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-arrows">
+                            <button class="carousel-arrow prev" aria-label="Previous service">‹</button>
+                            <button class="carousel-arrow next" aria-label="Next service">›</button>
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button class="carousel-dot active" data-slide="0"></button>
+                        <button class="carousel-dot" data-slide="1"></button>
+                        <button class="carousel-dot" data-slide="2"></button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
             <h2 class="section-title" style="color: white;">Get In Touch</h2>
@@ -826,7 +1003,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 ARCLINE ADVISORY. All rights reserved. | Transforming businesses, one solution at a time.</p>
@@ -834,28 +1010,6 @@
     </footer>
 
     <script>
-        // Handle page load behavior - only scroll to top on fresh page loads, not refreshes
-        let isPageRefresh = false;
-        
-        // Check if this is a page refresh by detecting if user has scrolled before
-        if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-            isPageRefresh = true;
-        }
-
-        window.addEventListener('load', function() {
-            // Only scroll to top if it's a fresh page load (not a refresh) and no hash in URL
-            if (!isPageRefresh && !window.location.hash && window.scrollY === 0) {
-                window.scrollTo(0, 0);
-            }
-            // If there's a hash or it's a refresh, let the browser handle positioning naturally
-        });
-
-        // Set scroll restoration to manual for better control
-        if (history.scrollRestoration) {
-            history.scrollRestoration = 'manual';
-        }
-
-        // Mobile menu toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
@@ -864,7 +1018,6 @@
             mobileMenu.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking on a link
         document.querySelectorAll('.mobile-menu a').forEach(link => {
             link.addEventListener('click', function() {
                 mobileMenuBtn.classList.remove('active');
@@ -872,7 +1025,6 @@
             });
         });
 
-        // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
                 mobileMenuBtn.classList.remove('active');
@@ -880,13 +1032,12 @@
             }
         });
 
-        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                    const offsetTop = target.offsetTop - 80;
                     window.scrollTo({
                         top: offsetTop,
                         behavior: 'smooth'
@@ -895,7 +1046,6 @@
             });
         });
 
-        // Navbar background change on scroll
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -907,24 +1057,20 @@
             }
         });
 
-        // Contact form handling
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
             const formData = new FormData(this);
             const name = formData.get('name');
             const email = formData.get('email');
             const company = formData.get('company');
             const message = formData.get('message');
             
-            // Simple validation
             if (!name || !email || !message) {
                 alert('Please fill in all required fields.');
                 return;
             }
             
-            // Simulate form submission
             const submitBtn = document.querySelector('.submit-btn');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Sending...';
@@ -938,7 +1084,6 @@
             }, 1500);
         });
 
-        // Add scroll animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -953,7 +1098,181 @@
             });
         }, observerOptions);
 
-        // Observe elements for animation
+        // Simple and Clean Carousel
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let isTransitioning = false;
+
+        const track = document.getElementById('servicesTrack');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const prevButton = document.querySelector('.carousel-arrow.prev');
+        const nextButton = document.querySelector('.carousel-arrow.next');
+
+        function updateCarousel() {
+            if (!track || isTransitioning) return;
+            
+            isTransitioning = true;
+            const translateX = -(currentSlide * (100 / 3));
+            track.style.transform = `translateX(${translateX}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 300);
+        }
+
+        function goToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < totalSlides && slideIndex !== currentSlide) {
+                currentSlide = slideIndex;
+                updateCarousel();
+            }
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % totalSlides);
+        }
+
+        function prevSlide() {
+            goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+        }
+
+        // Event listeners
+        if (nextButton) {
+            nextButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextSlide();
+                stopAutoPlay();
+                startAutoPlay();
+            });
+        }
+
+        if (prevButton) {
+            prevButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevSlide();
+                stopAutoPlay();
+                startAutoPlay();
+            });
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                goToSlide(index);
+                stopAutoPlay();
+                startAutoPlay();
+            });
+        });
+
+        // Touch/Swipe functionality
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+
+        function handleStart(e) {
+            if (isTransitioning) return;
+            isDragging = true;
+            startX = e.touches ? e.touches[0].clientX : e.clientX;
+            currentX = startX;
+            
+            if (track) {
+                track.style.transition = 'none';
+            }
+        }
+
+        function handleMove(e) {
+            if (!isDragging || !track || isTransitioning) return;
+            e.preventDefault();
+            
+            currentX = e.touches ? e.touches[0].clientX : e.clientX;
+            const diff = currentX - startX;
+            const movePercent = (diff / track.offsetWidth) * 100;
+            const currentTranslate = -(currentSlide * (100 / 3));
+            
+            track.style.transform = `translateX(${currentTranslate + (movePercent / 3)}%)`;
+        }
+
+        function handleEnd() {
+            if (!isDragging || !track || isTransitioning) return;
+            isDragging = false;
+            
+            track.style.transition = 'transform 0.3s ease-in-out';
+            
+            const diff = currentX - startX;
+            const threshold = 50;
+            
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
+                stopAutoPlay();
+                startAutoPlay();
+            } else {
+                updateCarousel();
+            }
+        }
+
+        // Add touch events
+        if (track) {
+            track.addEventListener('touchstart', handleStart, { passive: false });
+            track.addEventListener('touchmove', handleMove, { passive: false });
+            track.addEventListener('touchend', handleEnd, { passive: false });
+        }
+
+        // Auto-play functionality
+        let autoPlayInterval = null;
+
+        function startAutoPlay() {
+            if (window.innerWidth <= 768) {
+                stopAutoPlay();
+                autoPlayInterval = setInterval(nextSlide, 4000);
+            }
+        }
+
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        }
+
+        // Initialize
+        function initCarousel() {
+            if (track && window.innerWidth <= 768) {
+                currentSlide = 0;
+                updateCarousel();
+                startAutoPlay();
+            } else {
+                stopAutoPlay();
+            }
+        }
+
+        // Initialize on load
+        setTimeout(initCarousel, 100);
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            setTimeout(initCarousel, 100);
+        });
+
+        // Pause auto-play when user interacts
+        if (track) {
+            track.addEventListener('touchstart', () => {
+                stopAutoPlay();
+                setTimeout(() => {
+                    if (window.innerWidth <= 768) {
+                        startAutoPlay();
+                    }
+                }, 5000);
+            });
+        }
+
         document.querySelectorAll('.service-card, .about-text, .about-video').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
@@ -961,7 +1280,6 @@
             observer.observe(el);
         });
 
-        // Prevent zoom on input focus (iOS Safari fix)
         document.querySelectorAll('input, textarea').forEach(input => {
             input.addEventListener('focus', function() {
                 const viewport = document.querySelector('meta[name="viewport"]');
