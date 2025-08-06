@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Innovation Solutions - ARCLINE ADVISORY</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Growth Acceleration - ARCLINE ADVISORY</title>
     <style>
         * {
             margin: 0;
@@ -12,77 +12,81 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: #2d3748;
+            font-size: 14px;
             overflow-x: hidden;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
-        /* Navigation */
+        /* Compact Navigation */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
             z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            padding: 12px 0;
+            box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid #e2e8f0;
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            height: 56px;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 20px;
+            font-weight: 700;
+            color: #4c51bf;
             text-decoration: none;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 24px;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: #333;
+            color: #4a5568;
             font-weight: 500;
-            transition: color 0.3s ease;
+            font-size: 15px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: #667eea;
+            background: #ebf4ff;
+            color: #4c51bf;
         }
 
         .cta-button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #4c51bf;
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
+            padding: 10px 18px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 15px;
+            transition: all 0.2s ease;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+            background: #434190;
+            transform: translateY(-1px);
         }
 
         /* Mobile Menu */
@@ -150,389 +154,414 @@
             color: #667eea;
         }
 
-        /* Hero Section */
+        /* Compact Hero */
         .hero {
-            height: 70vh;
-            min-height: 500px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
             color: white;
-            z-index: 10;
-            position: relative;
+            padding: 80px 0 40px;
+            margin-top: 80px;
             text-align: center;
-            width: 100%;
         }
 
         .breadcrumb {
-            font-size: 1rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
+            font-size: 13px;
+            opacity: 0.8;
+            margin-bottom: 12px;
         }
 
         .breadcrumb a {
             color: white;
             text-decoration: none;
-            opacity: 0.8;
-        }
-
-        .breadcrumb a:hover {
-            opacity: 1;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: slideUp 1s ease 0.3s forwards;
+            margin-bottom: 16px;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: slideUp 1s ease 0.5s forwards;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Main Content */
-        .main-content {
-            padding: 5rem 0;
-        }
-
-        .section {
-            margin-bottom: 5rem;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: #333;
-            text-align: center;
-        }
-
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 3rem;
-            text-align: center;
+            font-size: 16px;
+            margin-bottom: 24px;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            opacity: 0.95;
+            line-height: 1.6;
         }
 
-        /* Solutions Grid */
-        .solutions-detailed {
+        /* Compact Main Content */
+        .main-content {
+            padding: 32px 0;
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #2d3748;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .section-subtitle {
+            font-size: 15px;
+            color: #718096;
+            margin-bottom: 32px;
+            text-align: center;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Compact Growth Areas Grid */
+        .growth-areas {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-bottom: 4rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .solution-detail {
+        /* Desktop scrolling - show when content overflows */
+        @media (min-width: 769px) {
+            .growth-areas {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scroll-behavior: smooth;
+                padding-bottom: 8px;
+            }
+            
+            .growth-area {
+                flex: 0 0 280px;
+                scroll-snap-align: start;
+            }
+            
+            /* Desktop scrollbar styling */
+            .growth-areas::-webkit-scrollbar {
+                height: 6px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-track {
+                background: #f1f5f9;
+                border-radius: 3px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 3px;
+            }
+            
+            .growth-areas::-webkit-scrollbar-thumb:hover {
+                background: #a0aec0;
+            }
+        }
+
+        .growth-area {
             background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
         }
 
-        .solution-detail:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+        .growth-area:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .solution-detail-icon {
-            width: 100px;
-            height: 100px;
+        .growth-area-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .growth-area-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .growth-area h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .growth-area p {
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .growth-features {
+            list-style: none;
+        }
+
+        .growth-features li {
+            padding: 4px 0;
+            position: relative;
+            padding-left: 20px;
+            color: #4a5568;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .growth-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #48bb78;
+            font-weight: bold;
+        }
+
+        /* Compact Metrics Section */
+        .metrics-section {
+            background: #f7fafc;
+            padding: 40px 0;
+        }
+
+        .metrics-content {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 32px;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .metrics-video {
+            background: white;
+            height: 250px;
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .metrics-video-wrapper {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .metrics-video iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-disclaimer {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .video-disclaimer p {
+            font-size: 11px;
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        .metrics-text h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #2d3748;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .metrics-text p {
+            font-size: 14px;
+            color: #718096;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* Compact Metrics Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+
+        .metric-card {
+            background: white;
+            padding: 20px 16px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .metric-icon {
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
+            margin: 0 auto 12px;
+            font-size: 14px;
             color: white;
         }
 
-        .solution-detail h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: #333;
+        .metric-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #4c51bf;
+            margin-bottom: 4px;
+            line-height: 1;
         }
 
-        .solution-detail p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 2rem;
+        .metric-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 6px;
         }
 
-        .solution-features {
-            list-style: none;
-            margin-bottom: 2rem;
+        .metric-description {
+            font-size: 12px;
+            color: #718096;
+            line-height: 1.4;
         }
 
-        .solution-features li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 2rem;
-            color: #555;
+        /* Compact Strategy Timeline */
+        .strategy-timeline {
+            background: #f7fafc;
+            padding: 40px 0;
+            margin-top: 32px;
         }
 
-        .solution-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-        }
-
-        /* Technologies Section */
-        .tech-section {
-            background: #f8f9fa;
-            padding: 5rem 0;
-            margin: 0 -20px;
-        }
-
-        .tech-content {
+        .timeline-steps {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            margin-bottom: 3rem;
-        }
-
-        .tech-video {
-            background: #ffffff;
-            height: 400px;
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .tech-video-wrapper {
-            width: 100%;
-            height: 100%;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #000;
-            position: relative;
-        }
-
-        .tech-video iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
-            display: block;
-        }
-
-        .tech-text h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .tech-text p {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .tech-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .tech-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .tech-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .tech-card h4 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .tech-card p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Innovation Process */
-        .innovation-process {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            padding: 5rem 0;
-            margin: 5rem -20px;
-        }
-
-        .process-timeline {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
         }
 
         .timeline-step {
             background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-            position: relative;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
             text-align: center;
-        }
-
-        .timeline-step::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border-radius: 50%;
+            position: relative;
         }
 
         .step-number {
-            width: 60px;
-            height: 60px;
+            width: 32px;
+            height: 32px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
+            font-size: 14px;
             font-weight: bold;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 12px;
         }
 
         .timeline-step h4 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: #333;
+            font-size: 15px;
+            margin-bottom: 8px;
+            color: #2d3748;
+            font-weight: 600;
         }
 
         .timeline-step p {
-            color: #666;
-            line-height: 1.6;
+            color: #718096;
+            line-height: 1.5;
+            font-size: 13px;
         }
 
-        /* CTA Section */
+        /* Compact CTA Section */
         .cta-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 5rem 0;
+            padding: 40px 0;
             text-align: center;
-            margin: 5rem -20px 0;
+            margin-top: 32px;
         }
 
         .cta-section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 24px;
+            margin-bottom: 8px;
         }
 
         .cta-section p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            font-size: 15px;
+            margin-bottom: 24px;
             opacity: 0.9;
         }
 
         .cta-buttons {
             display: flex;
-            gap: 1rem;
+            gap: 12px;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .btn-primary {
             background: white;
-            color: #667eea;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            color: #4c51bf;
+            padding: 12px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .btn-secondary {
             background: transparent;
             color: white;
             border: 2px solid white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
+            padding: 10px 20px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: all 0.2s ease;
         }
 
         .btn-secondary:hover {
             background: white;
-            color: #667eea;
+            color: #4c51bf;
         }
 
         /* Footer */
@@ -543,171 +572,194 @@
             padding: 2rem 0;
         }
 
-        /* Mobile Styles */
+        footer p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
+            .container { 
+                padding: 0 16px; 
             }
-
-            /* Navigation */
-            nav {
-                padding: 0.75rem 0;
+            .nav-links { 
+                display: none; 
             }
-
-            .nav-links {
-                display: none;
+            .mobile-menu-btn { 
+                display: flex; 
             }
-
-            .mobile-menu-btn {
-                display: flex;
+            .cta-button { 
+                display: none; 
             }
-
-            .cta-button {
-                display: none;
+            .logo { 
+                font-size: 1.5rem; 
             }
-
-            .logo {
-                font-size: 1.5rem;
+            .hero { 
+                padding: 60px 0 32px; 
+                margin-top: 80px; 
             }
-
-            .hero h1 {
-                font-size: 2.5rem;
+            .hero h1 { 
+                font-size: 2rem; 
+                line-height: 1.2;
+                padding: 0 8px;
             }
-
-            .hero p {
-                font-size: 1.1rem;
+            .hero p { 
+                font-size: 15px;
+                line-height: 1.6;
+                padding: 0 8px;
             }
-
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 1.5rem;
+            .section-title { 
+                font-size: 20px;
+                line-height: 1.3;
+                padding: 0 8px;
             }
-
             .section-subtitle {
-                font-size: 1rem;
-                margin-bottom: 2rem;
+                padding: 0 8px;
+                line-height: 1.6;
             }
-
-            .solutions-detailed {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            
+            /* Horizontal scrolling grid for mobile */
+            .growth-areas {
+                display: flex;
+                gap: 16px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: 0 16px 16px 16px;
+                margin: 0 -16px;
+                -webkit-overflow-scrolling: touch;
             }
-
-            .solution-detail {
-                padding: 2rem 1.5rem;
+            
+            .growth-area { 
+                flex: 0 0 280px;
+                padding: 16px;
+                scroll-snap-align: start;
             }
-
-            .solution-detail-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 2rem;
+            
+            /* Scrollbar styling for mobile cards */
+            .growth-areas::-webkit-scrollbar {
+                height: 4px;
             }
-
-            .solution-detail h3 {
-                font-size: 1.5rem;
+            
+            .growth-areas::-webkit-scrollbar-track {
+                background: #f1f5f9;
+                border-radius: 2px;
             }
-
-            .solution-detail p {
-                font-size: 1rem;
+            
+            .growth-areas::-webkit-scrollbar-thumb {
+                background: #cbd5e0;
+                border-radius: 2px;
             }
-
-            /* Technologies Section */
-            .tech-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            
+            .growth-areas::-webkit-scrollbar-thumb:hover {
+                background: #a0aec0;
             }
-
-            .tech-video {
-                height: 220px;
-                order: -1;
-                padding: 10px;
-            }
-
-            .tech-video iframe {
-                border-radius: 8px;
-            }
-
-            .tech-text h3 {
-                font-size: 1.6rem;
+            
+            .metrics-content { 
+                grid-template-columns: 1fr; 
+                gap: 24px;
                 text-align: center;
+                padding: 0 16px;
             }
-
-            .tech-text p {
-                font-size: 0.95rem;
-                text-align: center;
+            .metrics-video { 
+                height: 200px; 
+                order: -1; 
+                max-width: 100%;
+                margin: 0 auto;
             }
-
-            .tech-grid {
+            .metrics-grid { 
+                grid-template-columns: 1fr 1fr; 
+                gap: 12px;
+                padding: 0 16px;
+            }
+            .metric-card { 
+                padding: 16px 12px; 
+            }
+            .timeline-steps { 
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-                margin-top: 2rem;
+                padding: 0 16px;
             }
-
-            .tech-card {
-                padding: 1.5rem;
-            }
-
-            .tech-icon {
-                font-size: 2.5rem;
-            }
-
-            .tech-card h4 {
-                font-size: 1.2rem;
-            }
-
-            .tech-card p {
-                font-size: 0.85rem;
-            }
-
-            .process-timeline {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
             .timeline-step {
-                padding: 2rem 1.5rem;
+                padding: 16px;
             }
-
-            .timeline-step h4 {
-                font-size: 1.2rem;
-            }
-
-            .timeline-step p {
-                font-size: 0.9rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                width: 280px;
-                text-align: center;
-                padding: 0.9rem 1.5rem;
-            }
-
-            .tech-section,
-            .innovation-process,
-            .cta-section {
-                margin: 2rem -15px;
-                padding: 3rem 0;
-            }
-
             .cta-section h2 {
-                font-size: 2rem;
+                font-size: 20px;
+                line-height: 1.3;
+                padding: 0 16px;
             }
-
             .cta-section p {
-                font-size: 1rem;
+                padding: 0 16px;
+                line-height: 1.6;
             }
+            .cta-buttons { 
+                flex-direction: column; 
+                align-items: center;
+                padding: 0 16px;
+            }
+            .btn-primary, .btn-secondary { 
+                width: 200px; 
+                text-align: center; 
+            }
+            footer p {
+                padding: 0 16px;
+                line-height: 1.5;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+            .metrics-grid { 
+                grid-template-columns: 1fr;
+                padding: 0 12px;
+            }
+            .hero h1 { 
+                font-size: 1.75rem;
+                padding: 0 4px;
+            }
+            .hero p,
+            .section-title,
+            .section-subtitle {
+                padding: 0 4px;
+            }
+            .cta-section h2,
+            .cta-section p {
+                padding: 0 12px;
+            }
+            .growth-areas {
+                padding: 0 12px 16px 12px;
+                margin: 0 -12px;
+            }
+            .metrics-content,
+            .timeline-steps,
+            .cta-buttons {
+                padding: 0 12px;
+            }
+            footer p {
+                padding: 0 12px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e0;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
@@ -716,7 +768,7 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="index.html#about">About</a></li>
                     <li><a href="index.html#services">Services</a></li>
-                    <li><a href="#" class="active">Innovation Solutions</a></li>
+                    <li><a href="#" class="active">Growth Acceleration</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
                 <a href="index.html#contact" class="cta-button">Get Started</a>
@@ -732,276 +784,260 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#services">Services</a></li>
-                <li><a href="#" class="active">Innovation Solutions</a></li>
+                <li><a href="#" class="active">Growth Acceleration</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="breadcrumb">
-                    <a href="index.html">Home</a> / <span>Innovation Solutions</span>
-                </div>
-                <h1>💡 Innovation Solutions</h1>
-                <p>Transform healthcare delivery with cutting-edge medical innovations designed to improve patient outcomes, enhance clinical efficiency, and advance medical research in today's rapidly evolving healthcare landscape.</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Growth Acceleration</span>
             </div>
+            <h1>📈 Growth Acceleration</h1>
+            <p>Accelerate your healthcare organization's growth with proven medical strategies and tools designed to scale your practice, maximize patient satisfaction, and optimize ROI.</p>
         </div>
     </section>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Overview Section -->
             <section class="section">
-                <h2 class="section-title">Medical Innovation Excellence</h2>
-                <p class="section-subtitle">Our comprehensive healthcare innovation solutions are designed to modernize medical practices, improve patient care, and position healthcare organizations at the forefront of medical advancement.</p>
+                <h2 class="section-title">Healthcare Growth Excellence</h2>
+                <p class="section-subtitle">Comprehensive growth acceleration services designed to scale your medical practice and maximize patient outcomes.</p>
                 
-                <div class="solutions-detailed">
-                    <div class="solution-detail">
-                        <div class="solution-detail-icon">🏥</div>
-                        <h3>Healthcare Technology Integration</h3>
-                        <p>Streamline healthcare operations with intelligent technology solutions that reduce administrative burden, eliminate errors, and improve patient care coordination across all medical specialties.</p>
-                        <ul class="solution-features">
-                            <li>Electronic Health Records (EHR) optimization</li>
-                            <li>AI-powered diagnostic assistance systems</li>
-                            <li>Integration with medical devices and equipment</li>
-                            <li>Custom healthcare workflow solutions</li>
+                <div class="growth-areas">
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">🏥</div>
+                            <h3>Medical Practice Expansion</h3>
+                        </div>
+                        <p>Scale your healthcare practice efficiently with proven growth strategies that increase capacity and optimize operations.</p>
+                        <ul class="growth-features">
+                            <li>Multi-location practice development</li>
+                            <li>Service line expansion</li>
+                            <li>Staff recruitment and scaling</li>
+                            <li>Capacity optimization</li>
                         </ul>
                     </div>
 
-                    <div class="solution-detail">
-                        <div class="solution-detail-icon">🔬</div>
-                        <h3>Medical Research & Analytics</h3>
-                        <p>Accelerate medical research and clinical decision-making with advanced data analytics, machine learning, and research management platforms designed for healthcare professionals.</p>
-                        <ul class="solution-features">
-                            <li>Clinical data analysis and visualization</li>
-                            <li>Research database management systems</li>
-                            <li>Patient outcome tracking and reporting</li>
-                            <li>Predictive healthcare analytics</li>
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">👥</div>
+                            <h3>Patient Acquisition & Retention</h3>
+                        </div>
+                        <p>Grow your patient base through comprehensive marketing strategies and engagement programs.</p>
+                        <ul class="growth-features">
+                            <li>Digital marketing and SEO</li>
+                            <li>Referral program development</li>
+                            <li>Reputation management</li>
+                            <li>Patient loyalty programs</li>
                         </ul>
                     </div>
 
-                    <div class="solution-detail">
-                        <div class="solution-detail-icon">📱</div>
-                        <h3>Telemedicine & Patient Engagement</h3>
-                        <p>Enhance patient accessibility and engagement through comprehensive telemedicine platforms and patient portal solutions that improve healthcare delivery and patient satisfaction.</p>
-                        <ul class="solution-features">
-                            <li>Telemedicine platform development</li>
-                            <li>Patient portal and mobile health apps</li>
-                            <li>Remote patient monitoring systems</li>
-                            <li>Digital patient communication tools</li>
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">💰</div>
+                            <h3>Revenue Optimization</h3>
+                        </div>
+                        <p>Maximize practice revenue through financial strategies and billing improvements.</p>
+                        <ul class="growth-features">
+                            <li>Billing and coding optimization</li>
+                            <li>Insurance reimbursement maximization</li>
+                            <li>Pricing strategy development</li>
+                            <li>Alternative revenue streams</li>
                         </ul>
                     </div>
 
-                    <div class="solution-detail">
-                        <div class="solution-detail-icon">🛡️</div>
-                        <h3>Medical Data Security & Compliance</h3>
-                        <p>Protect sensitive medical information with robust cybersecurity solutions specifically designed for healthcare, ensuring HIPAA compliance and patient data protection.</p>
-                        <ul class="solution-features">
-                            <li>HIPAA compliance management systems</li>
-                            <li>Medical data encryption and protection</li>
-                            <li>Healthcare security auditing</li>
-                            <li>Medical incident response and recovery</li>
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">📊</div>
+                            <h3>Performance Analytics</h3>
+                        </div>
+                        <p>Leverage data analytics to drive growth decisions and improve patient outcomes.</p>
+                        <ul class="growth-features">
+                            <li>KPI tracking and analysis</li>
+                            <li>Outcome measurement systems</li>
+                            <li>Efficiency metrics</li>
+                            <li>Practice benchmarking</li>
+                        </ul>
+                    </div>
+
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">🔧</div>
+                            <h3>Operational Excellence</h3>
+                        </div>
+                        <p>Streamline healthcare operations and improve efficiency through process optimization and technology integration.</p>
+                        <ul class="growth-features">
+                            <li>Workflow process optimization</li>
+                            <li>Healthcare technology integration</li>
+                            <li>Quality improvement programs</li>
+                            <li>Compliance and risk management</li>
+                        </ul>
+                    </div>
+
+                    <div class="growth-area">
+                        <div class="growth-area-header">
+                            <div class="growth-area-icon">🎯</div>
+                            <h3>Strategic Planning</h3>
+                        </div>
+                        <p>Develop comprehensive strategic plans that align with your healthcare organization's vision and market opportunities.</p>
+                        <ul class="growth-features">
+                            <li>Market analysis and positioning</li>
+                            <li>Competitive strategy development</li>
+                            <li>Long-term growth roadmapping</li>
+                            <li>Change management support</li>
                         </ul>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- Technologies Section -->
-        <section class="tech-section">
+        <section class="metrics-section">
             <div class="container">
-                <h2 class="section-title">Medical Technologies We Specialize In</h2>
-                <p class="section-subtitle">We leverage the latest medical technologies and healthcare platforms to deliver innovative solutions that advance patient care and medical research.</p>
+                <h2 class="section-title">Healthcare Growth Impact</h2>
+                <p class="section-subtitle">Measurable results that transform medical practices and accelerate sustainable growth.</p>
                 
-                <div class="tech-content">
-                    <div class="tech-text">
-                        <h3>Cutting-Edge Healthcare Innovation</h3>
-                        <p>Our medical technology solutions are designed to revolutionize healthcare delivery, improve patient outcomes, and streamline clinical workflows through advanced digital health platforms.</p>
-                        <p>From AI-powered diagnostics to telemedicine platforms, we implement the most advanced healthcare technologies to transform your medical practice.</p>
-                    </div>
+                <div class="metrics-content">
                     <div>
-                        <div style="text-align: center; margin-bottom: 1rem;">
-                            <p style="font-size: 0.85rem; color: #888; font-style: italic;">
-                                *Video used for demonstration and UI design purposes only
-                            </p>
+                        <div class="video-disclaimer">
+                            <p>*Video used for demonstration purposes only</p>
                         </div>
-                        <div class="tech-video">
-                            <div class="tech-video-wrapper">
+                        <div class="metrics-video">
+                            <div class="metrics-video-wrapper">
                                 <iframe 
                                     width="560" 
                                     height="315" 
-                                    src="https://www.youtube.com/embed/xYHRrmhjznI?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&fs=0&loop=1&playlist=xYHRrmhjznI" 
-                                    title="Medical Innovation Video" 
+                                    src="https://www.youtube.com/embed/zXPEBbEZLB8?autoplay=1&mute=1&controls=0&disablekb=1&modestbranding=1&rel=0&playsinline=1&fs=0&loop=1&playlist=zXPEBbEZLB8" 
+                                    title="Healthcare Growth Video" 
                                     frameborder="0" 
-                                    allow="autoplay; encrypted-media" 
-                                    allowfullscreen="false">
+                                    allow="autoplay; encrypted-media">
                                 </iframe>
                             </div>
                         </div>
                     </div>
+                    <div class="metrics-text">
+                        <h3>Accelerated Healthcare Growth</h3>
+                        <p>Our proven strategies deliver measurable results that transform medical practices while maintaining exceptional care quality.</p>
+                        <p>From revenue optimization to operational efficiency, we implement data-driven solutions that scale sustainably.</p>
+                    </div>
                 </div>
                 
-                <div class="tech-grid">
-                    <div class="tech-card">
-                        <div class="tech-icon">🏥</div>
-                        <h4>Electronic Health Records</h4>
-                        <p>EHR systems, EPIC, Cerner, and custom medical databases</p>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">📈</div>
+                        <div class="metric-number">30%</div>
+                        <div class="metric-label">Patient Volume Growth</div>
+                        <div class="metric-description">Average increase in patient appointments within 12 months</div>
                     </div>
                     
-                    <div class="tech-card">
-                        <div class="tech-icon">🧬</div>
-                        <h4>Medical AI & Machine Learning</h4>
-                        <p>Diagnostic AI, predictive analytics, and medical imaging analysis</p>
+                    <div class="metric-card">
+                        <div class="metric-icon">💰</div>
+                        <div class="metric-number">25%</div>
+                        <div class="metric-label">Revenue Enhancement</div>
+                        <div class="metric-description">Practice revenue improvement through optimized operations</div>
                     </div>
                     
-                    <div class="tech-card">
-                        <div class="tech-icon">📊</div>
-                        <h4>Clinical Data Analytics</h4>
-                        <p>Patient outcome analysis, clinical research data, and reporting</p>
+                    <div class="metric-card">
+                        <div class="metric-icon">⚡</div>
+                        <div class="metric-number">40%</div>
+                        <div class="metric-label">Efficiency Gains</div>
+                        <div class="metric-description">Workflow optimization reducing administrative burden</div>
                     </div>
                     
-                    <div class="tech-card">
-                        <div class="tech-icon">💊</div>
-                        <h4>Pharmacy & Drug Management</h4>
-                        <p>Medication management systems, drug interaction databases</p>
+                    <div class="metric-card">
+                        <div class="metric-icon">😊</div>
+                        <div class="metric-number">95%</div>
+                        <div class="metric-label">Patient Satisfaction</div>
+                        <div class="metric-description">High satisfaction through improved care coordination</div>
                     </div>
                     
-                    <div class="tech-card">
-                        <div class="tech-icon">📱</div>
-                        <h4>Telemedicine Platforms</h4>
-                        <p>Remote consultation, patient monitoring, and mobile health apps</p>
+                    <div class="metric-card">
+                        <div class="metric-icon">⏱️</div>
+                        <div class="metric-number">6</div>
+                        <div class="metric-label">Months to ROI</div>
+                        <div class="metric-description">Average timeframe to achieve positive ROI</div>
                     </div>
                     
-                    <div class="tech-card">
-                        <div class="tech-icon">🔒</div>
-                        <h4>HIPAA Compliance</h4>
-                        <p>Medical data security, patient privacy, and regulatory compliance</p>
+                    <div class="metric-card">
+                        <div class="metric-icon">👨‍⚕️</div>
+                        <div class="metric-number">85%</div>
+                        <div class="metric-label">Staff Retention Rate</div>
+                        <div class="metric-description">Improved satisfaction and reduced turnover</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Innovation Process -->
-        <section class="innovation-process">
+        <section class="strategy-timeline">
             <div class="container">
-                <h2 class="section-title">Our Medical Innovation Process</h2>
-                <p class="section-subtitle">We follow a proven methodology specifically designed for healthcare environments to ensure successful implementation of medical innovations that improve patient outcomes.</p>
+                <h2 class="section-title">Our Growth Process</h2>
+                <p class="section-subtitle">A systematic approach to accelerating healthcare practice growth.</p>
                 
-                <div class="process-timeline">
+                <div class="timeline-steps">
                     <div class="timeline-step">
                         <div class="step-number">1</div>
-                        <h4>Clinical Assessment</h4>
-                        <p>We analyze your current medical systems, identify clinical pain points, and understand specific healthcare requirements and patient needs.</p>
+                        <h4>Assessment & Analysis</h4>
+                        <p>Comprehensive evaluation of current operations and growth potential to identify key opportunities.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">2</div>
-                        <h4>Medical Solution Design</h4>
-                        <p>Our healthcare experts design innovative medical solutions incorporating the latest healthcare technologies and clinical best practices.</p>
+                        <h4>Strategy Development</h4>
+                        <p>Create customized growth strategies tailored to your practice's unique needs and goals.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">3</div>
-                        <h4>Clinical Prototype Testing</h4>
-                        <p>We create medical prototypes and conduct clinical proof-of-concepts to validate solutions in real healthcare environments.</p>
+                        <h4>Implementation</h4>
+                        <p>Execute growth initiatives with dedicated support and smooth integration.</p>
                     </div>
                     
                     <div class="timeline-step">
                         <div class="step-number">4</div>
-                        <h4>Healthcare Implementation</h4>
-                        <p>Our team implements the medical solution with minimal disruption to patient care, ensuring smooth clinical workflow integration.</p>
+                        <h4>Monitoring & Optimization</h4>
+                        <p>Continuous performance tracking with ongoing adjustments to maximize outcomes.</p>
                     </div>
-                    
-                    <div class="timeline-step">
-                        <div class="step-number">5</div>
-                        <h4>Clinical Testing & Validation</h4>
-                        <p>Comprehensive clinical testing and validation ensure the solution meets medical standards and improves patient outcomes.</p>
-                    </div>
-                    
-                    <div class="timeline-step">
-                        <div class="step-number">6</div>
-                        <h4>Medical Training & Support</h4>
-                        <p>We provide clinical training, medical documentation, and ongoing healthcare support to ensure successful adoption by medical staff.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section">
-            <div class="container">
-                <h2>Ready to Innovate Healthcare?</h2>
-                <p>Let's discuss how our medical innovation solutions can transform your healthcare practice and improve patient outcomes.</p>
-                <div class="cta-buttons">
-                    <a href="index.html#contact" class="btn-primary">Start Your Medical Innovation Journey</a>
-                    <a href="index.html#about" class="btn-secondary">Learn More About Us</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Accelerate Your Healthcare Growth?</h2>
+            <p>Transform your medical practice with proven growth strategies that deliver measurable results.</p>
+            <div class="cta-buttons">
+                <a href="index.html#contact" class="btn-primary">Start Growing Today</a>
+                <a href="index.html#services" class="btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="container">
-            <p>&copy; 2025 ARCLINE ADVISORY. All rights reserved. | Transforming businesses, one solution at a time.</p>
+            <p>&copy; 2025 ARCLINE ADVISORY. All rights reserved. | Healthcare Growth & Advisory Services</p>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle with proper animations
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
         mobileMenuBtn.addEventListener('click', function() {
             this.classList.toggle('active');
             mobileMenu.classList.toggle('active');
-            
-            // Animate hamburger to X
-            const spans = this.querySelectorAll('span');
-            if (this.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(45deg) translate(-5px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
         });
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-menu a').forEach(link => {
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
             link.addEventListener('click', function() {
                 mobileMenuBtn.classList.remove('active');
                 mobileMenu.classList.remove('active');
-                
-                // Reset hamburger animation
-                const spans = mobileMenuBtn.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
             });
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenuBtn.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                
-                // Reset hamburger animation
-                const spans = mobileMenuBtn.querySelectorAll('span');
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
-        });
-
-        // Navbar background change on scroll
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -1011,29 +1047,6 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
                 navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
             }
-        });
-
-        // Smooth scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.solution-detail, .tech-card, .timeline-step, .tech-text, .tech-video').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            observer.observe(el);
         });
     </script>
 </body>
