@@ -16,10 +16,6 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-text-size-adjust: 100%;
-            -ms-text-size-adjust: 100%;
         }
 
         .container {
@@ -28,7 +24,6 @@
             padding: 0 20px;
         }
 
-        /* Enhanced Navigation - Match main site */
         nav {
             position: fixed;
             top: 0;
@@ -36,9 +31,8 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 0.75rem 0;
             box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -48,25 +42,25 @@
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: bold;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             text-decoration: none;
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
         .nav-links a {
             text-decoration: none;
             color: #333;
             font-weight: 500;
+            font-size: 0.9rem;
             transition: color 0.3s ease;
         }
 
@@ -74,37 +68,26 @@
             color: #667eea;
         }
 
-        .cta-button {
+        .get-started-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 0.75rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-size: 0.85rem;
+            transition: transform 0.3s ease;
         }
 
-        .cta-button:hover {
+        .get-started-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
         }
 
-        .cta-button:active {
-            transform: scale(0.98);
-        }
-
-        /* Enhanced Mobile Menu */
         .mobile-menu-btn {
             display: none;
             flex-direction: column;
             cursor: pointer;
             padding: 8px;
-            border-radius: 8px;
-            transition: background 0.3s ease;
-        }
-
-        .mobile-menu-btn:hover {
-            background: rgba(102, 126, 234, 0.1);
         }
 
         .mobile-menu-btn span {
@@ -112,21 +95,8 @@
             height: 3px;
             background: #333;
             margin: 2.5px 0;
-            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.3s ease;
             border-radius: 3px;
-        }
-
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(-45deg) translate(-5px, 6px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(45deg) translate(-5px, -6px);
         }
 
         .mobile-menu {
@@ -137,11 +107,10 @@
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
             padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
             transform: translateY(-100%);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.4s ease;
         }
 
         .mobile-menu.active {
@@ -157,71 +126,37 @@
 
         .mobile-menu ul li {
             margin: 1.5rem 0;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.3s ease;
         }
-
-        .mobile-menu.active ul li {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .mobile-menu.active ul li:nth-child(1) { transition-delay: 0.1s; }
-        .mobile-menu.active ul li:nth-child(2) { transition-delay: 0.2s; }
-        .mobile-menu.active ul li:nth-child(3) { transition-delay: 0.3s; }
-        .mobile-menu.active ul li:nth-child(4) { transition-delay: 0.4s; }
 
         .mobile-menu ul li a {
             text-decoration: none;
             color: #333;
             font-size: 1.2rem;
             font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            display: inline-block;
         }
 
-        .mobile-menu ul li a:hover {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .mobile-menu ul li a:active {
-            transform: scale(0.95);
-        }
-
-        /* Enhanced Hero Section */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 120px 0 60px;
-            margin-top: 80px;
+            padding: 100px 0 60px;
+            margin-top: 70px;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');
-            animation: float 6s ease-in-out infinite;
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 10;
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .breadcrumb {
@@ -235,36 +170,6 @@
             text-decoration: none;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: slideUp 1s ease 0.3s forwards;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            animation: slideUp 1s ease 0.5s forwards;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Optimized Main Content */
         .main-content {
             padding: 3.5rem 0;
         }
@@ -291,37 +196,11 @@
             margin-right: auto;
         }
 
-        /* Enhanced Growth Areas Grid - Desktop only */
         .growth-areas {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-bottom: 3rem;
-        }
-
-        /* Mobile horizontal scrolling for growth areas - Mobile only */
-        @media (max-width: 768px) {
-            .growth-areas {
-                display: flex;
-                gap: 1.5rem;
-                margin-bottom: 2rem;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                padding: 0 16px 0 16px;
-                margin: 0 -16px 2rem -16px;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            .growth-areas::-webkit-scrollbar {
-                display: none;
-            }
-
-            .growth-area {
-                flex: 0 0 300px;
-                scroll-snap-align: start;
-            }
         }
 
         .growth-area {
@@ -330,19 +209,11 @@
             border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(102, 126, 234, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.3s ease;
         }
 
         .growth-area:hover {
             transform: translateY(-5px);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
-            border-color: rgba(102, 126, 234, 0.2);
-        }
-
-        .growth-area:active {
-            transform: scale(0.98);
         }
 
         .growth-area-header {
@@ -362,21 +233,18 @@
             justify-content: center;
             font-size: 1.5rem;
             color: white;
-            flex-shrink: 0;
         }
 
         .growth-area h3 {
             font-size: 1.3rem;
             font-weight: 600;
             color: #333;
-            margin: 0;
         }
 
         .growth-area p {
             color: #666;
             line-height: 1.7;
             margin-bottom: 1.5rem;
-            font-size: 0.95rem;
         }
 
         .growth-features {
@@ -388,7 +256,6 @@
             position: relative;
             padding-left: 1.5rem;
             color: #555;
-            font-size: 0.9rem;
         }
 
         .growth-features li::before {
@@ -461,35 +328,10 @@
             font-style: italic;
         }
 
-        /* Enhanced Metrics Grid - Desktop only */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-        }
-
-        /* Mobile horizontal scrolling for metrics - Mobile only */
-        @media (max-width: 768px) {
-            .metrics-grid {
-                display: flex;
-                gap: 1.2rem;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                padding: 0 16px 0 16px;
-                margin: 0 -16px;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-
-            .metrics-grid::-webkit-scrollbar {
-                display: none;
-            }
-
-            .metric-card {
-                flex: 0 0 200px;
-                scroll-snap-align: start;
-            }
         }
 
         .metric-card {
@@ -505,10 +347,6 @@
         .metric-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .metric-card:active {
-            transform: scale(0.98);
         }
 
         .metric-icon {
@@ -572,10 +410,6 @@
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
         }
 
-        .timeline-step:active {
-            transform: scale(0.98);
-        }
-
         .step-number {
             width: 50px;
             height: 50px;
@@ -603,7 +437,6 @@
             font-size: 0.95rem;
         }
 
-        /* Enhanced CTA Section */
         .cta-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -641,16 +474,11 @@
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-primary:active {
-            transform: scale(0.98);
         }
 
         .btn-secondary {
@@ -669,11 +497,6 @@
             color: #667eea;
         }
 
-        .btn-secondary:active {
-            transform: scale(0.98);
-        }
-
-        /* Footer */
         footer {
             background: #333;
             color: white;
@@ -681,17 +504,7 @@
             padding: 2rem 0;
         }
 
-        footer p {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        /* Enhanced Mobile Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 0 16px;
-            }
-
             .nav-links {
                 display: none;
             }
@@ -700,81 +513,30 @@
                 display: flex;
             }
 
-            .cta-button {
+            .get-started-btn {
                 display: none;
             }
 
             .logo {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
             }
 
             .hero {
-                padding: 100px 0 50px;
-                margin-top: 80px;
+                padding: 90px 0 50px;
+                margin-top: 70px;
             }
 
             .hero h1 {
                 font-size: 2.2rem;
-                margin-bottom: 1rem;
-                padding: 0 8px;
             }
 
-            .hero p {
-                font-size: 1rem;
-                padding: 0 8px;
-                margin-bottom: 1.5rem;
-            }
-
-            .breadcrumb {
-                font-size: 13px;
-                margin-bottom: 12px;
-            }
-
-            .main-content {
-                padding: 2.5rem 0;
-            }
-
-            .section {
-                margin-bottom: 2.5rem;
-            }
-
-            .section-title {
-                font-size: 1.8rem;
-                margin-bottom: 0.8rem;
-                padding: 0 8px;
-            }
-
-            .section-subtitle {
-                font-size: 1rem;
-                margin-bottom: 2rem;
-                padding: 0 8px;
-            }
-
-            .growth-area {
-                padding: 2rem 1.5rem;
-            }
-
-            .growth-area-icon {
-                width: 50px;
-                height: 50px;
-                font-size: 1.3rem;
-            }
-
-            .growth-area h3 {
-                font-size: 1.2rem;
-            }
-
-            .growth-area p {
-                font-size: 0.9rem;
-                margin-bottom: 1.2rem;
-            }
-
-            .growth-features li {
-                font-size: 0.85rem;
+            .growth-areas {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
 
             .metrics-section {
-                margin: 0 -16px;
+                margin: 0 -20px;
                 padding: 2.5rem 0;
             }
 
@@ -801,6 +563,11 @@
                 padding: 0 8px;
             }
 
+            .metrics-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
             .metric-card {
                 padding: 1.5rem 1rem;
             }
@@ -825,7 +592,7 @@
             }
 
             .strategy-timeline {
-                margin: 2.5rem -16px 0;
+                margin: 2.5rem -20px 0;
                 padding: 2.5rem 0;
             }
 
@@ -855,203 +622,18 @@
             }
 
             .cta-section {
-                margin: 2.5rem -16px 0;
+                margin: 2.5rem -20px 0;
                 padding: 2.5rem 0;
-            }
-
-            .cta-section h2 {
-                font-size: 1.8rem;
-                margin-bottom: 0.8rem;
-                padding: 0 16px;
-            }
-
-            .cta-section p {
-                font-size: 1rem;
-                margin-bottom: 1.5rem;
-                padding: 0 16px;
             }
 
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
-                gap: 1rem;
             }
 
             .btn-primary,
             .btn-secondary {
                 width: 260px;
-                text-align: center;
-                padding: 0.9rem 1.5rem;
-            }
-
-            footer p {
-                padding: 0 16px;
-                font-size: 0.9rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 12px;
-            }
-
-            .hero {
-                padding: 90px 0 40px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-                padding: 0 4px;
-            }
-
-            .hero p {
-                font-size: 0.9rem;
-                padding: 0 4px;
-            }
-
-            .main-content {
-                padding: 2rem 0;
-            }
-
-            .section {
-                margin-bottom: 2rem;
-            }
-
-            .section-title {
-                font-size: 1.6rem;
-                padding: 0 4px;
-            }
-
-            .section-subtitle {
-                font-size: 0.9rem;
-                padding: 0 4px;
-                margin-bottom: 1.5rem;
-            }
-
-            .growth-areas {
-                gap: 1.2rem;
-            }
-
-            .growth-area {
-                padding: 1.5rem 1.2rem;
-            }
-
-            .growth-area-header {
-                gap: 0.8rem;
-                margin-bottom: 1.2rem;
-            }
-
-            .growth-area-icon {
-                width: 45px;
-                height: 45px;
-                font-size: 1.2rem;
-            }
-
-            .growth-area h3 {
-                font-size: 1.1rem;
-            }
-
-            .growth-area p {
-                font-size: 0.85rem;
-                margin-bottom: 1rem;
-            }
-
-            .growth-features li {
-                font-size: 0.8rem;
-                padding: 0.2rem 0;
-            }
-
-            .metrics-section {
-                margin: 0 -12px;
-                padding: 2rem 0;
-            }
-
-            .metrics-content {
-                gap: 1.5rem;
-                margin-bottom: 1.5rem;
-            }
-
-            .metrics-video {
-                height: 200px;
-            }
-
-            .metrics-text h3 {
-                font-size: 1.4rem;
-            }
-
-            .metrics-text p {
-                font-size: 0.85rem;
-                padding: 0 4px;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .metric-card {
-                padding: 1.2rem 1rem;
-            }
-
-            .metric-number {
-                font-size: 1.8rem;
-            }
-
-            .strategy-timeline {
-                margin: 2rem -12px 0;
-                padding: 2rem 0;
-            }
-
-            .timeline-steps {
-                gap: 1.2rem;
-            }
-
-            .timeline-step {
-                padding: 1.5rem 1.2rem;
-            }
-
-            .step-number {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .timeline-step h4 {
-                font-size: 1rem;
-                margin-bottom: 0.6rem;
-            }
-
-            .timeline-step p {
-                font-size: 0.85rem;
-            }
-
-            .cta-section {
-                margin: 2rem -12px 0;
-                padding: 2rem 0;
-            }
-
-            .cta-section h2 {
-                font-size: 1.6rem;
-                padding: 0 12px;
-            }
-
-            .cta-section p {
-                font-size: 0.9rem;
-                padding: 0 12px;
-                margin-bottom: 1.2rem;
-            }
-
-            .btn-primary,
-            .btn-secondary {
-                width: 220px;
-                padding: 0.8rem 1.3rem;
-                font-size: 0.95rem;
-            }
-
-            footer p {
-                padding: 0 12px;
-                font-size: 0.85rem;
             }
         }
     </style>
@@ -1060,15 +642,16 @@
     <nav id="navbar">
         <div class="container">
             <div class="nav-container">
-                <a href="#" class="logo">ARCLINE ADVISORY</a>
+                <a href="index.html" class="logo">ARCLINE ADVISORY</a>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#healthcare-growth">Services</a></li>
+                    <li><a href="#growth-impact">Impact</a></li>
+                    <li><a href="#growth-process">Process</a></li>
                     <li><a href="#" class="active">Growth Acceleration</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#get-started">Contact</a></li>
                 </ul>
-                <a href="#contact" class="cta-button">Get Started</a>
+                <a href="#get-started" class="get-started-btn">Get Started</a>
                 <div class="mobile-menu-btn" id="mobileMenuBtn">
                     <span></span>
                     <span></span>
@@ -1078,20 +661,21 @@
         </div>
         <div class="mobile-menu" id="mobileMenu">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#healthcare-growth">Services</a></li>
+                <li><a href="#growth-impact">Impact</a></li>
+                <li><a href="#growth-process">Process</a></li>
                 <li><a href="#" class="active">Growth Acceleration</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#get-started">Contact</a></li>
             </ul>
         </div>
     </nav>
 
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="container">
             <div class="hero-content">
                 <div class="breadcrumb">
-                    <a href="#home">Home</a> / <span>Growth Acceleration</span>
+                    <a href="index.html">Home</a> / <span>Growth Acceleration</span>
                 </div>
                 <h1>📈 Growth Acceleration</h1>
                 <p>Accelerate your healthcare organization's growth with proven medical strategies and tools designed to scale your practice, maximize patient satisfaction, and optimize ROI.</p>
@@ -1101,7 +685,7 @@
 
     <main class="main-content">
         <div class="container">
-            <section class="section">
+            <section class="section" id="healthcare-growth">
                 <h2 class="section-title">Healthcare Growth Excellence</h2>
                 <p class="section-subtitle">Comprehensive growth acceleration services designed to scale your medical practice and maximize patient outcomes.</p>
                 
@@ -1193,7 +777,7 @@
             </section>
         </div>
 
-        <section class="metrics-section">
+        <section class="metrics-section" id="growth-impact">
             <div class="container">
                 <h2 class="section-title">Healthcare Growth Impact</h2>
                 <p class="section-subtitle">Measurable results that transform medical practices and accelerate sustainable growth.</p>
@@ -1269,7 +853,7 @@
             </div>
         </section>
 
-        <section class="strategy-timeline">
+        <section class="strategy-timeline" id="growth-process">
             <div class="container">
                 <h2 class="section-title">Our Growth Process</h2>
                 <p class="section-subtitle">A systematic approach to accelerating healthcare practice growth.</p>
@@ -1303,13 +887,13 @@
         </section>
     </main>
 
-    <section class="cta-section">
+    <section class="cta-section" id="get-started">
         <div class="container">
             <h2>Ready to Accelerate Your Healthcare Growth?</h2>
             <p>Transform your medical practice with proven growth strategies that deliver measurable results.</p>
             <div class="cta-buttons">
-                <a href="#contact" class="btn-primary">Start Growing Today</a>
-                <a href="#services" class="btn-secondary">Explore Services</a>
+                <a href="#get-started" class="btn-primary">Start Growing Today</a>
+                <a href="#healthcare-growth" class="btn-secondary">Explore Services</a>
             </div>
         </div>
     </section>
@@ -1321,14 +905,12 @@
     </footer>
 
     <script>
-        // Enhanced Mobile Menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
         mobileMenuBtn.addEventListener('click', function() {
             this.classList.toggle('active');
             mobileMenu.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         });
 
         // Close mobile menu when clicking on links
@@ -1336,88 +918,22 @@
             link.addEventListener('click', function() {
                 mobileMenuBtn.classList.remove('active');
                 mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
             });
         });
 
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenuBtn.classList.remove('active');
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            }
-        });
-
-        // Enhanced scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -30px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
-        }, observerOptions);
-
-        // Animate elements on scroll
-        document.querySelectorAll('.growth-area, .metric-card, .timeline-step, .metrics-text, .metrics-video').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
         });
-
-        // Add touch feedback for mobile
-        document.querySelectorAll('.growth-area, .metric-card, .timeline-step').forEach(card => {
-            card.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.98)';
-            });
-            
-            card.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-
-        // Performance optimizations
-        let ticking = false;
-        
-        function updateNavbar() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            }
-            ticking = false;
-        }
-
-        function requestNavbarUpdate() {
-            if (!ticking) {
-                requestAnimationFrame(updateNavbar);
-                ticking = true;
-            }
-        }
-
-        window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
     </script>
 </body>
 </html>
