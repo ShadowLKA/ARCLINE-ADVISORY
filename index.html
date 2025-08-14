@@ -17,6 +17,8 @@
             line-height: 1.6;
             color: #333;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         .container {
@@ -90,15 +92,22 @@
             display: none;
             flex-direction: column;
             cursor: pointer;
-            padding: 5px;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
         }
 
         .mobile-menu-btn span {
-            width: 25px;
+            width: 24px;
             height: 3px;
             background: #333;
-            margin: 3px 0;
-            transition: 0.3s;
+            margin: 2.5px 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 3px;
         }
 
         .mobile-menu-btn.active span:nth-child(1) {
@@ -107,6 +116,7 @@
 
         .mobile-menu-btn.active span:nth-child(2) {
             opacity: 0;
+            transform: translateX(20px);
         }
 
         .mobile-menu-btn.active span:nth-child(3) {
@@ -114,19 +124,24 @@
         }
 
         .mobile-menu {
-            display: none;
             position: fixed;
             top: 80px;
             left: 0;
             width: 100%;
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .mobile-menu.active {
-            display: block;
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
         }
 
         .mobile-menu ul {
@@ -135,19 +150,40 @@
         }
 
         .mobile-menu ul li {
-            margin: 1rem 0;
+            margin: 1.5rem 0;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
+
+        .mobile-menu.active ul li {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu.active ul li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-menu.active ul li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-menu.active ul li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-menu.active ul li:nth-child(4) { transition-delay: 0.4s; }
 
         .mobile-menu ul li a {
             text-decoration: none;
             color: #333;
             font-size: 1.2rem;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            display: inline-block;
         }
 
         .mobile-menu ul li a:hover {
             color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .mobile-menu ul li a:active {
+            transform: scale(0.95);
         }
 
         /* Hero Section */
@@ -221,17 +257,10 @@
             transition: all 0.3s ease;
             border: none;
             outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
             display: inline-block;
             cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-primary:hover {
@@ -241,12 +270,8 @@
             color: #667eea !important;
         }
 
-        .btn-primary:active,
-        .btn-primary:focus {
-            background: white !important;
-            color: #667eea !important;
-            outline: none;
-            border: none;
+        .btn-primary:active {
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
@@ -259,17 +284,10 @@
             font-weight: 600;
             transition: all 0.3s ease;
             outline: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
             display: inline-block;
             cursor: pointer;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .btn-secondary:hover {
@@ -277,12 +295,8 @@
             color: #667eea !important;
         }
 
-        .btn-secondary:active,
-        .btn-secondary:focus {
-            background: transparent !important;
-            color: white !important;
-            outline: none;
-            border: 2px solid white;
+        .btn-secondary:active {
+            transform: scale(0.98);
         }
 
         @keyframes slideUp {
@@ -373,7 +387,7 @@
             display: block;
         }
 
-        /* Services Section */
+        /* Enhanced Services Section */
         .services-container {
             position: relative;
         }
@@ -386,35 +400,75 @@
             margin: 0 auto;
         }
 
-        /* Mobile Carousel Styles */
+        /* Enhanced Mobile Carousel with Better Animations */
         .services-carousel {
             display: none;
             position: relative;
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 0;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 340px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
         .carousel-wrapper {
-            background: white;
-            border-radius: 24px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 28px;
+            position: relative;
             overflow: hidden;
             width: 100%;
-            max-width: 340px;
-            margin: 0 auto;
-            position: relative;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                0 8px 32px rgba(102, 126, 234, 0.1);
+        }
+
+        .carousel-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 28px;
+            padding: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask-composite: xor;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .services-track {
             display: flex;
             width: 300%;
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+            position: relative;
+            z-index: 2;
+        }
+
+        .services-track.dragging {
+            transition: none;
+        }
+
+        .services-track.smooth-transition {
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .carousel-slide {
             width: calc(100% / 3);
             flex-shrink: 0;
+            position: relative;
         }
 
         .carousel-slide .service-card {
@@ -423,37 +477,75 @@
             border: none;
             border-radius: 0;
             background: transparent;
-            padding: 32px 24px;
+            padding: 40px 28px;
             transform: none !important;
             transition: none;
+            position: relative;
         }
 
         .carousel-slide .service-card:hover {
             transform: none !important;
             box-shadow: none;
+            border: none;
+        }
+
+        .carousel-slide .service-card::before {
+            display: none;
+        }
+
+        .carousel-slide.active .service-card {
+            transform: none !important;
+        }
+
+        .carousel-slide .service-card::before {
+            display: none;
         }
 
         .carousel-nav {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 24px;
+            gap: 16px;
+            margin-top: 32px;
+            padding: 0 20px;
         }
 
         .carousel-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 7px;
             background: #e5e7eb;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: none;
             padding: 0;
+            position: relative;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .carousel-dot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.4s ease;
         }
 
         .carousel-dot.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            width: 32px;
+            width: 40px;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .carousel-dot.active::before {
+            left: 100%;
+        }
+
+        .carousel-dot:active {
+            transform: scale(0.9);
         }
 
         .carousel-arrows {
@@ -461,82 +553,139 @@
             top: 50%;
             transform: translateY(-50%);
             width: 100%;
-            display: none;
+            left: 0;
+            display: flex;
+            justify-content: space-between;
             pointer-events: none;
             z-index: 10;
+            padding: 0 -25px;
         }
 
         .carousel-arrow {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(102, 126, 234, 0.15);
-            width: 40px;
-            height: 40px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 
+                0 8px 24px rgba(0, 0, 0, 0.15),
+                0 4px 12px rgba(102, 126, 234, 0.1);
             color: #667eea;
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             pointer-events: all;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-arrow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            z-index: -1;
         }
 
         .carousel-arrow:hover {
-            background: white;
-            transform: scale(1.08);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transform: scale(1.05);
+            box-shadow: 
+                0 12px 32px rgba(0, 0, 0, 0.2),
+                0 6px 16px rgba(102, 126, 234, 0.2);
             border-color: #667eea;
+            color: white;
         }
 
-        .carousel-arrow.prev {
-            left: -50px;
+        .carousel-arrow:hover::before {
+            opacity: 1;
         }
 
-        .carousel-arrow.next {
-            right: -50px;
+        .carousel-arrow:active {
+            transform: scale(0.95);
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.2),
+                0 2px 8px rgba(102, 126, 234, 0.2);
         }
 
-        /* Remove any unwanted elements or decorations */
-        .carousel-progress {
-            display: none;
-        }
-
-        .carousel-progress-bar {
-            display: none;
-        }
-
+        /* Enhanced Service Cards */
         .service-card {
             background: white;
             padding: 2.5rem 2rem;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.1),
+                0 5px 20px rgba(0, 0, 0, 0.05);
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
             cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            display: none;
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: none;
+            box-shadow: 
+                0 15px 50px rgba(0, 0, 0, 0.1),
+                0 5px 20px rgba(0, 0, 0, 0.05);
+            border-color: rgba(102, 126, 234, 0.1);
+        }
+
+        .service-card:active {
+            transform: scale(0.98);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.15),
+                0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card:hover::before {
+            display: none;
         }
 
         .service-icon {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: white;
+            transition: none;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-icon::before {
+            display: none;
+        }
+
+        .service-card:hover .service-icon::before {
+            display: none;
+        }
+
+        .service-card:hover .service-icon {
+            transform: none;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
         }
 
         .service-card h3 {
@@ -544,6 +693,11 @@
             margin-bottom: 1rem;
             color: #333;
             font-weight: 600;
+            transition: none;
+        }
+
+        .service-card:hover h3 {
+            color: #333;
         }
 
         .service-card p {
@@ -551,6 +705,11 @@
             line-height: 1.6;
             margin-bottom: 1.2rem;
             font-size: 0.95rem;
+            transition: none;
+        }
+
+        .service-card:hover p {
+            color: #666;
         }
 
         .service-card .learn-more {
@@ -559,11 +718,21 @@
             text-decoration: none;
             font-size: 0.9rem;
             transition: color 0.2s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-card .learn-more::after {
+            display: none;
         }
 
         .service-card .learn-more:hover {
             color: #764ba2;
-            text-decoration: underline;
+            transform: none;
+        }
+
+        .service-card .learn-more:hover::after {
+            display: none;
         }
 
         /* Contact Section */
@@ -605,6 +774,14 @@
             font-size: 1rem;
             background: rgba(255, 255, 255, 0.9);
             color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
         }
 
         .form-group textarea {
@@ -628,16 +805,16 @@
         .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-            background: white !important;
-            color: #667eea !important;
         }
 
-        .submit-btn:active,
-        .submit-btn:focus {
-            background: white !important;
-            color: #667eea !important;
-            outline: none;
-            border: none;
+        .submit-btn:active {
+            transform: scale(0.98);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
         }
 
         .contact-info h3 {
@@ -659,10 +836,10 @@
             padding: 2rem 0;
         }
 
-        /* Mobile Styles */
+        /* Enhanced Mobile Styles */
         @media (max-width: 768px) {
             .container {
-                padding: 0 15px;
+                padding: 0 16px;
             }
 
             .nav-links {
@@ -682,30 +859,36 @@
             }
 
             .hero {
-                min-height: 80vh;
+                min-height: 100vh;
                 padding: 2rem 0;
             }
 
             .hero h1 {
                 font-size: 2.5rem;
                 line-height: 1.2;
+                margin-bottom: 1.5rem;
             }
 
             .hero p {
                 font-size: 1.1rem;
-                margin-bottom: 2rem;
+                margin-bottom: 2.5rem;
+                padding: 0 10px;
             }
 
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
+                padding: 0 20px;
             }
 
             .btn-primary,
             .btn-secondary {
-                width: 200px;
+                width: 100%;
+                max-width: 280px;
                 text-align: center;
+                padding: 1rem 2rem;
+                font-size: 1rem;
             }
 
             section {
@@ -715,16 +898,22 @@
             .section-title {
                 font-size: 2rem;
                 margin-bottom: 2rem;
+                padding: 0 10px;
             }
 
             .section-subtitle {
                 font-size: 1.1rem;
                 margin-bottom: 3rem;
+                padding: 0 10px;
             }
 
             .about-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
+            }
+
+            .about-text {
+                padding: 0 10px;
             }
 
             .about-text h3 {
@@ -738,7 +927,8 @@
             .about-video {
                 height: 250px;
                 order: -1;
-                padding: 10px;
+                padding: 12px;
+                margin: 0 10px;
             }
 
             .about-video iframe {
@@ -751,10 +941,27 @@
 
             .services-carousel {
                 display: block;
+                padding: 20px 0;
+            }
+
+            .carousel-container {
+                margin: 0 auto;
+                padding: 0 15px;
+                max-width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .carousel-wrapper {
+                width: 100%;
+                max-width: 320px;
             }
 
             .carousel-arrows {
-                display: block;
+                display: flex;
+                width: calc(100% + 60px);
+                left: -30px;
+                padding: 0;
             }
 
             .contact-content {
@@ -765,6 +972,7 @@
             .contact-info {
                 order: -1;
                 text-align: center;
+                padding: 0 10px;
             }
 
             .contact-info h3 {
@@ -777,6 +985,7 @@
 
             .contact-form {
                 padding: 1.5rem;
+                margin: 0 10px;
             }
 
             footer p {
@@ -786,12 +995,17 @@
         }
 
         @media (max-width: 480px) {
+            .container {
+                padding: 0 12px;
+            }
+
             .hero h1 {
                 font-size: 2rem;
             }
 
             .hero p {
                 font-size: 1rem;
+                padding: 0 5px;
             }
 
             .section-title {
@@ -806,24 +1020,109 @@
                 font-size: 1.6rem;
             }
 
-            .service-card {
-                padding: 1.5rem;
+            .carousel-container {
+                margin: 0 auto;
+                padding: 0 10px;
+                max-width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .carousel-wrapper {
+                width: 100%;
+                max-width: 300px;
+                border-radius: 20px;
+            }
+
+            .carousel-arrows {
+                width: calc(100% + 50px);
+                left: -25px;
+            }
+
+            .carousel-slide .service-card {
+                padding: 32px 20px;
+            }
+
+            .service-card .service-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
             }
 
             .about-video {
                 height: 200px;
-                padding: 8px;
-            }
-
-            .about-video iframe {
-                border-radius: 6px;
+                padding: 10px;
+                margin: 0 5px;
             }
 
             .btn-primary,
             .btn-secondary {
-                width: 100%;
-                padding: 0.8rem 1.5rem;
+                padding: 0.9rem 1.5rem;
+                font-size: 0.95rem;
             }
+        }
+
+        /* Smooth scrolling for iOS */
+        * {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Prevent zoom on inputs for iOS */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            font-size: 16px;
+        }
+
+        /* Enhanced Animation Keyframes */
+        @keyframes slideInFromLeft {
+            0% {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInFromRight {
+            0% {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(102, 126, 234, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(102, 126, 234, 0);
+            }
+        }
+
+        /* Service card entrance animations */
+        .service-card.animate-in {
+            animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
     </style>
 </head>
@@ -925,38 +1224,40 @@
                     </div>
                 </div>
 
-                <!-- Mobile Carousel -->
+                <!-- Enhanced Mobile Carousel -->
                 <div class="services-carousel">
-                    <div class="carousel-wrapper">
-                        <div class="services-track" id="servicesTrack">
-                            <div class="carousel-slide">
-                                <div class="service-card" onclick="window.location.href='strategy-consulting.html'" style="cursor: pointer;">
-                                    <div class="service-icon">🚀</div>
-                                    <h3>Strategy & Consulting</h3>
-                                    <p>Expert guidance to help you navigate challenges and identify growth opportunities in your market.</p>
-                                    <a href="strategy-consulting.html" class="learn-more">Learn More →</a>
+                    <div class="carousel-container">
+                        <div class="carousel-wrapper">
+                            <div class="services-track" id="servicesTrack">
+                                <div class="carousel-slide active">
+                                    <div class="service-card" onclick="window.location.href='strategy-consulting.html'" style="cursor: pointer;">
+                                        <div class="service-icon">🚀</div>
+                                        <h3>Strategy & Consulting</h3>
+                                        <p>Expert guidance to help you navigate challenges and identify growth opportunities in your market.</p>
+                                        <a href="strategy-consulting.html" class="learn-more">Learn More →</a>
+                                    </div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="service-card" onclick="window.location.href='innovation-solutions.html'" style="cursor: pointer;">
+                                        <div class="service-icon">💡</div>
+                                        <h3>Innovation Solutions</h3>
+                                        <p>Cutting-edge solutions designed to transform your business processes and drive efficiency.</p>
+                                        <a href="innovation-solutions.html" class="learn-more">Learn More →</a>
+                                    </div>
+                                </div>
+                                <div class="carousel-slide">
+                                    <div class="service-card" onclick="window.location.href='growth-acceleration.html'" style="cursor: pointer;">
+                                        <div class="service-icon">📈</div>
+                                        <h3>Growth Acceleration</h3>
+                                        <p>Proven strategies and tools to scale your business and maximize your return on investment.</p>
+                                        <a href="growth-acceleration.html" class="learn-more">Learn More →</a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="carousel-slide">
-                                <div class="service-card" onclick="window.location.href='innovation-solutions.html'" style="cursor: pointer;">
-                                    <div class="service-icon">💡</div>
-                                    <h3>Innovation Solutions</h3>
-                                    <p>Cutting-edge solutions designed to transform your business processes and drive efficiency.</p>
-                                    <a href="innovation-solutions.html" class="learn-more">Learn More →</a>
-                                </div>
+                            <div class="carousel-arrows">
+                                <button class="carousel-arrow prev" aria-label="Previous service">‹</button>
+                                <button class="carousel-arrow next" aria-label="Next service">›</button>
                             </div>
-                            <div class="carousel-slide">
-                                <div class="service-card" onclick="window.location.href='growth-acceleration.html'" style="cursor: pointer;">
-                                    <div class="service-icon">📈</div>
-                                    <h3>Growth Acceleration</h3>
-                                    <p>Proven strategies and tools to scale your business and maximize your return on investment.</p>
-                                    <a href="growth-acceleration.html" class="learn-more">Learn More →</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-arrows">
-                            <button class="carousel-arrow prev" aria-label="Previous service">‹</button>
-                            <button class="carousel-arrow next" aria-label="Next service">›</button>
                         </div>
                     </div>
                     <div class="carousel-nav">
@@ -1010,28 +1311,35 @@
     </footer>
 
     <script>
+        // Enhanced Mobile Menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
 
         mobileMenuBtn.addEventListener('click', function() {
             this.classList.toggle('active');
             mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         });
 
+        // Close mobile menu when clicking on links
         document.querySelectorAll('.mobile-menu a').forEach(link => {
             link.addEventListener('click', function() {
                 mobileMenuBtn.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             });
         });
 
+        // Close mobile menu when clicking outside
         document.addEventListener('click', function(e) {
             if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
                 mobileMenuBtn.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
 
+        // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1046,6 +1354,7 @@
             });
         });
 
+        // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
@@ -1057,13 +1366,13 @@
             }
         });
 
+        // Enhanced Contact Form
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const formData = new FormData(this);
             const name = formData.get('name');
             const email = formData.get('email');
-            const company = formData.get('company');
             const message = formData.get('message');
             
             if (!name || !email || !message) {
@@ -1084,195 +1393,305 @@
             }, 1500);
         });
 
+        // Enhanced Carousel with Fixed Functionality
+        class EnhancedCarousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = 3;
+                this.isTransitioning = false;
+                this.isDragging = false;
+                this.startX = 0;
+                this.currentX = 0;
+                this.initialTranslate = 0;
+                this.translate = 0;
+                this.autoPlayInterval = null;
+                this.animationFrame = null;
+
+                this.track = document.getElementById('servicesTrack');
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.dots = document.querySelectorAll('.carousel-dot');
+                this.prevButton = document.querySelector('.carousel-arrow.prev');
+                this.nextButton = document.querySelector('.carousel-arrow.next');
+
+                this.init();
+            }
+
+            init() {
+                if (!this.track) return;
+                
+                this.setupEventListeners();
+                this.updateCarousel();
+                
+                if (window.innerWidth <= 768) {
+                    this.startAutoPlay();
+                }
+            }
+
+            setupEventListeners() {
+                // Touch events
+                this.track.addEventListener('touchstart', this.handleTouchStart.bind(this), { passive: false });
+                this.track.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
+                this.track.addEventListener('touchend', this.handleTouchEnd.bind(this), { passive: false });
+
+                // Mouse events for desktop testing
+                this.track.addEventListener('mousedown', this.handleMouseDown.bind(this));
+                this.track.addEventListener('mousemove', this.handleMouseMove.bind(this));
+                this.track.addEventListener('mouseup', this.handleMouseUp.bind(this));
+                this.track.addEventListener('mouseleave', this.handleMouseUp.bind(this));
+
+                // Arrow buttons with proper event handling
+                if (this.prevButton) {
+                    this.prevButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.prevSlide();
+                        this.resetAutoPlay();
+                    });
+                }
+
+                if (this.nextButton) {
+                    this.nextButton.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.nextSlide();
+                        this.resetAutoPlay();
+                    });
+                }
+
+                // Dots with proper event handling
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.goToSlide(index);
+                        this.resetAutoPlay();
+                    });
+                });
+
+                // Window resize
+                window.addEventListener('resize', () => {
+                    this.handleResize();
+                });
+
+                // Visibility change for auto-play
+                document.addEventListener('visibilitychange', () => {
+                    if (document.hidden) {
+                        this.stopAutoPlay();
+                    } else if (window.innerWidth <= 768) {
+                        this.startAutoPlay();
+                    }
+                });
+            }
+
+            handleTouchStart(e) {
+                if (this.isTransitioning) return;
+                
+                this.isDragging = true;
+                this.startX = e.touches[0].clientX;
+                this.currentX = this.startX;
+                this.initialTranslate = this.getCurrentTranslate();
+                
+                this.track.classList.add('dragging');
+                this.stopAutoPlay();
+            }
+
+            handleTouchMove(e) {
+                if (!this.isDragging || this.isTransitioning) return;
+                
+                e.preventDefault();
+                this.currentX = e.touches[0].clientX;
+                const diffX = this.currentX - this.startX;
+                const slideWidth = this.getSlideWidth();
+                const dragThreshold = slideWidth * 0.3;
+                const boundedDiff = Math.max(-dragThreshold, Math.min(dragThreshold, diffX));
+                
+                this.translate = this.initialTranslate + boundedDiff;
+                this.updateTransform();
+            }
+
+            handleTouchEnd() {
+                if (!this.isDragging) return;
+                
+                this.isDragging = false;
+                this.track.classList.remove('dragging');
+                
+                const diffX = this.currentX - this.startX;
+                const slideWidth = this.getSlideWidth();
+                const threshold = slideWidth * 0.2;
+                
+                if (Math.abs(diffX) > threshold) {
+                    if (diffX > 0) {
+                        this.prevSlide();
+                    } else {
+                        this.nextSlide();
+                    }
+                } else {
+                    this.snapToCurrentSlide();
+                }
+                
+                this.resetAutoPlay();
+            }
+
+            handleMouseDown(e) {
+                if (window.innerWidth > 768) return;
+                e.preventDefault();
+                this.handleTouchStart({ touches: [{ clientX: e.clientX }] });
+            }
+
+            handleMouseMove(e) {
+                if (window.innerWidth > 768 || !this.isDragging) return;
+                e.preventDefault();
+                this.handleTouchMove({ touches: [{ clientX: e.clientX }], preventDefault: () => {} });
+            }
+
+            handleMouseUp() {
+                if (window.innerWidth > 768 || !this.isDragging) return;
+                this.handleTouchEnd();
+            }
+
+            getSlideWidth() {
+                return this.track.offsetWidth / 3;
+            }
+
+            getCurrentTranslate() {
+                return -(this.currentSlide * this.getSlideWidth());
+            }
+
+            updateTransform() {
+                if (this.animationFrame) {
+                    cancelAnimationFrame(this.animationFrame);
+                }
+                
+                this.animationFrame = requestAnimationFrame(() => {
+                    const finalTranslate = this.isDragging ? this.translate : this.getCurrentTranslate();
+                    this.track.style.transform = `translateX(${finalTranslate}px)`;
+                });
+            }
+
+            updateCarousel() {
+                if (!this.track || this.isTransitioning) return;
+                
+                this.isTransitioning = true;
+                
+                // Remove transition class and add it back for smooth animation
+                this.track.classList.remove('smooth-transition');
+                
+                // Force reflow
+                this.track.offsetHeight;
+                
+                // Add smooth transition
+                this.track.classList.add('smooth-transition');
+                
+                this.translate = this.getCurrentTranslate();
+                this.updateTransform();
+                this.updateDots();
+                this.updateSlideStates();
+
+                setTimeout(() => {
+                    this.isTransitioning = false;
+                    this.track.classList.remove('smooth-transition');
+                }, 400);
+            }
+
+            updateSlideStates() {
+                this.slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            updateDots() {
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+            }
+
+            goToSlide(slideIndex) {
+                if (slideIndex >= 0 && slideIndex < this.totalSlides && slideIndex !== this.currentSlide && !this.isTransitioning) {
+                    this.currentSlide = slideIndex;
+                    this.updateCarousel();
+                }
+            }
+
+            nextSlide() {
+                if (!this.isTransitioning) {
+                    this.goToSlide((this.currentSlide + 1) % this.totalSlides);
+                }
+            }
+
+            prevSlide() {
+                if (!this.isTransitioning) {
+                    this.goToSlide((this.currentSlide - 1 + this.totalSlides) % this.totalSlides);
+                }
+            }
+
+            snapToCurrentSlide() {
+                this.updateCarousel();
+            }
+
+            startAutoPlay() {
+                if (window.innerWidth <= 768 && !this.autoPlayInterval) {
+                    this.autoPlayInterval = setInterval(() => {
+                        if (!this.isDragging && !this.isTransitioning && !document.hidden) {
+                            this.nextSlide();
+                        }
+                    }, 4000);
+                }
+            }
+
+            stopAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+
+            resetAutoPlay() {
+                this.stopAutoPlay();
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        this.startAutoPlay();
+                    }, 6000);
+                }
+            }
+
+            handleResize() {
+                // Reset position on resize
+                this.translate = this.getCurrentTranslate();
+                this.updateTransform();
+                
+                if (window.innerWidth <= 768) {
+                    this.startAutoPlay();
+                } else {
+                    this.stopAutoPlay();
+                }
+            }
+        }
+
+        // Initialize carousel
+        let carousel;
+        setTimeout(() => {
+            carousel = new EnhancedCarousel();
+        }, 100);
+
+        // Enhanced Intersection Observer for animations
         const observerOptions = {
-            threshold: 0.1,
+            threshold: 0.2,
             rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('service-card')) {
+                        entry.target.classList.add('animate-in');
+                    }
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
         }, observerOptions);
 
-        // Simple and Clean Carousel
-        let currentSlide = 0;
-        const totalSlides = 3;
-        let isTransitioning = false;
-
-        const track = document.getElementById('servicesTrack');
-        const dots = document.querySelectorAll('.carousel-dot');
-        const prevButton = document.querySelector('.carousel-arrow.prev');
-        const nextButton = document.querySelector('.carousel-arrow.next');
-
-        function updateCarousel() {
-            if (!track || isTransitioning) return;
-            
-            isTransitioning = true;
-            const translateX = -(currentSlide * (100 / 3));
-            track.style.transform = `translateX(${translateX}%)`;
-            
-            // Update dots
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 300);
-        }
-
-        function goToSlide(slideIndex) {
-            if (slideIndex >= 0 && slideIndex < totalSlides && slideIndex !== currentSlide) {
-                currentSlide = slideIndex;
-                updateCarousel();
-            }
-        }
-
-        function nextSlide() {
-            goToSlide((currentSlide + 1) % totalSlides);
-        }
-
-        function prevSlide() {
-            goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
-        }
-
-        // Event listeners
-        if (nextButton) {
-            nextButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                nextSlide();
-                stopAutoPlay();
-                startAutoPlay();
-            });
-        }
-
-        if (prevButton) {
-            prevButton.addEventListener('click', (e) => {
-                e.stopPropagation();
-                prevSlide();
-                stopAutoPlay();
-                startAutoPlay();
-            });
-        }
-
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', (e) => {
-                e.stopPropagation();
-                goToSlide(index);
-                stopAutoPlay();
-                startAutoPlay();
-            });
-        });
-
-        // Touch/Swipe functionality
-        let startX = 0;
-        let currentX = 0;
-        let isDragging = false;
-
-        function handleStart(e) {
-            if (isTransitioning) return;
-            isDragging = true;
-            startX = e.touches ? e.touches[0].clientX : e.clientX;
-            currentX = startX;
-            
-            if (track) {
-                track.style.transition = 'none';
-            }
-        }
-
-        function handleMove(e) {
-            if (!isDragging || !track || isTransitioning) return;
-            e.preventDefault();
-            
-            currentX = e.touches ? e.touches[0].clientX : e.clientX;
-            const diff = currentX - startX;
-            const movePercent = (diff / track.offsetWidth) * 100;
-            const currentTranslate = -(currentSlide * (100 / 3));
-            
-            track.style.transform = `translateX(${currentTranslate + (movePercent / 3)}%)`;
-        }
-
-        function handleEnd() {
-            if (!isDragging || !track || isTransitioning) return;
-            isDragging = false;
-            
-            track.style.transition = 'transform 0.3s ease-in-out';
-            
-            const diff = currentX - startX;
-            const threshold = 50;
-            
-            if (Math.abs(diff) > threshold) {
-                if (diff > 0) {
-                    prevSlide();
-                } else {
-                    nextSlide();
-                }
-                stopAutoPlay();
-                startAutoPlay();
-            } else {
-                updateCarousel();
-            }
-        }
-
-        // Add touch events
-        if (track) {
-            track.addEventListener('touchstart', handleStart, { passive: false });
-            track.addEventListener('touchmove', handleMove, { passive: false });
-            track.addEventListener('touchend', handleEnd, { passive: false });
-        }
-
-        // Auto-play functionality
-        let autoPlayInterval = null;
-
-        function startAutoPlay() {
-            if (window.innerWidth <= 768) {
-                stopAutoPlay();
-                autoPlayInterval = setInterval(nextSlide, 4000);
-            }
-        }
-
-        function stopAutoPlay() {
-            if (autoPlayInterval) {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = null;
-            }
-        }
-
-        // Initialize
-        function initCarousel() {
-            if (track && window.innerWidth <= 768) {
-                currentSlide = 0;
-                updateCarousel();
-                startAutoPlay();
-            } else {
-                stopAutoPlay();
-            }
-        }
-
-        // Initialize on load
-        setTimeout(initCarousel, 100);
-
-        // Handle window resize
-        window.addEventListener('resize', () => {
-            setTimeout(initCarousel, 100);
-        });
-
-        // Pause auto-play when user interacts
-        if (track) {
-            track.addEventListener('touchstart', () => {
-                stopAutoPlay();
-                setTimeout(() => {
-                    if (window.innerWidth <= 768) {
-                        startAutoPlay();
-                    }
-                }, 5000);
-            });
-        }
-
+        // Observe elements for animations
         document.querySelectorAll('.service-card, .about-text, .about-video').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
@@ -1280,17 +1699,52 @@
             observer.observe(el);
         });
 
-        document.querySelectorAll('input, textarea').forEach(input => {
-            input.addEventListener('focus', function() {
-                const viewport = document.querySelector('meta[name="viewport"]');
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+        // Performance optimizations
+        let ticking = false;
+        
+        function updateNavbar() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+            ticking = false;
+        }
+
+        function requestNavbarUpdate() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
+
+        // Prevent zoom on input focus for iOS
+        const addInputFocusHandlers = () => {
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                        const viewport = document.querySelector('meta[name="viewport"]');
+                        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+                    }
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+                        const viewport = document.querySelector('meta[name="viewport"]');
+                        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                    }
+                });
             });
-            
-            input.addEventListener('blur', function() {
-                const viewport = document.querySelector('meta[name="viewport"]');
-                viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
-            });
-        });
+        };
+
+        // Initialize input handlers
+        addInputFocusHandlers();
     </script>
 </body>
 </html>
