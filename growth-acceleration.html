@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Growth Acceleration - ARCLINE ADVISORY</title>
     <style>
         * {
@@ -18,6 +18,8 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
         }
 
         .container {
@@ -289,12 +291,38 @@
             margin-right: auto;
         }
 
-        /* Enhanced Growth Areas Grid */
+        /* Enhanced Growth Areas Grid - Desktop only */
         .growth-areas {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-bottom: 3rem;
+        }
+
+        /* Mobile horizontal scrolling for growth areas - Mobile only */
+        @media (max-width: 768px) {
+            .growth-areas {
+                display: flex;
+                grid-template-columns: none;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: 0 16px 0 16px;
+                margin: 0 -16px 2rem -16px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .growth-areas::-webkit-scrollbar {
+                display: none;
+            }
+
+            .growth-area {
+                flex: 0 0 300px;
+                scroll-snap-align: start;
+            }
         }
 
         .growth-area {
@@ -303,35 +331,23 @@
             border-radius: 20px;
             box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(102, 126, 234, 0.1);
-            transition: all 0.3s ease;
+            transition: none;
             position: relative;
             overflow: hidden;
         }
 
         .growth-area::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                90deg, 
-                transparent, 
-                rgba(102, 126, 234, 0.05), 
-                transparent
-            );
-            transition: left 0.6s ease;
+            display: none;
         }
 
         .growth-area:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
-            border-color: #667eea;
+            transform: none;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            border-color: rgba(102, 126, 234, 0.1);
         }
 
         .growth-area:hover::before {
-            left: 100%;
+            display: none;
         }
 
         .growth-area:active {
@@ -454,11 +470,36 @@
             font-style: italic;
         }
 
-        /* Enhanced Metrics Grid */
+        /* Enhanced Metrics Grid - Desktop only */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
+        }
+
+        /* Mobile horizontal scrolling for metrics - Mobile only */
+        @media (max-width: 768px) {
+            .metrics-grid {
+                display: flex;
+                grid-template-columns: none;
+                gap: 1.2rem;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding: 0 16px 0 16px;
+                margin: 0 -16px;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .metrics-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .metric-card {
+                flex: 0 0 200px;
+                scroll-snap-align: start;
+            }
         }
 
         .metric-card {
@@ -720,13 +761,12 @@
             }
 
             .growth-areas {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-                margin-bottom: 2rem;
+                /* Mobile scrolling styles already defined above */
             }
 
             .growth-area {
                 padding: 2rem 1.5rem;
+                /* flex and scroll-snap styles already defined above */
             }
 
             .growth-area-icon {
@@ -777,12 +817,12 @@
             }
 
             .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.2rem;
+                /* Mobile scrolling styles already defined above */
             }
 
             .metric-card {
                 padding: 1.5rem 1rem;
+                /* flex and scroll-snap styles already defined above */
             }
 
             .metric-icon {
