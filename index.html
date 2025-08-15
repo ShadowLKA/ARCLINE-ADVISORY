@@ -2,14 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ARCLINE ADVISORY - Healthcare Innovation & Growth Solutions</title>
     <meta name="description" content="Transform your healthcare practice with proven growth strategies, medical innovation solutions, and expert consulting services.">
     <style>
+        /* Prevent zoom and selection on all elements */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Allow text selection only where needed */
+        p, h1, h2, h3, h4, h5, h6, span, li, td, th {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Form inputs should be selectable */
+        input, textarea, select {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            -webkit-touch-callout: default;
         }
 
         body {
@@ -19,6 +43,13 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .container {
@@ -552,21 +583,21 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 100%;
-            left: 0;
+            width: calc(100% + 100px);
+            left: -50px;
             display: flex;
             justify-content: space-between;
             pointer-events: none;
             z-index: 10;
-            padding: 0 -25px;
+            padding: 0;
         }
 
         .carousel-arrow {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(15px);
             border: 2px solid rgba(102, 126, 234, 0.2);
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -577,13 +608,14 @@
                 0 8px 24px rgba(0, 0, 0, 0.15),
                 0 4px 12px rgba(102, 126, 234, 0.1);
             color: #667eea;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             pointer-events: all;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
             position: relative;
             overflow: hidden;
+            z-index: 20;
         }
 
         .carousel-arrow::before {
@@ -959,8 +991,8 @@
 
             .carousel-arrows {
                 display: flex;
-                width: calc(100% + 60px);
-                left: -30px;
+                width: calc(100% + 100px);
+                left: -50px;
                 padding: 0;
             }
 
@@ -1035,8 +1067,8 @@
             }
 
             .carousel-arrows {
-                width: calc(100% + 50px);
-                left: -25px;
+                width: calc(100% + 80px);
+                left: -40px;
             }
 
             .carousel-slide .service-card {
@@ -1723,25 +1755,63 @@
 
         window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
 
-        // Prevent zoom on input focus for iOS
+        // Prevent zoom on input focus for iOS and lock zoom globally
         const addInputFocusHandlers = () => {
             const inputs = document.querySelectorAll('input, textarea');
             inputs.forEach(input => {
                 input.addEventListener('focus', function() {
-                    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                        const viewport = document.querySelector('meta[name="viewport"]');
-                        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
-                    }
+                    // Don't change viewport on focus since zoom is already disabled
                 });
                 
                 input.addEventListener('blur', function() {
-                    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-                        const viewport = document.querySelector('meta[name="viewport"]');
-                        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
-                    }
+                    // Don't change viewport on blur since zoom is already disabled
                 });
             });
         };
+
+        // Prevent zoom gestures
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
+
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Prevent pinch zoom
+        document.addEventListener('touchmove', function(event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Prevent wheel zoom (Ctrl + scroll)
+        document.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Prevent keyboard zoom shortcuts
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
+                e.preventDefault();
+            }
+        });
 
         // Initialize input handlers
         addInputFocusHandlers();
