@@ -5,16 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Innovation Solutions - ARCLINE ADVISORY</title>
     <style>
-        /* Prevent zoom and selection on all elements */
+        /* Reset with proper user interaction settings */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -43,13 +38,11 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         .container {
@@ -58,7 +51,7 @@
             padding: 0 16px;
         }
 
-        /* Navigation - Match main page */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -219,7 +212,7 @@
             transform: scale(0.95);
         }
 
-        /* Compact Hero */
+        /* Hero */
         .hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -272,7 +265,7 @@
             line-height: 1.6;
         }
 
-        /* Optimized Main Content */
+        /* Main Content */
         .main-content {
             padding: 40px 0;
         }
@@ -301,7 +294,7 @@
             line-height: 1.6;
         }
 
-        /* Optimized Solutions Grid - 2x2 layout */
+        /* Solutions Grid */
         .solutions-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -379,7 +372,7 @@
             font-weight: bold;
         }
 
-        /* Optimized Technologies Section */
+        /* Tech Section */
         .tech-section {
             background: #f8f9fa;
             padding: 50px 0;
@@ -442,7 +435,7 @@
             font-style: italic;
         }
 
-        /* Optimized Tech Grid - 3x2 layout */
+        /* Tech Grid */
         .tech-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -486,7 +479,7 @@
             line-height: 1.4;
         }
 
-        /* Optimized Process Section - 3x2 layout */
+        /* Process Section */
         .process-section {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
             padding: 50px 0;
@@ -545,7 +538,7 @@
             font-size: 13px;
         }
 
-        /* Compact CTA Section */
+        /* CTA Section */
         .cta-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -620,7 +613,7 @@
             transform: scale(0.98);
         }
 
-        /* Footer - Match main page */
+        /* Footer */
         footer {
             background: #333;
             color: white;
@@ -1314,8 +1307,10 @@
             }
         });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
+        // Enhanced navbar scroll effect with performance optimization
+        let ticking = false;
+        
+        function updateNavbar() {
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 50) {
                 navbar.style.background = 'rgba(255, 255, 255, 0.98)';
@@ -1324,7 +1319,17 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
                 navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
             }
-        });
+            ticking = false;
+        }
+
+        function requestNavbarUpdate() {
+            if (!ticking) {
+                requestAnimationFrame(updateNavbar);
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
 
         // Enhanced scroll animations
         const observerOptions = {
@@ -1360,73 +1365,125 @@
             });
         });
 
-        // Performance optimizations
-        let ticking = false;
-        
-        function updateNavbar() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
-            }
-            ticking = false;
-        }
-
-        function requestNavbarUpdate() {
-            if (!ticking) {
-                requestAnimationFrame(updateNavbar);
-                ticking = true;
-            }
-        }
-
-        window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
-
-        // Prevent zoom gestures
-        document.addEventListener('gesturestart', function (e) {
-            e.preventDefault();
+        // Staggered animations for grid items
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
         });
 
-        document.addEventListener('gesturechange', function (e) {
-            e.preventDefault();
+        // Apply staggered animation to grid items
+        const gridItems = document.querySelectorAll('.solutions-grid .solution-card, .tech-grid .tech-card, .process-timeline .timeline-step');
+        gridItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            staggerObserver.observe(item);
         });
 
-        document.addEventListener('gestureend', function (e) {
-            e.preventDefault();
-        });
-
-        // Prevent double-tap zoom
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Prevent pinch zoom
-        document.addEventListener('touchmove', function(event) {
-            if (event.scale !== 1) {
-                event.preventDefault();
-            }
-        }, { passive: false });
-
-        // Prevent wheel zoom (Ctrl + scroll)
-        document.addEventListener('wheel', function(e) {
-            if (e.ctrlKey) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Prevent keyboard zoom shortcuts
+        // Enhanced keyboard navigation
         document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
-                e.preventDefault();
+            // Close mobile menu with Escape key
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                mobileMenuBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
+
+        // Accessibility improvements
+        const focusableElements = document.querySelectorAll('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        
+        // Add focus indicators
+        focusableElements.forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.outline = '2px solid #667eea';
+                this.style.outlineOffset = '2px';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.outline = '';
+                this.style.outlineOffset = '';
+            });
+        });
+
+        // Mobile performance optimizations
+        if ('ontouchstart' in window) {
+            // Reduce animation complexity on mobile devices
+            document.documentElement.style.setProperty('--animation-duration', '0.3s');
+            
+            // Optimize touch interactions
+            document.addEventListener('touchstart', function() {}, { passive: true });
+        }
+
+        // Error handling for video iframe
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IFRAME') {
+                console.warn('Video failed to load, hiding container');
+                const videoContainer = e.target.closest('.tech-video');
+                if (videoContainer) {
+                    videoContainer.style.display = 'none';
+                }
+            }
+        }, true);
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            // Add entrance animations to hero content
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.opacity = '0';
+                heroContent.style.transform = 'translateY(30px)';
+                heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
+                
+                setTimeout(() => {
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                }, 300);
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Performance optimization for scroll events
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(requestNavbarUpdate, 10);
+        }, { passive: true });
+
+        // Preload critical resources
+        const preloadVideo = () => {
+            const iframe = document.querySelector('.tech-video iframe');
+            if (iframe) {
+                iframe.loading = 'lazy';
+            }
+        };
+
+        // Call preload function
+        preloadVideo();
     </script>
 </body>
 </html>
