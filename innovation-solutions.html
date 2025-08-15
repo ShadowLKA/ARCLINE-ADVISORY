@@ -30,33 +30,26 @@
             -webkit-touch-callout: default;
         }
 
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #333;
             font-size: 14px;
-            overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            /* Fix for mobile scrolling */
             -webkit-overflow-scrolling: touch;
-            position: relative;
         }
 
-        /* Prevent body scroll when mobile menu is open */
+        /* Mobile menu open state - simplified */
         body.mobile-menu-open {
+            overflow: hidden;
             position: fixed;
             width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            /* Ensure proper scrolling on iOS */
-            height: 100%;
-            overflow-x: hidden;
         }
 
         .container {
@@ -184,7 +177,6 @@
             visibility: hidden;
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             z-index: 999;
-            /* Enable scrolling within mobile menu if needed */
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
         }
@@ -1299,7 +1291,7 @@
     </footer>
 
     <script>
-        // Enhanced Mobile Menu with proper scroll handling
+        // Simplified and improved mobile menu functionality
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         let scrollPosition = 0;
@@ -1308,8 +1300,9 @@
             const isActive = mobileMenu.classList.contains('active');
             
             if (!isActive) {
-                // Opening menu - save scroll position and prevent body scroll
+                // Store scroll position
                 scrollPosition = window.pageYOffset;
+                // Apply fixed positioning to body
                 document.body.style.position = 'fixed';
                 document.body.style.top = `-${scrollPosition}px`;
                 document.body.style.width = '100%';
@@ -1318,25 +1311,34 @@
                 mobileMenuBtn.classList.add('active');
                 mobileMenu.classList.add('active');
             } else {
-                // Closing menu - restore scroll position and enable body scroll
+                // Remove mobile menu classes
                 mobileMenuBtn.classList.remove('active');
                 mobileMenu.classList.remove('active');
                 document.body.classList.remove('mobile-menu-open');
                 
+                // Reset body positioning
                 document.body.style.position = '';
                 document.body.style.top = '';
                 document.body.style.width = '';
                 
+                // Restore scroll position
                 window.scrollTo(0, scrollPosition);
             }
         }
 
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+        // Event listeners
+        mobileMenuBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
 
         // Close mobile menu when clicking on links
         document.querySelectorAll('.mobile-menu a').forEach(link => {
             link.addEventListener('click', function() {
-                toggleMobileMenu();
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
             });
         });
 
@@ -1349,7 +1351,14 @@
             }
         });
 
-        // Enhanced navbar scroll effect with performance optimization
+        // Escape key to close mobile menu
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                toggleMobileMenu();
+            }
+        });
+
+        // Improved navbar scroll effect
         let ticking = false;
         
         function updateNavbar() {
@@ -1373,10 +1382,10 @@
 
         window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
 
-        // Enhanced scroll animations
+        // Smooth scroll animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -30px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -1384,38 +1393,18 @@
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target); // Stop observing once animated
                 }
             });
         }, observerOptions);
 
-        // Animate elements on scroll
-        document.querySelectorAll('.solution-card, .tech-card, .timeline-step, .tech-text, .tech-video').forEach(el => {
+        // Set up elements for animation
+        const animatedElements = document.querySelectorAll('.solution-card, .tech-card, .timeline-step, .tech-text, .tech-video');
+        animatedElements.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
-        });
-
-        // Add touch feedback for mobile - improved
-        document.querySelectorAll('.solution-card, .tech-card, .timeline-step').forEach(card => {
-            let touchTimeout;
-            
-            card.addEventListener('touchstart', function(e) {
-                e.preventDefault(); // Prevent default to avoid conflicts
-                clearTimeout(touchTimeout);
-                this.style.transform = 'scale(0.98)';
-                this.style.transition = 'transform 0.1s ease';
-            }, { passive: false });
-            
-            card.addEventListener('touchend', function() {
-                this.style.transform = '';
-                this.style.transition = 'transform 0.3s ease';
-            });
-            
-            card.addEventListener('touchcancel', function() {
-                this.style.transform = '';
-                this.style.transition = 'transform 0.3s ease';
-            });
         });
 
         // Staggered animations for grid items
@@ -1429,75 +1418,66 @@
                     staggerObserver.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -30px 0px'
-        });
+        }, observerOptions);
 
         // Apply staggered animation to grid items
-        const gridItems = document.querySelectorAll('.solutions-grid .solution-card, .tech-grid .tech-card, .process-timeline .timeline-step');
-        gridItems.forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(30px)';
-            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            staggerObserver.observe(item);
-        });
-
-        // Enhanced keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            // Close mobile menu with Escape key
-            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
-                toggleMobileMenu();
+        const gridContainers = ['.solutions-grid', '.tech-grid', '.process-timeline'];
+        gridContainers.forEach(containerSelector => {
+            const container = document.querySelector(containerSelector);
+            if (container) {
+                const items = container.children;
+                Array.from(items).forEach((item, index) => {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(30px)';
+                    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    staggerObserver.observe(item);
+                });
             }
         });
 
-        // Accessibility improvements
-        const focusableElements = document.querySelectorAll('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        
-        // Add focus indicators
-        focusableElements.forEach(element => {
-            element.addEventListener('focus', function() {
-                this.style.outline = '2px solid #667eea';
-                this.style.outlineOffset = '2px';
-            });
-            
-            element.addEventListener('blur', function() {
-                this.style.outline = '';
-                this.style.outlineOffset = '';
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return; // Skip empty anchors
+                
+                const target = document.querySelector(href);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // Mobile performance optimizations
-        if ('ontouchstart' in window) {
-            // Reduce animation complexity on mobile devices
-            document.documentElement.style.setProperty('--animation-duration', '0.3s');
-            
-            // Optimize touch interactions - prevent default only when necessary
-            let isScrolling = false;
-            
-            document.addEventListener('touchstart', function() {
-                isScrolling = false;
-            }, { passive: true });
-            
-            document.addEventListener('touchmove', function() {
-                isScrolling = true;
-            }, { passive: true });
-        }
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Close mobile menu if window becomes wide
+                if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            }, 250);
+        });
 
-        // Error handling for video iframe
-        window.addEventListener('error', function(e) {
-            if (e.target.tagName === 'IFRAME') {
-                console.warn('Video failed to load, hiding container');
-                const videoContainer = e.target.closest('.tech-video');
-                if (videoContainer) {
-                    videoContainer.style.display = 'none';
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                if (event.target.closest('.solution-card, .tech-card, .timeline-step')) {
+                    event.preventDefault();
                 }
             }
-        }, true);
+            lastTouchEnd = now;
+        }, { passive: false });
 
-        // Initialize on page load
+        // Page load animation
         window.addEventListener('load', function() {
-            // Add entrance animations to hero content
             const heroContent = document.querySelector('.hero-content');
             if (heroContent) {
                 heroContent.style.opacity = '0';
@@ -1511,85 +1491,28 @@
             }
         });
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                const target = document.querySelector(href);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        // Emergency reset function for stuck states
+        function resetPageState() {
+            document.body.classList.remove('mobile-menu-open');
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            mobileMenuBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+
+        // Auto-reset on orientation change
+        window.addEventListener('orientationchange', function() {
+            setTimeout(resetPageState, 500);
         });
 
-        // Improved scroll handling for mobile
-        let isScrollingMobile = false;
-        let scrollTimer = null;
-
-        function handleMobileScroll() {
-            if (!isScrollingMobile) {
-                isScrollingMobile = true;
-                document.body.style.pointerEvents = 'none';
+        // Reset button for testing (remove in production)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+                resetPageState();
+                console.log('Page state reset');
             }
-            
-            clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(() => {
-                isScrollingMobile = false;
-                document.body.style.pointerEvents = '';
-            }, 150);
-        }
-
-        if ('ontouchstart' in window) {
-            window.addEventListener('scroll', handleMobileScroll, { passive: true });
-        }
-
-        // Prevent zoom on double tap for specific elements
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                if (event.target.closest('.solution-card, .tech-card, .timeline-step')) {
-                    event.preventDefault();
-                }
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Enhanced resize handling
-        let resizeTimer;
-        window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
-                // Reset any stuck mobile menu states
-                if (window.innerWidth > 768 && mobileMenu.classList.contains('active')) {
-                    toggleMobileMenu();
-                }
-            }, 250);
         });
-
-        // Preload critical resources
-        const preloadVideo = () => {
-            const iframe = document.querySelector('.tech-video iframe');
-            if (iframe) {
-                iframe.loading = 'lazy';
-            }
-        };
-
-        // Call preload function
-        preloadVideo();
-
-        // Fix iOS Safari viewport height issues
-        function setVH() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-
-        window.addEventListener('resize', setVH);
-        setVH();
     </script>
 </body>
 </html>
