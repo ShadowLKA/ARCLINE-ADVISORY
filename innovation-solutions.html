@@ -2,13 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Innovation Solutions - ARCLINE ADVISORY</title>
     <style>
+        /* Prevent zoom and selection on all elements */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Allow text selection only where needed */
+        p, h1, h2, h3, h4, h5, h6, span, li, td, th {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        /* Form inputs should be selectable */
+        input, textarea, select {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+            -webkit-touch-callout: default;
         }
 
         body {
@@ -17,6 +41,15 @@
             color: #333;
             font-size: 14px;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-touch-callout: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .container {
@@ -79,6 +112,8 @@
             text-decoration: none;
             font-weight: 600;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .cta-button:hover {
@@ -282,6 +317,7 @@
             transition: all 0.3s ease;
             border: 1px solid rgba(102, 126, 234, 0.1);
             text-align: center;
+            cursor: pointer;
         }
 
         .solution-card:hover {
@@ -420,6 +456,7 @@
             text-align: center;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .tech-card:hover {
@@ -468,6 +505,8 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             text-align: center;
             position: relative;
+            transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .timeline-step:hover {
@@ -547,6 +586,8 @@
             font-weight: 600;
             font-size: 14px;
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary:hover {
@@ -590,6 +631,15 @@
         footer p {
             font-size: 14px;
             line-height: 1.5;
+        }
+
+        /* Prevent zoom on inputs for iOS */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            font-size: 16px;
         }
 
         /* Mobile Responsive */
@@ -1333,6 +1383,50 @@
         }
 
         window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
+
+        // Prevent zoom gestures
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
+
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Prevent pinch zoom
+        document.addEventListener('touchmove', function(event) {
+            if (event.scale !== 1) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // Prevent wheel zoom (Ctrl + scroll)
+        document.addEventListener('wheel', function(e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        // Prevent keyboard zoom shortcuts
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
