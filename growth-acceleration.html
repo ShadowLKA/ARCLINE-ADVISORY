@@ -5,16 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Growth Acceleration - ARCLINE ADVISORY</title>
     <style>
-        /* Prevent zoom and selection on all elements */
+        /* Reset with proper user interaction settings */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -42,13 +37,12 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            -webkit-touch-callout: none;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
+            /* REMOVED problematic touch-action and user-select rules */
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         .container {
@@ -1340,49 +1334,136 @@
             });
         });
 
-        // Prevent zoom gestures
-        document.addEventListener('gesturestart', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('gesturechange', function (e) {
-            e.preventDefault();
-        });
-
-        document.addEventListener('gestureend', function (e) {
-            e.preventDefault();
-        });
-
-        // Prevent double-tap zoom
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', function (event) {
-            const now = (new Date()).getTime();
-            if (now - lastTouchEnd <= 300) {
-                event.preventDefault();
-            }
-            lastTouchEnd = now;
-        }, false);
-
-        // Prevent pinch zoom
-        document.addEventListener('touchmove', function(event) {
-            if (event.scale !== 1) {
-                event.preventDefault();
-            }
-        }, { passive: false });
-
-        // Prevent wheel zoom (Ctrl + scroll)
-        document.addEventListener('wheel', function(e) {
-            if (e.ctrlKey) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        // Prevent keyboard zoom shortcuts
+        // Enhanced keyboard navigation
         document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=' || e.key === '0')) {
-                e.preventDefault();
+            // Close modal with Escape key
+            if (e.key === 'Escape' && contactModal.style.display === 'block') {
+                closeContactModal();
+            }
+            
+            // Close mobile menu with Escape key
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                mobileMenuBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
+
+        // Intersection Observer for staggered animations
+        const staggerObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                    staggerObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        });
+
+        // Apply staggered animation to grid items
+        const gridItems = document.querySelectorAll('.growth-areas .growth-area, .metrics-grid .metric-card');
+        gridItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            staggerObserver.observe(item);
+        });
+
+        // Performance optimization for scroll events
+        let scrollTimeout;
+        window.addEventListener('scroll', function() {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(requestNavbarUpdate, 10);
+        }, { passive: true });
+
+        // Preload critical resources
+        const preloadVideo = () => {
+            const iframe = document.querySelector('.metrics-video iframe');
+            if (iframe) {
+                iframe.loading = 'lazy';
+            }
+        };
+
+        // Initialize on page load
+        window.addEventListener('load', function() {
+            preloadVideo();
+            
+            // Add entrance animations to hero content
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.style.opacity = '0';
+                heroContent.style.transform = 'translateY(30px)';
+                heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
+                
+                setTimeout(() => {
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                }, 300);
+            }
+        });
+
+        // Form validation enhancements
+        const form = document.querySelector('.contact-form');
+        if (form) {
+            const inputs = form.querySelectorAll('input[required], select[required]');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (!this.value.trim() && this.hasAttribute('required')) {
+                        this.style.borderColor = '#ff6b6b';
+                    } else {
+                        this.style.borderColor = '#e0e0e0';
+                    }
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.style.borderColor === 'rgb(255, 107, 107)') {
+                        this.style.borderColor = '#e0e0e0';
+                    }
+                });
+            });
+        }
+
+        // Accessibility improvements
+        const focusableElements = document.querySelectorAll('button, a, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        
+        // Add focus indicators
+        focusableElements.forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.outline = '2px solid #667eea';
+                this.style.outlineOffset = '2px';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.outline = '';
+                this.style.outlineOffset = '';
+            });
+        });
+
+        // Mobile performance optimizations
+        if ('ontouchstart' in window) {
+            // Reduce animation complexity on mobile devices
+            document.documentElement.style.setProperty('--animation-duration', '0.3s');
+            
+            // Optimize touch interactions
+            document.addEventListener('touchstart', function() {}, { passive: true });
+        }
+
+        // Error handling for video iframe
+        window.addEventListener('error', function(e) {
+            if (e.target.tagName === 'IFRAME') {
+                console.warn('Video failed to load, hiding container');
+                const videoContainer = e.target.closest('.metrics-video');
+                if (videoContainer) {
+                    videoContainer.style.display = 'none';
+                }
+            }
+        }, true);
     </script>
 </body>
 </html>
