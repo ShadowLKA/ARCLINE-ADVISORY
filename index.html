@@ -63,7 +63,7 @@
         .carousel-wrapper::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:28px;padding:3px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:xor;-webkit-mask-composite:xor;pointer-events:none;z-index:1}
         .services-track{display:flex;width:300%;transition:transform .4s cubic-bezier(.25,.46,.45,.94);will-change:transform;position:relative;z-index:2}
         .carousel-slide{width:calc(100%/3);flex-shrink:0;position:relative}
-        .carousel-slide .service-card{margin:0;box-shadow:none;border:none;border-radius:0;background:transparent;padding:40px 28px;transform:none!important;transition:none;position:relative}
+        .carousel-slide .service-card{margin:0;box-shadow:none!important;border:none;border-radius:0;background:transparent;padding:40px 28px;transform:none!important;transition:none;position:relative}
         .carousel-nav{display:flex;justify-content:center;gap:16px;margin-top:32px;padding:0 20px}
         .carousel-dot{width:14px;height:14px;border-radius:7px;background:#e5e7eb;cursor:pointer;transition:all .2s cubic-bezier(.25,.46,.45,.94);border:none;padding:0;position:relative;overflow:hidden}
         .carousel-dot.active{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);width:40px;box-shadow:0 4px 12px rgba(102,126,234,.3)}
@@ -221,19 +221,19 @@
             
             <div class="services-container">
                 <div class="services-grid">
-                    <a href="Strategic Advisory.html" class="service-card">
+                    <a href="Strategic Advisory/index.html" class="service-card">
                         <div class="service-icon">🎯</div>
                         <h3>Strategic Advisory</h3>
                         <p>We support organizations in shaping clear, forward-looking strategies for national health system reform, multisectoral programming, public-private alignment, and advancement of new models of care.</p>
                         <span class="learn-more">Learn More</span>
                     </a>
-                    <a href="Program & Platform Design.html" class="service-card">
+                    <a href="Program & Platform Design/index.html" class="service-card">
                         <div class="service-icon">🏗️</div>
                         <h3>Program & Platform Design</h3>
                         <p>We help design scalable, equitable health programs and platforms, integrating innovation, delivery models, and systems thinking across diverse health areas and geographies.</p>
                         <span class="learn-more">Learn More</span>
                     </a>
-                    <a href="Execution Support.html" class="service-card">
+                    <a href="Execution Support/index.html" class="service-card">
                         <div class="service-icon">⚡</div>
                         <h3>Execution Support</h3>
                         <p>From piloting new approaches to scaling implementation, we provide hands-on support to translate strategy into action, ensuring operational readiness and real-world impact.</p>
@@ -246,7 +246,7 @@
                         <div class="carousel-wrapper">
                             <div class="services-track" id="servicesTrack">
                                 <div class="carousel-slide active">
-                                    <a href="Strategic Advisory.html" class="service-card">
+                                    <a href="Strategic Advisory/index.html" class="service-card">
                                         <div class="service-icon">🎯</div>
                                         <h3>Strategic Advisory</h3>
                                         <p>We support organizations in shaping clear, forward-looking strategies for national health system reform, multisectoral programming, and public-private alignment.</p>
@@ -254,7 +254,7 @@
                                     </a>
                                 </div>
                                 <div class="carousel-slide">
-                                    <a href="Program & Platform Design.html" class="service-card">
+                                    <a href="Program & Platform Design/index.html" class="service-card">
                                         <div class="service-icon">🏗️</div>
                                         <h3>Program & Platform Design</h3>
                                         <p>We help design scalable, equitable health programs and platforms, integrating innovation and delivery models across diverse health areas.</p>
@@ -262,7 +262,7 @@
                                     </a>
                                 </div>
                                 <div class="carousel-slide">
-                                    <a href="Execution Support.html" class="service-card">
+                                    <a href="Execution Support/index.html" class="service-card">
                                         <div class="service-icon">⚡</div>
                                         <h3>Execution Support</h3>
                                         <p>From piloting to scaling implementation, we provide hands-on support to translate strategy into action and ensure real-world impact.</p>
@@ -433,65 +433,112 @@
                 this.track = document.getElementById('servicesTrack');
                 this.slides = document.querySelectorAll('.carousel-slide');
                 this.dots = document.querySelectorAll('.carousel-dot');
+                this.touchData = {
+                    startX: 0,
+                    currentX: 0,
+                    isDragging: false,
+                    startTime: 0
+                };
+                this.autoplayInterval = null;
                 this.init();
             }
 
             init() {
                 if (!this.track) return;
                 
-                // Touch events
-                let startX = 0, currentX = 0, isDragging = false;
+                // Disable text selection
+                this.track.style.userSelect = 'none';
+                this.track.style.webkitUserSelect = 'none';
                 
-                this.track.addEventListener('touchstart', e => {
+                // Simple touch events
+                this.track.addEventListener('touchstart', (e) => {
                     if (this.isTransitioning) return;
-                    isDragging = true;
-                    startX = e.touches[0].clientX;
+                    this.stopAutoPlay();
+                    this.touchData.isDragging = true;
+                    this.touchData.startX = e.touches[0].clientX;
+                    this.touchData.currentX = this.touchData.startX;
+                    this.touchData.startTime = Date.now();
                 }, { passive: true });
 
-                this.track.addEventListener('touchmove', e => {
-                    if (!isDragging || this.isTransitioning) return;
-                    currentX = e.touches[0].clientX;
-                    e.preventDefault();
-                }, { passive: false });
+                this.track.addEventListener('touchmove', (e) => {
+                    if (!this.touchData.isDragging || this.isTransitioning) return;
+                    this.touchData.currentX = e.touches[0].clientX;
+                    const deltaX = this.touchData.currentX - this.touchData.startX;
+                    
+                    // Very responsive - show movement immediately
+                    const slideWidth = this.track.parentElement.offsetWidth;
+                    const currentTransform = -this.currentSlide * slideWidth;
+                    this.track.style.transition = 'none';
+                    this.track.style.transform = `translateX(${currentTransform + deltaX * 0.8}px)`;
+                }, { passive: true });
 
                 this.track.addEventListener('touchend', () => {
-                    if (!isDragging) return;
-                    isDragging = false;
-                    const diffX = currentX - startX;
-                    const threshold = this.track.offsetWidth / 6;
+                    if (!this.touchData.isDragging) return;
+                    this.touchData.isDragging = false;
                     
-                    if (Math.abs(diffX) > threshold) {
-                        diffX > 0 ? this.prevSlide() : this.nextSlide();
+                    const deltaX = this.touchData.currentX - this.touchData.startX;
+                    const deltaTime = Date.now() - this.touchData.startTime;
+                    const velocity = Math.abs(deltaX) / deltaTime;
+                    
+                    // Very low threshold for easier swiping
+                    const threshold = 20; // Much lower than before
+                    const shouldSlide = Math.abs(deltaX) > threshold || velocity > 0.2;
+                    
+                    this.track.style.transition = 'transform 0.3s ease-out';
+                    
+                    if (shouldSlide) {
+                        if (deltaX > 0 && this.currentSlide > 0) {
+                            this.prevSlide();
+                        } else if (deltaX < 0 && this.currentSlide < this.totalSlides - 1) {
+                            this.nextSlide();
+                        } else {
+                            this.updateCarousel(false);
+                        }
+                    } else {
+                        this.updateCarousel(false);
                     }
-                });
+                    
+                    this.startAutoPlay();
+                }, { passive: true });
 
                 // Arrow buttons
                 document.querySelector('.carousel-arrow.prev')?.addEventListener('click', e => {
                     e.preventDefault();
+                    e.stopPropagation();
                     this.prevSlide();
                 });
 
                 document.querySelector('.carousel-arrow.next')?.addEventListener('click', e => {
                     e.preventDefault();
+                    e.stopPropagation();
                     this.nextSlide();
                 });
 
                 // Dots
                 this.dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => this.goToSlide(index));
+                    dot.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.goToSlide(index);
+                    });
                 });
 
-                // Auto-play on mobile
+                // Auto-play
                 if (window.innerWidth <= 768) {
                     this.startAutoPlay();
                 }
             }
 
-            updateCarousel() {
-                if (this.isTransitioning) return;
-                this.isTransitioning = true;
+            updateCarousel(animate = true) {
+                if (animate && this.isTransitioning) return;
+                if (animate) this.isTransitioning = true;
                 
-                const slideWidth = this.track.offsetWidth / 3;
+                const slideWidth = this.track.parentElement.offsetWidth;
+                
+                if (animate) {
+                    this.track.style.transition = 'transform 0.3s ease-out';
+                }
+                
                 this.track.style.transform = `translateX(${-this.currentSlide * slideWidth}px)`;
                 
                 this.slides.forEach((slide, index) => {
@@ -502,32 +549,47 @@
                     dot.classList.toggle('active', index === this.currentSlide);
                 });
 
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 400);
+                if (animate) {
+                    setTimeout(() => {
+                        this.isTransitioning = false;
+                        this.track.style.transition = '';
+                    }, 300);
+                }
             }
 
             goToSlide(slideIndex) {
-                if (slideIndex >= 0 && slideIndex < this.totalSlides && slideIndex !== this.currentSlide) {
+                if (slideIndex >= 0 && slideIndex < this.totalSlides && slideIndex !== this.currentSlide && !this.isTransitioning) {
                     this.currentSlide = slideIndex;
-                    this.updateCarousel();
+                    this.updateCarousel(true);
                 }
             }
 
             nextSlide() {
-                this.goToSlide((this.currentSlide + 1) % this.totalSlides);
+                const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+                this.goToSlide(nextIndex);
             }
 
             prevSlide() {
-                this.goToSlide((this.currentSlide - 1 + this.totalSlides) % this.totalSlides);
+                const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.goToSlide(prevIndex);
             }
 
             startAutoPlay() {
-                setInterval(() => {
-                    if (!this.isTransitioning && !document.hidden && window.innerWidth <= 768) {
-                        this.nextSlide();
-                    }
-                }, 4000);
+                if (window.innerWidth <= 768) {
+                    this.stopAutoPlay();
+                    this.autoplayInterval = setInterval(() => {
+                        if (!this.isTransitioning && !this.touchData.isDragging && !document.hidden) {
+                            this.nextSlide();
+                        }
+                    }, 6000);
+                }
+            }
+
+            stopAutoPlay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
+                }
             }
         }
 
