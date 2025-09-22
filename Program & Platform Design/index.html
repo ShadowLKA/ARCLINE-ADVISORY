@@ -14,13 +14,13 @@
 <div class="nav-container">
 <a href="../" class="logo">ARCLINE ADVISORY</a>
 <ul class="nav-links">
-<li><a href="../">Home</a></li>
-<li><a href="../#about">About</a></li>
-<li><a href="../#services">Services</a></li>
-<li><a href="../#advisors">Team</a></li>
-<li><a href="../#contact">Contact</a></li>
+<li><a href="../" onclick="navigateToHome()">Home</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('about')">About</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('services')">Services</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('advisors')">Team</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('contact')">Contact</a></li>
 </ul>
-<a href="../#contact" class="cta-button">Get Started</a>
+<a href="javascript:void(0)" onclick="navigateToSection('contact')" class="cta-button">Get Started</a>
 <div class="mobile-menu-btn" id="mobileMenuBtn">
 <span></span><span></span><span></span>
 </div>
@@ -28,11 +28,11 @@
 </div>
 <div class="mobile-menu" id="mobileMenu">
 <ul>
-<li><a href="../">Home</a></li>
-<li><a href="../#about">About</a></li>
-<li><a href="../#services">Services</a></li>
-<li><a href="../#advisors">Team</a></li>
-<li><a href="../#contact">Contact</a></li>
+<li><a href="../" onclick="navigateToHome()">Home</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('about')">About</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('services')">Services</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('advisors')">Team</a></li>
+<li><a href="javascript:void(0)" onclick="navigateToSection('contact')">Contact</a></li>
 </ul>
 </div>
 </nav>
@@ -208,11 +208,20 @@
 <div class="container">
 <h2 class="section-title" style="color: white;">Ready to Design Your Health Platform?</h2>
 <p class="section-subtitle" style="color: rgba(255,255,255,0.9); margin-bottom: 30px;">Let's collaborate to create scalable, equitable health solutions that drive real-world impact.</p>
-<a href="../#contact" class="cta-btn">Start Your Design Journey</a>
+<a href="javascript:void(0)" onclick="navigateToSection('contact')" class="cta-btn">Start Your Design Journey</a>
 </div>
 </section>
 
 <script>
+// Clean navigation functions
+function navigateToHome() {
+    window.location.href = '../';
+}
+
+function navigateToSection(section) {
+    window.location.href = '../#' + section;
+}
+
 // Mobile Menu
 const btn = document.getElementById('mobileMenuBtn');
 const menu = document.getElementById('mobileMenu');
@@ -244,7 +253,7 @@ navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
 });
 
 // Animation Observer
-document.addEventListener('DOMContentLoaded',function(){const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity='1';entry.target.style.transform='translateY(0)';observer.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});const animatedElements=document.querySelectorAll('.design-card, .approach-step, .impact-stat');animatedElements.forEach((el,index)=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition=`opacity 0.6s ease ${index*0.1}s, transform 0.6s ease ${index*0.1}s`;observer.observe(el)});document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){const href=this.getAttribute('href');if(href==='#')return;const target=document.querySelector(href);if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'})}})})});
+document.addEventListener('DOMContentLoaded',function(){const observer=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity='1';entry.target.style.transform='translateY(0)';observer.unobserve(entry.target)}})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});const animatedElements=document.querySelectorAll('.design-card, .approach-step, .impact-stat');animatedElements.forEach((el,index)=>{el.style.opacity='0';el.style.transform='translateY(30px)';el.style.transition=`opacity 0.6s ease ${index*0.1}s, transform 0.6s ease ${index*0.1}s`;observer.observe(el)})});
 </script>
 </body>
 </html>
