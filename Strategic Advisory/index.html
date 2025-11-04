@@ -14,15 +14,19 @@
         .container{max-width:1200px;margin:0 auto;padding:0 20px}
         .container-wide{max-width:1400px;margin:0 auto;padding:0 20px}
         nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;padding:1rem 0;box-shadow:0 2px 20px rgba(0,0,0,0.1);transition:all 0.3s ease}
-        .nav-container{display:flex;justify-content:space-between;align-items:center}
-        .logo{font-size:1.8rem;font-weight:bold;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-decoration:none}
-        .nav-links{display:flex;list-style:none;gap:2rem}
-        .nav-links a{text-decoration:none;color:#333;font-weight:500;transition:color 0.3s ease}
-        .nav-links a:hover,.nav-links a.active{color:#667eea}
-        .cta-button{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:0.75rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:600;transition:transform 0.3s ease,box-shadow 0.3s ease}
-        .cta-button:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(102,126,234,0.3)}
-        .mobile-menu-btn{display:none;flex-direction:column;cursor:pointer;padding:8px;border-radius:8px;transition:background 0.3s ease}
-        .mobile-menu-btn:hover{background:rgba(102,126,234,0.1)}
+                <div class="language-selector">
+                    <button class="language-btn" id="languageBtn">
+                        <span class="globe-icon">🌐</span>
+                        <span class="current-lang" id="currentLang">EN</span>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <div class="language-option" data-lang="en">English</div>
+                        <div class="language-option" data-lang="ka">ქართული</div>
+                        <div class="language-option" data-lang="ru">Русский</div>
+                    </div>
+                </div>
+            </div>
+        </div>
         .mobile-menu-btn span{width:24px;height:3px;background:#333;margin:2.5px 0;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);border-radius:3px}
         .mobile-menu-btn.active span:nth-child(1){transform:rotate(-45deg) translate(-5px,6px)}
         .mobile-menu-btn.active span:nth-child(2){opacity:0;transform:translateX(20px)}
@@ -178,6 +182,16 @@
             .cta-content h2{font-size:1.6rem}
             .btn-primary,.btn-secondary{width:180px;font-size:0.9rem}
         }
+        /* Language selector styles (copied minimal from index) */
+        .language-selector { position: relative; display: inline-flex; align-items: center; margin-left: 20px; margin-right: 20px; }
+        .language-btn { background: white; color: #667eea; padding: 6px 12px; border-radius: 50px; border: 2px solid #667eea; cursor: pointer; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease; }
+        .language-btn .globe-icon { font-size: 1rem; }
+        .current-lang { text-transform: uppercase; font-weight: 700; letter-spacing: 0.4px; display: inline-block; }
+        .language-dropdown { position: absolute; top: 100%; right: 0; margin-top: 8px; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; z-index: 1000; overflow: hidden; min-width: 150px; }
+        .language-dropdown.active { opacity: 1; visibility: visible; transform: translateY(0); }
+        .language-option { padding: 10px 20px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px; color: #333; }
+        .language-option:hover { background: rgba(102,126,234,0.1); color: #667eea; }
+        .language-option.active { background: rgba(102,126,234,0.1); color: #667eea; font-weight: 500; }
     </style>
 </head>
 <body>
@@ -250,6 +264,15 @@
                             <li>Discretion and precision in sensitive environments</li>
                             <li>Context-sensitive strategies that deliver results</li>
                         </ul>
+                                // Language switcher initialization
+                                initializeLanguageSwitcher();
+                                // default language — try to read localStorage or fallback to en
+                                const initial = (localStorage && localStorage.getItem('site_lang')) || 'en';
+                                document.getElementById('currentLang').textContent = initial.toUpperCase();
+                                // mark active option
+                                const el = document.querySelector('.language-option[data-lang="' + initial + '"]');
+                                if(el) el.classList.add('active');
+                                changeLanguage(initial);
                     </div>
                     <div class="intro-visual">
                     </div>
