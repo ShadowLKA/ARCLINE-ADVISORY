@@ -14,20 +14,6 @@
         .container{max-width:1200px;margin:0 auto;padding:0 20px}
         .container-wide{max-width:1400px;margin:0 auto;padding:0 20px}
         nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;padding:1rem 0;box-shadow:0 2px 20px rgba(0,0,0,0.1);transition:all 0.3s ease}
-                <div class="language-selector">
-                    <button class="language-btn" id="languageBtn">
-                        <span class="globe-icon">🌐</span>
-                        <span class="current-lang" id="currentLang">EN</span>
-                    </button>
-                    <div class="language-dropdown" id="languageDropdown">
-                        <div class="language-option" data-lang="en">English</div>
-                        <div class="language-option" data-lang="ka">ქართული</div>
-                        <div class="language-option" data-lang="ru">Русский</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        .mobile-menu-btn span{width:24px;height:3px;background:#333;margin:2.5px 0;transition:all 0.3s cubic-bezier(0.25,0.46,0.45,0.94);border-radius:3px}
         .mobile-menu-btn.active span:nth-child(1){transform:rotate(-45deg) translate(-5px,6px)}
         .mobile-menu-btn.active span:nth-child(2){opacity:0;transform:translateX(20px)}
         .mobile-menu-btn.active span:nth-child(3){transform:rotate(45deg) translate(-5px,-6px)}
@@ -264,15 +250,7 @@
                             <li>Discretion and precision in sensitive environments</li>
                             <li>Context-sensitive strategies that deliver results</li>
                         </ul>
-                                // Language switcher initialization
-                                initializeLanguageSwitcher();
-                                // default language — try to read localStorage or fallback to en
-                                const initial = (localStorage && localStorage.getItem('site_lang')) || 'en';
-                                document.getElementById('currentLang').textContent = initial.toUpperCase();
-                                // mark active option
-                                const el = document.querySelector('.language-option[data-lang="' + initial + '"]');
-                                if(el) el.classList.add('active');
-                                changeLanguage(initial);
+                    <!-- Language initialization removed from inline content. Initialization runs in the page script. -->
                     </div>
                     <div class="intro-visual">
                     </div>
