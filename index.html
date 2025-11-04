@@ -137,6 +137,96 @@
         }
         html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
         input[type="text"],input[type="email"],textarea{font-size:16px}
+        .language-selector {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        .language-btn {
+            background: white;
+            color: #667eea;
+            padding: 6px 12px;
+            border-radius: 50px;
+            border: 2px solid #667eea;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+        .language-btn:hover {
+            background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102,126,234,.3);
+        }
+        .language-btn .globe-icon {
+            font-size: 1rem;
+        }
+        .current-lang {
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+            display: inline-block;
+        }
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 8px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+            min-width: 150px;
+        }
+        .language-dropdown.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .language-option {
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #333;
+        }
+        .language-option:hover {
+            background: rgba(102,126,234,0.1);
+            color: #667eea;
+        }
+        .language-option.active {
+            background: rgba(102,126,234,0.1);
+            color: #667eea;
+            font-weight: 500;
+        }
+        @media (max-width: 768px) {
+            .language-selector {
+                width: 100%;
+                margin: 10px 0;
+            }
+            .language-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            .language-dropdown {
+                width: 100%;
+                position: static;
+                margin-top: 8px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -145,13 +235,29 @@
             <div class="nav-container">
                 <div class="logo">ARCLINE ADVISORY</div>
                 <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#advisors">Team</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#home" data-translate="nav_home">Home</a></li>
+                    <li><a href="#about" data-translate="nav_about">About</a></li>
+                    <li><a href="#services" data-translate="nav_services">Services</a></li>
+                    <li><a href="#advisors" data-translate="nav_team">Team</a></li>
+                    <li><a href="#contact" data-translate="nav_contact">Contact</a></li>
                 </ul>
-                <a href="#contact" class="cta-button">Get Started</a>
+                <div class="language-selector">
+                    <button class="language-btn" id="languageBtn">
+                        <span class="globe-icon">🌐</span>
+                        <span class="current-lang">EN</span>
+                    </button>
+                    <div class="language-dropdown" id="languageDropdown">
+                        <div class="language-option active" data-lang="en" data-label="English">
+                            <span>en</span> English
+                        </div>
+                        <div class="language-option" data-lang="ka" data-label="ქართული">
+                            <span>ge</span> ქართული
+                        </div>
+                        <div class="language-option" data-lang="ru" data-label="Русский">
+                            <span>ru</span> Русский
+                        </div>
+                    </div>
+                </div>
                 <div class="mobile-menu-btn" id="mobileMenuBtn">
                     <span></span><span></span><span></span>
                 </div>
@@ -159,11 +265,30 @@
         </div>
         <div class="mobile-menu" id="mobileMenu">
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#advisors">Team</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-translate="nav_home">Home</a></li>
+                <li><a href="#about" data-translate="nav_about">About</a></li>
+                <li><a href="#services" data-translate="nav_services">Services</a></li>
+                <li><a href="#advisors" data-translate="nav_team">Team</a></li>
+                <li><a href="#contact" data-translate="nav_contact">Contact</a></li>
+                <li>
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageBtnMobile">
+                            <span class="globe-icon">🌐</span>
+                            <span class="current-lang">EN</span>
+                        </button>
+                        <div class="language-dropdown" id="languageDropdownMobile">
+                            <div class="language-option active" data-lang="en" data-label="English">
+                                <span>🇬🇧</span> English
+                            </div>
+                            <div class="language-option" data-lang="ka" data-label="ქართული">
+                                <span>🇬🇪</span> ქართული
+                            </div>
+                            <div class="language-option" data-lang="ru" data-label="Русский">
+                                <span>🇷🇺</span> Русский
+                            </div>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>
@@ -171,12 +296,12 @@
     <section class="hero" id="home">
         <div class="container">
             <div class="hero-content">
-                <div class="tagline">Independent. Expert-led. System-focused.</div>
-                <h1>Global Strategy for Health, Governance, and Innovation</h1>
-                <p>We support public and private sector organizations as they navigate complex, interconnected challenges across healthcare, politics, and innovation with tailored strategic solutions grounded in systems thinking.</p>
+                <div class="tagline" data-translate="hero_tagline">Independent. Expert-led. System-focused.</div>
+                <h1 data-translate="hero_title">Global Strategy for Health, Governance, and Innovation</h1>
+                <p data-translate="hero_description">We support public and private sector organizations as they navigate complex, interconnected challenges across healthcare, politics, and innovation with tailored strategic solutions grounded in systems thinking.</p>
                 <div class="hero-buttons">
-                    <a href="#services" class="btn-primary">Our Services</a>
-                    <a href="#about" class="btn-secondary">Learn More</a>
+                    <a href="#services" class="btn-primary" data-translate="hero_btn_services">Our Services</a>
+                    <a href="#about" class="btn-secondary" data-translate="hero_btn_learn">Learn More</a>
                 </div>
             </div>
         </div>
@@ -184,30 +309,30 @@
 
     <section class="about" id="about">
         <div class="container">
-            <h2 class="section-title">About Arcline Advisory</h2>
-            <p class="section-subtitle">A global advisory firm built on a model of practice-led expertise, delivering strategic support grounded in real-world implementation</p>
+            <h2 class="section-title" data-translate="about_title">About Arcline Advisory</h2>
+            <p class="section-subtitle" data-translate="about_subtitle">A global advisory firm built on a model of practice-led expertise, delivering strategic support grounded in real-world implementation</p>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>Transforming Complex Challenges into Strategic Solutions</h3>
-                    <p>Arcline is a global advisory firm supporting public and private sector organizations across healthcare, politics, and innovation. Each of our practice areas is led by experienced professionals with deep sector knowledge, global perspective, and a track record of driving measurable impact.</p>
-                    <p>We deliver tailored strategic support that bridges high-level strategy with on-the-ground execution, bringing clarity, credibility, and momentum to even the most complex initiatives.</p>
-                    <a href="#contact" class="cta-button">Partner With Us</a>
+                    <h3 data-translate="about_heading">Transforming Complex Challenges into Strategic Solutions</h3>
+                    <p data-translate="about_text1">Arcline is a global advisory firm supporting public and private sector organizations across healthcare, politics, and innovation. Each of our practice areas is led by experienced professionals with deep sector knowledge, global perspective, and a track record of driving measurable impact.</p>
+                    <p data-translate="about_text2">We deliver tailored strategic support that bridges high-level strategy with on-the-ground execution, bringing clarity, credibility, and momentum to even the most complex initiatives.</p>
+                    <a href="#contact" class="cta-button" data-translate="about_cta">Partner With Us</a>
                 </div>
                 <div class="about-highlights">
                     <div class="highlight">
                         <div class="highlight-icon">🌍</div>
-                        <h4>Global Reach</h4>
-                        <p>Cross-country expertise across diverse regulatory environments</p>
+                        <h4 data-translate="highlight1_title">Global Reach</h4>
+                        <p data-translate="highlight1_desc">Cross-country expertise across diverse regulatory environments</p>
                     </div>
                     <div class="highlight">
                         <div class="highlight-icon">🎯</div>
-                        <h4>Systems Focus</h4>
-                        <p>Holistic approach to interconnected challenges</p>
+                        <h4 data-translate="highlight2_title">Systems Focus</h4>
+                        <p data-translate="highlight2_desc">Holistic approach to interconnected challenges</p>
                     </div>
                     <div class="highlight">
                         <div class="highlight-icon">⚡</div>
-                        <h4>Impact Driven</h4>
-                        <p>Measurable results from strategy to implementation</p>
+                        <h4 data-translate="highlight3_title">Impact Driven</h4>
+                        <p data-translate="highlight3_desc">Measurable results from strategy to implementation</p>
                     </div>
                 </div>
             </div>
@@ -216,28 +341,28 @@
 
     <section class="services" id="services">
         <div class="container">
-            <h2 class="section-title">Our Services</h2>
-            <p class="section-subtitle">Comprehensive health advisory solutions across the entire lifecycle from strategy to execution</p>
+            <h2 class="section-title" data-translate="services_title">Our Services</h2>
+            <p class="section-subtitle" data-translate="services_subtitle">Comprehensive health advisory solutions across the entire lifecycle from strategy to execution</p>
             
             <div class="services-container">
                 <div class="services-grid">
                     <a href="Strategic%20Advisory/" class="service-card">
                         <div class="service-icon">🎯</div>
-                        <h3>Strategic Advisory</h3>
-                        <p>We support organizations in shaping clear, forward-looking strategies for national health system reform, multisectoral programming, public-private alignment, and advancement of new models of care.</p>
-                        <span class="learn-more">Learn More</span>
+                        <h3 data-translate="service1_title">Strategic Advisory</h3>
+                        <p data-translate="service1_desc">We support organizations in shaping clear, forward-looking strategies for national health system reform, multisectoral programming, public-private alignment, and advancement of new models of care.</p>
+                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
                     </a>
                     <a href="Program%20%26%20Platform%20Design/" class="service-card">
                         <div class="service-icon">🏗️</div>
-                        <h3>Program & Platform Design</h3>
-                        <p>We help design scalable, equitable health programs and platforms, integrating innovation, delivery models, and systems thinking across diverse health areas and geographies.</p>
-                        <span class="learn-more">Learn More</span>
+                        <h3 data-translate="service2_title">Program & Platform Design</h3>
+                        <p data-translate="service2_desc">We help design scalable, equitable health programs and platforms, integrating innovation, delivery models, and systems thinking across diverse health areas and geographies.</p>
+                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
                     </a>
                     <a href="Execution%20Support/" class="service-card">
                         <div class="service-icon">⚡</div>
-                        <h3>Execution Support</h3>
-                        <p>From piloting new approaches to scaling implementation, we provide hands-on support to translate strategy into action, ensuring operational readiness and real-world impact.</p>
-                        <span class="learn-more">Learn More</span>
+                        <h3 data-translate="service3_title">Execution Support</h3>
+                        <p data-translate="service3_desc">From piloting new approaches to scaling implementation, we provide hands-on support to translate strategy into action, ensuring operational readiness and real-world impact.</p>
+                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
                     </a>
                 </div>
 
@@ -256,17 +381,17 @@
                                 <div class="carousel-slide">
                                     <a href="Program%20%26%20Platform%20Design/" class="service-card">
                                         <div class="service-icon">🏗️</div>
-                                        <h3>Program & Platform Design</h3>
-                                        <p>We help design scalable, equitable health programs and platforms, integrating innovation and delivery models across diverse health areas.</p>
-                                        <span class="learn-more">Learn More</span>
+                                        <h3 data-translate="service2_title">Program & Platform Design</h3>
+                                        <p data-translate="service2_desc">We help design scalable, equitable health programs and platforms, integrating innovation and delivery models across diverse health areas.</p>
+                                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
                                     </a>
                                 </div>
                                 <div class="carousel-slide">
                                     <a href="Execution%20Support/" class="service-card">
                                         <div class="service-icon">⚡</div>
-                                        <h3>Execution Support</h3>
-                                        <p>From piloting to scaling implementation, we provide hands-on support to translate strategy into action and ensure real-world impact.</p>
-                                        <span class="learn-more">Learn More</span>
+                                        <h3 data-translate="service3_title">Execution Support</h3>
+                                        <p data-translate="service3_desc">From piloting to scaling implementation, we provide hands-on support to translate strategy into action and ensure real-world impact.</p>
+                                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
                                     </a>
                                 </div>
                             </div>
@@ -288,32 +413,32 @@
 
     <section class="advisors" id="advisors">
         <div class="container">
-            <h2 class="section-title">Strategic Advisors</h2>
-            <p class="section-subtitle">World-class expertise across health systems, innovation, and global strategy</p>
+            <h2 class="section-title" data-translate="advisors_title">Strategic Advisors</h2>
+            <p class="section-subtitle" data-translate="advisors_subtitle">World-class expertise across health systems, innovation, and global strategy</p>
             
             <div class="advisors-grid">
                 <div class="advisor-card">
-                    <h4>Dr. Rupa Patel</h4>
-                    <div class="title">Strategic Advisor, HIV Prevention & Health Equity</div>
-                    <p>Internationally recognized infectious disease physician and former CDC PrEP lead, advising on prevention strategy, access equity, and the integration of biomedical prevention into public health systems.</p>
+                    <h4 data-translate="advisor1_name">Dr. Rupa Patel</h4>
+                    <div class="title" data-translate="advisor1_title">Strategic Advisor, HIV Prevention & Health Equity</div>
+                    <p data-translate="advisor1_desc">Internationally recognized infectious disease physician and former CDC PrEP lead, advising on prevention strategy, access equity, and the integration of biomedical prevention into public health systems.</p>
                 </div>
                 
                 <div class="advisor-card">
-                    <h4>Dr. Rashad Massoud</h4>
-                    <div class="title">Strategic Advisor, Health Systems & Quality Improvement</div>
-                    <p>Global health systems expert and former Vice President at URC and AmeriCares, advising on large-scale implementation, health system strengthening, and quality improvement in low- and middle-income countries.</p>
+                    <h4 data-translate="advisor2_name">Dr. Rashad Massoud</h4>
+                    <div class="title" data-translate="advisor2_title">Strategic Advisor, Health Systems & Quality Improvement</div>
+                    <p data-translate="advisor2_desc">Global health systems expert and former Vice President at URC and AmeriCares, advising on large-scale implementation, health system strengthening, and quality improvement in low- and middle-income countries.</p>
                 </div>
                 
                 <div class="advisor-card">
-                    <h4>Dr. Judy Kuriansky</h4>
-                    <div class="title">Strategic Advisor, Mental Health & Global Resilience</div>
-                    <p>Internationally recognized clinical psychologist and UN NGO representative, advising on trauma-informed care, mental health integration, and global policy advocacy.</p>
+                    <h4 data-translate="advisor3_name">Dr. Judy Kuriansky</h4>
+                    <div class="title" data-translate="advisor3_title">Strategic Advisor, Mental Health & Global Resilience</div>
+                    <p data-translate="advisor3_desc">Internationally recognized clinical psychologist and UN NGO representative, advising on trauma-informed care, mental health integration, and global policy advocacy.</p>
                 </div>
                 
                 <div class="advisor-card">
-                    <h4>Dr. Tamar Tchelidze</h4>
-                    <div class="title">Strategic Advisor, Global Health Strategy & Public Health Systems</div>
-                    <p>Global health leader with experience across diplomacy, diagnostics, and policy, advising on public-private partnerships, health system transformation, and infectious disease strategy worldwide.</p>
+                    <h4 data-translate="advisor4_name">Dr. Tamar Tchelidze</h4>
+                    <div class="title" data-translate="advisor4_title">Strategic Advisor, Global Health Strategy & Public Health Systems</div>
+                    <p data-translate="advisor4_desc">Global health leader with experience across diplomacy, diagnostics, and policy, advising on public-private partnerships, health system transformation, and infectious disease strategy worldwide.</p>
                 </div>
             </div>
         </div>
@@ -321,33 +446,42 @@
 
     <section class="contact" id="contact">
         <div class="container">
-            <h2 class="section-title" style="color: white;">Get In Touch</h2>
+            <h2 class="section-title" style="color: white;" data-translate="contact_title">Get In Touch</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <h3>Ready to Transform Your Health Initiative?</h3>
-                    <p>Let's discuss how we can help you navigate complex health challenges and drive strategic impact. Reach out today for a confidential consultation.</p>
-                    <p><strong>Email:</strong> contact@arclineadvisory.com</p>
-                    <p><strong>Focus Areas:</strong> Global Health Strategy, Systems Strengthening, Innovation Implementation</p>
-                    <p><strong>Sectors:</strong> Public Health, Healthcare Innovation, Policy & Governance</p>
+                    <h3 data-translate="contact_cta">Ready to Transform Your Health Initiative?</h3>
+                    <p data-translate="contact_description">Let's discuss how we can help you navigate complex health challenges and drive strategic impact. Reach out today for a confidential consultation.</p>
+                    <p>
+                        <strong data-translate="contact_email">Email:</strong>
+                        <a href="mailto:contact@arclineadvisory.com">contact@arclineadvisory.com</a>
+                    </p>
+                    <p>
+                        <strong data-translate="contact_focus_areas">Focus Areas:</strong>
+                        <span data-translate="contact_focus_areas_text">Global Health Strategy, Systems Strengthening, Innovation Implementation</span>
+                    </p>
+                    <p>
+                        <strong data-translate="contact_sectors">Sectors:</strong>
+                        <span data-translate="contact_sectors_text">Public Health, Healthcare Innovation, Policy & Governance</span>
+                    </p>
                 </div>
                 <form class="contact-form" id="contactForm">
                     <div class="form-group">
-                        <label for="name">Name</label>
+                        <label for="name" data-translate="form_name">Name</label>
                         <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email" data-translate="form_email">Email</label>
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="organization">Organization</label>
+                        <label for="organization" data-translate="form_organization">Organization</label>
                         <input type="text" id="organization" name="organization">
                     </div>
                     <div class="form-group">
-                        <label for="message">How can we help you?</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your health strategy challenge or initiative..." required></textarea>
+                        <label for="message" data-translate="form_message">How can we help you?</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your health strategy challenge or initiative..." data-translate-placeholder="form_message_placeholder" required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
+                    <button type="submit" class="submit-btn" data-translate="form_submit">Send Message</button>
                 </form>
             </div>
         </div>
@@ -355,7 +489,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Arcline Advisory. All rights reserved. | Global Strategy for Health, Governance, and Innovation</p>
+            <p data-translate="footer_text">&copy; 2025 Arcline Advisory. All rights reserved. | Global Strategy for Health, Governance, and Innovation</p>
         </div>
     </footer>
 
@@ -595,6 +729,118 @@
 
         // Initialize carousel
         setTimeout(() => new Carousel(), 100);
+
+        // Language Switcher
+        function initializeLanguageSwitcher(btnId, dropdownId) {
+            const btn = document.getElementById(btnId);
+            const dropdown = document.getElementById(dropdownId);
+            const options = dropdown.querySelectorAll('.language-option');
+            const currentLang = btn.querySelector('.current-lang');
+
+            // Toggle dropdown
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', () => {
+                dropdown.classList.remove('active');
+            });
+
+            // Prevent dropdown from closing when clicking inside it
+            dropdown.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            // Handle language selection
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    const lang = option.getAttribute('data-lang');
+                    const label = option.getAttribute('data-label');
+                        console.log('Language option clicked:', lang);
+                    
+                    // Update button text
+                    currentLang.textContent = lang.toUpperCase();
+                    
+                    // Update active state for all language selectors
+                    document.querySelectorAll('.language-option').forEach(opt => {
+                        if (opt.getAttribute('data-lang') === lang) {
+                            opt.classList.add('active');
+                        } else {
+                            opt.classList.remove('active');
+                        }
+                    });
+                    
+                    // Update the text in both selectors
+                    document.querySelectorAll('.current-lang').forEach(el => {
+                        el.textContent = lang.toUpperCase();
+                    });
+                    
+                    // Close all dropdowns
+                    document.querySelectorAll('.language-dropdown').forEach(el => {
+                        el.classList.remove('active');
+                    });
+                    
+                    // Change language
+                    changeLanguage(lang);
+
+                    // If mobile menu is open, close it (useful when language option clicked inside mobile menu)
+                    try {
+                        const mobileBtnEl = document.getElementById('mobileMenuBtn');
+                        const mobileMenuEl = document.getElementById('mobileMenu');
+                        if (mobileBtnEl && mobileMenuEl && mobileMenuEl.classList.contains('active')) {
+                            mobileBtnEl.classList.remove('active');
+                            mobileMenuEl.classList.remove('active');
+                            document.body.style.overflow = '';
+                        }
+                    } catch (e) {
+                        // ignore if elements aren't present
+                    }
+                });
+            });
+        }
+
+        // Initialize both desktop and mobile language switchers
+        initializeLanguageSwitcher('languageBtn', 'languageDropdown');
+        initializeLanguageSwitcher('languageBtnMobile', 'languageDropdownMobile');
+
+        // Function to change language
+        function changeLanguage(lang) {
+            // Load and apply translations
+            fetch(`translations/${lang}.json`)
+                .then(response => response.json())
+                .then(translations => {
+                        console.log('Translations loaded:', translations);
+                        // Apply translations to the page
+                        // Regular text translations
+                        document.querySelectorAll('[data-translate]').forEach(element => {
+                            const key = element.getAttribute('data-translate');
+                            console.log('Translating element:', element);
+                            console.log('Translation key:', key);
+                            console.log('Translation value:', translations[key]);
+                            if (translations[key]) {
+                                element.textContent = translations[key];
+                            } else {
+                                console.warn('Missing translation for key:', key);
+                            }
+                        });
+                    
+                        // Placeholder translations
+                        document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                            const key = element.getAttribute('data-translate-placeholder');
+                            if (translations[key]) {
+                                element.placeholder = translations[key];
+                            } else {
+                                console.warn('Missing placeholder translation for key:', key);
+                            }
+                        });
+                })
+                    .catch(error => {
+                        console.error('Error loading translations:', error);
+                        console.error('Attempted to load:', `translations/${lang}.json`);
+                    });
+        }
 
         // Animation observer
         const observer = new IntersectionObserver(entries => {
