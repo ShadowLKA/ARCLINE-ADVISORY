@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ARCLINE ADVISORY - Global Strategy for Health, Governance, and Innovation</title>
+    <meta name="description" content="Independent. Expert-led. System-focused. Global advisory firm supporting organizations across healthcare, politics, and innovation with tailored strategic solutions.">
+    <!-- Supabase Configuration -->
+    <script src="js/config.js"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+        p,h1,h2,h3,h4,h5,h6,span,li,td,th,input,textarea,select{-webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text}
+        body{font-family:'Segoe UI',sans-serif;line-height:1.6;color:#333;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+        .container{max-width:1200px;margin:0 auto;padding:0 20px}
+        nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);z-index:1000;padding:1rem 0;box-shadow:0 2px 20px rgba(0,0,0,.1);transition:all .3s ease}
+        .nav-container{display:flex;justify-content:space-between;align-items:center}
+        .logo{font-size:1.8rem;font-weight:bold;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .nav-links{display:flex;list-style:none;gap:2rem}
+        .nav-links a{text-decoration:none;color:#333;font-weight:500;transition:color .3s ease}
+        .nav-links a:hover{color:#667eea}
+        .cta-button{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:.75rem 1.5rem;border-radius:50px;text-decoration:none;font-weight:600;transition:transform .3s ease,box-shadow .3s ease}
+        .cta-button:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(102,126,234,.3)}
+        .mobile-menu-btn{display:none;flex-direction:column;cursor:pointer;padding:8px;border-radius:8px;transition:background .3s ease}
+        .mobile-menu-btn:hover{background:rgba(102,126,234,.1)}
+        .mobile-menu-btn span{width:24px;height:3px;background:#333;margin:2.5px 0;transition:all .3s cubic-bezier(.25,.46,.45,.94);border-radius:3px}
+        .mobile-menu-btn.active span:nth-child(1){transform:rotate(-45deg) translate(-5px,6px)}
+        .mobile-menu-btn.active span:nth-child(2){opacity:0;transform:translateX(20px)}
+        .mobile-menu-btn.active span:nth-child(3){transform:rotate(45deg) translate(-5px,-6px)}
+        .mobile-menu{position:fixed;top:80px;left:0;width:100%;background:rgba(255,255,255,.98);backdrop-filter:blur(15px);padding:2rem;box-shadow:0 8px 32px rgba(0,0,0,.12);transform:translateY(-100%);opacity:0;visibility:hidden;transition:all .4s cubic-bezier(.25,.46,.45,.94)}
+        .mobile-menu.active{transform:translateY(0);opacity:1;visibility:visible}
+        .mobile-menu ul{list-style:none;text-align:center}
+        .mobile-menu ul li{margin:1.5rem 0;transform:translateY(20px);opacity:0;transition:all .3s ease}
+        .mobile-menu.active ul li{transform:translateY(0);opacity:1}
+        .mobile-menu ul li a{text-decoration:none;color:#333;font-size:1.2rem;font-weight:500;transition:all .3s ease;padding:.5rem 1rem;border-radius:8px;display:inline-block}
+        .mobile-menu ul li a:hover{color:#667eea;background:rgba(102,126,234,.1)}
+        .hero{height:100vh;min-height:600px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);display:flex;align-items:center;position:relative;overflow:hidden}
+        .hero::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,300 1000,1000 0,700"/></svg>');animation:float 6s ease-in-out infinite}
+        @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-20px)}}
+        .hero-content{color:white;z-index:10;position:relative;text-align:center;width:100%}
+        .hero .tagline{font-size:1.2rem;font-weight:500;margin-bottom:1rem;opacity:0;animation:slideUp 1s ease .3s forwards;text-transform:uppercase;letter-spacing:2px}
+        .hero h1{font-size:3.5rem;font-weight:700;margin-bottom:1rem;opacity:0;animation:slideUp 1s ease .5s forwards}
+        .hero p{font-size:1.3rem;margin-bottom:2rem;opacity:0;animation:slideUp 1s ease .7s forwards;max-width:600px;margin-left:auto;margin-right:auto}
+        .hero-buttons{display:flex;gap:1rem;justify-content:center;opacity:0;animation:slideUp 1s ease .9s forwards}
+        .btn-primary{background:white!important;color:#667eea!important;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s ease;border:none;outline:none;display:inline-block;cursor:pointer}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,.2)}
+        .btn-secondary{background:transparent!important;color:white!important;border:2px solid white;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s ease;outline:none;display:inline-block;cursor:pointer}
+        .btn-secondary:hover{background:white!important;color:#667eea!important}
+        @keyframes slideUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+        section{padding:5rem 0}
+        .section-title{text-align:center;font-size:2.5rem;font-weight:700;margin-bottom:3rem;color:#333}
+        .section-subtitle{text-align:center;font-size:1.2rem;color:#666;margin-bottom:4rem;max-width:600px;margin-left:auto;margin-right:auto}
+        .about{background:#f8f9fa}
+        .about-content{max-width:800px;margin:0 auto;text-align:center}
+        .about-text h3{font-size:2rem;margin-bottom:1rem;color:#333}
+        .about-text p{font-size:1.1rem;color:#666;margin-bottom:1.5rem}
+        .about-highlights{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
+        .highlight{background:white;padding:1.5rem;border-radius:10px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,.08)}
+        .highlight-icon{font-size:2rem;margin-bottom:.5rem}
+        .highlight h4{font-size:1rem;font-weight:600;color:#333;margin-bottom:.5rem}
+        .highlight p{font-size:.9rem;color:#666}
+        .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:1000px;margin:0 auto}
+        .services-carousel{display:none;position:relative;margin:0 auto;padding:20px 0;overflow:hidden;width:100%}
+        .carousel-container{position:relative;max-width:340px;margin:0 auto;padding:0 20px;box-sizing:border-box}
+        .carousel-wrapper{background:rgba(255,255,255,.95);border-radius:28px;position:relative;overflow:hidden;width:100%;backdrop-filter:blur(20px);box-shadow:0 20px 60px rgba(0,0,0,.15),0 8px 32px rgba(102,126,234,.1)}
+        .carousel-wrapper::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;border-radius:28px;padding:3px;background:linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%);mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:xor;-webkit-mask-composite:xor;pointer-events:none;z-index:1}
+        .services-track{display:flex;width:300%;transition:transform .4s cubic-bezier(.25,.46,.45,.94);will-change:transform;position:relative;z-index:2}
+        .carousel-slide{width:calc(100%/3);flex-shrink:0;position:relative}
+        .carousel-slide .service-card{margin:0;box-shadow:none!important;border:none;border-radius:0;background:transparent;padding:40px 28px;transform:none!important;transition:none;position:relative}
+        .carousel-nav{display:flex;justify-content:center;gap:16px;margin-top:32px;padding:0 20px}
+        .carousel-dot{width:14px;height:14px;border-radius:7px;background:#e5e7eb;cursor:pointer;transition:all .2s cubic-bezier(.25,.46,.45,.94);border:none;padding:0;position:relative;overflow:hidden}
+        .carousel-dot.active{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);width:40px;box-shadow:0 4px 12px rgba(102,126,234,.3)}
+        .carousel-arrows{position:absolute;top:50%;transform:translateY(-50%);width:calc(100% + 100px);left:-50px;display:flex;justify-content:space-between;pointer-events:none;z-index:10;padding:0}
+        .carousel-arrow{background:rgba(255,255,255,.98);backdrop-filter:blur(15px);border:2px solid rgba(102,126,234,.2);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s cubic-bezier(.25,.46,.45,.94);box-shadow:0 8px 24px rgba(0,0,0,.15),0 4px 12px rgba(102,126,234,.1);color:#667eea;font-size:18px;font-weight:700;pointer-events:all;position:relative;overflow:hidden;z-index:20}
+        .carousel-arrow:hover{transform:scale(1.05);box-shadow:0 12px 32px rgba(0,0,0,.2),0 6px 16px rgba(102,126,234,.2);border-color:#667eea;color:white;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%)}
+        .service-card{background:white;padding:2.5rem 2rem;border-radius:20px;box-shadow:0 15px 50px rgba(0,0,0,.1),0 5px 20px rgba(0,0,0,.05);text-align:center;transition:transform .15s ease,box-shadow .15s ease;cursor:pointer;border:2px solid rgba(102,126,234,.1);position:relative;overflow:hidden;text-decoration:none;color:inherit;display:block}
+        .service-card:hover{transform:translateY(-5px);box-shadow:0 25px 70px rgba(0,0,0,.15),0 10px 30px rgba(0,0,0,.1);border-color:rgba(102,126,234,.2);text-decoration:none;color:inherit}
+        .service-icon{width:80px;height:80px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:2rem;color:white;transition:transform .3s ease;box-shadow:0 8px 24px rgba(102,126,234,.3)}
+        .service-card:hover .service-icon{transform:scale(1.1)}
+        .service-card h3{font-size:1.4rem;margin-bottom:1rem;color:#333;font-weight:600}
+        .service-card p{color:#666;line-height:1.6;margin-bottom:1.2rem;font-size:.95rem}
+        .service-card .learn-more{color:#667eea;font-weight:600;text-decoration:none;font-size:.9rem;transition:color .2s ease;display:inline-block;margin-top:0.5rem}
+        .service-card .learn-more:hover{color:#764ba2}
+        .service-card .learn-more::after{content:' →';transition:transform .2s ease}
+        .service-card:hover .learn-more::after{transform:translateX(3px)}
+        .advisors{background:white;padding:5rem 0}
+        .advisors-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:2rem}
+        .advisor-card{background:#f8f9fa;padding:2rem;border-radius:15px;border-left:4px solid #667eea;transition:transform .3s ease,box-shadow .3s ease}
+        .advisor-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.1)}
+        .advisor-card h4{font-size:1.2rem;font-weight:600;color:#333;margin-bottom:.5rem}
+        .advisor-card .title{font-size:.95rem;color:#667eea;font-weight:500;margin-bottom:1rem}
+        .advisor-card p{font-size:.9rem;color:#666;line-height:1.6}
+        .contact{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white}
+        .contact-content{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+        .contact-form{background:rgba(255,255,255,.1);padding:2rem;border-radius:20px;backdrop-filter:blur(10px)}
+        .form-group{margin-bottom:1.5rem}
+        .form-group label{display:block;margin-bottom:.5rem;font-weight:500}
+        .form-group input,.form-group textarea{width:100%;padding:1rem;border:none;border-radius:10px;font-size:1rem;background:rgba(255,255,255,.9);color:#333;transition:all .3s ease}
+        .form-group input:focus,.form-group textarea:focus{outline:none;background:white;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+        .form-group textarea{resize:vertical;min-height:120px}
+        .submit-btn{background:white!important;color:#667eea!important;padding:1rem 2rem;border:none;border-radius:50px;font-weight:600;cursor:pointer;transition:all .3s ease;width:100%}
+        .submit-btn:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(0,0,0,.2)}
+        .submit-btn:disabled{opacity:.7;cursor:not-allowed;transform:none}
+        .contact-info h3{font-size:2rem;margin-bottom:1rem}
+        .contact-info p{font-size:1.1rem;margin-bottom:2rem;opacity:.9}
+        .contact-info strong{color:#fff}
+        footer{background:#333;color:white;text-align:center;padding:2rem 0}
+        @media (max-width:768px){
+            .container{padding:0 16px}
+            .nav-links,.cta-button{display:none}
+            .mobile-menu-btn{display:flex}
+            .logo{font-size:1.5rem}
+            .hero{min-height:100vh;padding:2rem 0}
+            .hero .tagline{font-size:1rem}
+            .hero h1{font-size:2.5rem;line-height:1.2;margin-bottom:1.5rem}
+            .hero p{font-size:1.1rem;margin-bottom:2.5rem;padding:0 10px}
+            .hero-buttons{flex-direction:column;align-items:center;gap:1rem;padding:0 20px}
+            .btn-primary,.btn-secondary{width:100%;max-width:280px;text-align:center;padding:1rem 2rem;font-size:1rem}
+            section{padding:3rem 0}
+            .section-title{font-size:2rem;margin-bottom:2rem;padding:0 10px}
+            .section-subtitle{font-size:1.1rem;margin-bottom:3rem;padding:0 10px}
+            .about-content{max-width:none}
+            .about-text{padding:0 10px}
+            .about-text h3{font-size:1.8rem}
+            .about-text p{font-size:1rem}
+            .about-highlights{grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}
+            .services-grid{display:none}
+            .services-carousel{display:block;padding:20px 0}
+            .services-track{width:300%}
+            .carousel-slide{width:calc(100%/3)}
+            .advisors-grid{grid-template-columns:1fr;gap:1.5rem}
+            .advisor-card{padding:1.5rem}
+            .contact-content{grid-template-columns:1fr;gap:2rem}
+            .contact-info{order:-1;text-align:center;padding:0 10px}
+            .contact-form{padding:1.5rem;margin:0 10px}
+        }
+        @media (max-width:480px){
+            .hero h1{font-size:2rem}
+            .section-title{font-size:1.8rem}
+        }
+        html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+        input[type="text"],input[type="email"],textarea{font-size:16px}
+        /* Language selector styles moved to `css/shared.css` for consistent appearance across pages.
+           The shared stylesheet is linked after this block and will apply the centralized rules.
+           If you need to adjust dropdown width globally, edit the --lang-dropdown-width variable in `css/shared.css`. */
+    </style>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js" defer></script></script>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-left">
+                    <div class="logo">ARCLINE ADVISORY</div>
+                </div>
+
+                <div class="nav-center">
+                    <ul class="nav-links">
+                        <li><a href="#home" data-translate="nav_home">Home</a></li>
+                        <li><a href="#about" data-translate="nav_about">About</a></li>
+                        <li><a href="#services" data-translate="nav_services">Services</a></li>
+                        <li><a href="#contact" data-translate="nav_contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-right">
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageBtn">
+                            <span class="globe-icon">🌐</span>
+                            <span class="current-lang">EN</span>
+                        </button>
+                        <div class="language-dropdown" id="languageDropdown">
+                            <div class="language-option active" data-lang="en">English</div>
+                            <div class="language-option" data-lang="ge">ქართული</div>
+                            <div class="language-option" data-lang="ru">Русский</div>
+                        </div>
+                    </div>
+                    <div class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <ul>
+                <li><a href="#home" data-translate="nav_home">Home</a></li>
+                <li><a href="#about" data-translate="nav_about">About</a></li>
+                <li><a href="#services" data-translate="nav_services">Services</a></li>
+                <li><a href="#contact" data-translate="nav_contact">Contact</a></li>
+                <li>
+                    <div class="language-selector">
+                        <button class="language-btn" id="languageBtnMobile">
+                            <span class="globe-icon">🌐</span>
+                            <span class="current-lang">EN</span>
+                        </button>
+                        <div class="language-dropdown" id="languageDropdownMobile">
+                            <div class="language-option active" data-lang="en">English</div>
+                            <div class="language-option" data-lang="ge">ქართული</div>
+                            <div class="language-option" data-lang="ru">Русский</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-translate="hero_title">Global Strategy for Health, Governance, and Innovation</h1>
+                <p data-translate="hero_description">We support public and private sector organizations as they navigate complex, interconnected challenges across healthcare, politics, and innovation with tailored strategic solutions grounded in systems thinking.</p>
+                <div class="hero-buttons">
+                    <a href="#services" class="btn-primary" data-translate="hero_btn_services">Our Services</a>
+                    <a href="#about" class="btn-secondary" data-translate="hero_btn_learn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title" data-translate="about_title">About Arcline Advisory</h2>
+            <p class="section-subtitle" data-translate="about_subtitle">A global advisory firm built on a model of practice-led expertise, delivering strategic support grounded in real-world implementation</p>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 data-translate="about_heading">Transforming Complex Challenges into Strategic Solutions</h3>
+                    <p data-translate="about_text1">Arcline is a global advisory firm supporting public and private sector organizations across healthcare, politics, and innovation. Each of our practice areas is led by experienced professionals with deep sector knowledge, global perspective, and a track record of driving measurable impact.</p>
+                    <p data-translate="about_text2">We deliver tailored strategic support that bridges high-level strategy with on-the-ground execution, bringing clarity, credibility, and momentum to even the most complex initiatives.</p>
+                    <a href="#contact" class="cta-button" data-translate="about_cta">Partner With Us</a>
+                </div>
+                <div class="about-highlights">
+                    <div class="highlight">
+                        <div class="highlight-icon">🌍</div>
+                        <h4 data-translate="highlight1_title">Global Reach</h4>
+                        <p data-translate="highlight1_desc">Cross-country expertise across diverse regulatory environments</p>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">🎯</div>
+                        <h4 data-translate="highlight2_title">Systems Focus</h4>
+                        <p data-translate="highlight2_desc">Holistic approach to interconnected challenges</p>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-icon">⚡</div>
+                        <h4 data-translate="highlight3_title">Impact Driven</h4>
+                        <p data-translate="highlight3_desc">Measurable results from strategy to implementation</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title" data-translate="services_title">Our Services</h2>
+            <p class="section-subtitle" data-translate="services_subtitle">Comprehensive health advisory solutions across the entire lifecycle from strategy to execution</p>
+            
+            <div class="services-container">
+                <div class="services-grid">
+                    <a href="Strategic%20Advisory/" class="service-card">
+                        <div class="service-icon">🎯</div>
+                        <h3 data-translate="service1_title">Strategic Advisory</h3>
+                        <p data-translate="service1_desc">We support organizations in shaping clear, forward-looking strategies for national health system reform, multisectoral programming, public-private alignment, and advancement of new models of care.</p>
+                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
+                    </a>
+                    <a href="Program%20%26%20Platform%20Design/" class="service-card">
+                        <div class="service-icon">🏗️</div>
+                        <h3 data-translate="service2_title">Program & Platform Design</h3>
+                        <p data-translate="service2_desc">We help design scalable, equitable health programs and platforms, integrating innovation, delivery models, and systems thinking across diverse health areas and geographies.</p>
+                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
+                    </a>
+                    <a href="Execution%20Support/" class="service-card">
+                        <div class="service-icon">⚡</div>
+                        <h3 data-translate="service3_title">Execution Support</h3>
+                        <p data-translate="service3_desc">From piloting new approaches to scaling implementation, we provide hands-on support to translate strategy into action, ensuring operational readiness and real-world impact.</p>
+                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
+                    </a>
+                </div>
+
+                <div class="services-carousel">
+                    <div class="carousel-container">
+                        <div class="carousel-wrapper">
+                            <div class="services-track" id="servicesTrack">
+                                <div class="carousel-slide active">
+                                    <a href="Strategic%20Advisory/" class="service-card">
+                                        <div class="service-icon">🎯</div>
+                                        <h3>Strategic Advisory</h3>
+                                        <p>We support organizations in shaping clear, forward-looking strategies for national health system reform, multisectoral programming, and public-private alignment.</p>
+                                        <span class="learn-more">Learn More</span>
+                                    </a>
+                                </div>
+                                <div class="carousel-slide">
+                                    <a href="Program%20%26%20Platform%20Design/" class="service-card">
+                                        <div class="service-icon">🏗️</div>
+                                        <h3 data-translate="service2_title">Program & Platform Design</h3>
+                                        <p data-translate="service2_desc">We help design scalable, equitable health programs and platforms, integrating innovation and delivery models across diverse health areas.</p>
+                                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
+                                    </a>
+                                </div>
+                                <div class="carousel-slide">
+                                    <a href="Execution%20Support/" class="service-card">
+                                        <div class="service-icon">⚡</div>
+                                        <h3 data-translate="service3_title">Execution Support</h3>
+                                        <p data-translate="service3_desc">From piloting to scaling implementation, we provide hands-on support to translate strategy into action and ensure real-world impact.</p>
+                                        <span class="learn-more" data-translate="service_learn_more">Learn More</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="carousel-arrows">
+                                <button class="carousel-arrow prev">‹</button>
+                                <button class="carousel-arrow next">›</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button class="carousel-dot active" data-slide="0"></button>
+                        <button class="carousel-dot" data-slide="1"></button>
+                        <button class="carousel-dot" data-slide="2"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="advisors" id="advisors">
+        <div class="container">
+            <h2 class="section-title" data-translate="advisors_title">Strategic Advisors</h2>
+            <p class="section-subtitle" data-translate="advisors_subtitle">World-class expertise across health systems, innovation, and global strategy</p>
+            
+            <div class="advisors-grid">
+                <div class="advisor-card">
+                    <h4 data-translate="advisor1_name">Dr. Rupa Patel</h4>
+                    <div class="title" data-translate="advisor1_title">Strategic Advisor, HIV Prevention & Health Equity</div>
+                    <p data-translate="advisor1_desc">Internationally recognized infectious disease physician and former CDC PrEP lead, advising on prevention strategy, access equity, and the integration of biomedical prevention into public health systems.</p>
+                </div>
+                
+                <div class="advisor-card">
+                    <h4 data-translate="advisor2_name">Dr. Rashad Massoud</h4>
+                    <div class="title" data-translate="advisor2_title">Strategic Advisor, Health Systems & Quality Improvement</div>
+                    <p data-translate="advisor2_desc">Global health systems expert and former Vice President at URC and AmeriCares, advising on large-scale implementation, health system strengthening, and quality improvement in low- and middle-income countries.</p>
+                </div>
+                
+                <div class="advisor-card">
+                    <h4 data-translate="advisor3_name">Dr. Judy Kuriansky</h4>
+                    <div class="title" data-translate="advisor3_title">Strategic Advisor, Mental Health & Global Resilience</div>
+                    <p data-translate="advisor3_desc">Internationally recognized clinical psychologist and UN NGO representative, advising on trauma-informed care, mental health integration, and global policy advocacy.</p>
+                </div>
+                
+                <div class="advisor-card">
+                    <h4 data-translate="advisor4_name">Dr. Tamar Tchelidze</h4>
+                    <div class="title" data-translate="advisor4_title">Strategic Advisor, Global Health Strategy & Public Health Systems</div>
+                    <p data-translate="advisor4_desc">Global health leader with experience across diplomacy, diagnostics, and policy, advising on public-private partnerships, health system transformation, and infectious disease strategy worldwide.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title" style="color: white;" data-translate="contact_title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3 data-translate="contact_cta">Ready to Transform Your Health Initiative?</h3>
+                    <p data-translate="contact_description">Let's discuss how we can help you navigate complex health challenges and drive strategic impact. Reach out today for a confidential consultation.</p>
+                    <p>
+                        <strong data-translate="contact_email">Email:</strong>
+                        <a href="mailto:contact@arclineadvisory.com">contact@arclineadvisory.com</a>
+                    </p>
+                    <p>
+                        <strong data-translate="contact_focus_areas">Focus Areas:</strong>
+                        <span data-translate="contact_focus_areas_text">Global Health Strategy, Systems Strengthening, Innovation Implementation</span>
+                    </p>
+                    <p>
+                        <strong data-translate="contact_sectors">Sectors:</strong>
+                        <span data-translate="contact_sectors_text">Public Health, Healthcare Innovation, Policy & Governance</span>
+                    </p>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <label for="name" data-translate="form_name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" data-translate="form_email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="organization" data-translate="form_organization">Organization</label>
+                        <input type="text" id="organization" name="organization">
+                    </div>
+                    <div class="form-group">
+                        <label for="message" data-translate="form_message">How can we help you?</label>
+                        <textarea id="message" name="message" placeholder="Tell us about your health strategy challenge or initiative..." data-translate-placeholder="form_message_placeholder" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn" data-translate="form_submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p data-translate="footer_text">&copy; 2025 Arcline Advisory. All rights reserved. | Global Strategy for Health, Governance, and Innovation</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        const btn = document.getElementById('mobileMenuBtn');
+        const menu = document.getElementById('mobileMenu');
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('active');
+            menu.classList.toggle('active');
+            document.body.style.overflow = menu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                btn.classList.remove('active');
+                menu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        // Contact Form - Supabase Integration
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+
+            // Validate required fields
+            if (!formData.get('name') || !formData.get('email') || !formData.get('message')) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                // Dynamically import Supabase functions
+                const { submitContactForm } = await import('./js/supabase-config.js');
+
+                // Prepare form data
+                const contactData = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    organization: formData.get('organization') || '',
+                    message: formData.get('message')
+                };
+
+                // Submit to Supabase
+                const result = await submitContactForm(contactData);
+
+                if (result.success) {
+                    alert('Thank you for your message! We\'ll get back to you soon to discuss your health strategy needs.');
+                    this.reset();
+                } else {
+                    alert('There was an error submitting your message. Please try again or contact us directly at info@arclineadvisory.com');
+                    console.error('Submission error:', result.error);
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('There was an error submitting your message. Please try again or contact us directly at info@arclineadvisory.com');
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Enhanced Carousel
+        class Carousel {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = 3;
+                this.isTransitioning = false;
+                this.track = document.getElementById('servicesTrack');
+                this.slides = document.querySelectorAll('.carousel-slide');
+                this.dots = document.querySelectorAll('.carousel-dot');
+                this.touchData = {
+                    startX: 0,
+                    currentX: 0,
+                    isDragging: false,
+                    startTime: 0
+                };
+                this.autoplayInterval = null;
+                this.init();
+            }
+
+            init() {
+                if (!this.track) return;
+                
+                // Disable text selection
+                this.track.style.userSelect = 'none';
+                this.track.style.webkitUserSelect = 'none';
+                
+                // Simple touch events
+                this.track.addEventListener('touchstart', (e) => {
+                    if (this.isTransitioning) return;
+                    this.stopAutoPlay();
+                    this.touchData.isDragging = true;
+                    this.touchData.startX = e.touches[0].clientX;
+                    this.touchData.currentX = this.touchData.startX;
+                    this.touchData.startTime = Date.now();
+                }, { passive: true });
+
+                this.track.addEventListener('touchmove', (e) => {
+                    if (!this.touchData.isDragging || this.isTransitioning) return;
+                    this.touchData.currentX = e.touches[0].clientX;
+                    const deltaX = this.touchData.currentX - this.touchData.startX;
+                    
+                    // Very responsive - show movement immediately
+                    const slideWidth = this.track.parentElement.offsetWidth;
+                    const currentTransform = -this.currentSlide * slideWidth;
+                    this.track.style.transition = 'none';
+                    this.track.style.transform = `translateX(${currentTransform + deltaX * 0.8}px)`;
+                }, { passive: true });
+
+                this.track.addEventListener('touchend', () => {
+                    if (!this.touchData.isDragging) return;
+                    this.touchData.isDragging = false;
+                    
+                    const deltaX = this.touchData.currentX - this.touchData.startX;
+                    const deltaTime = Date.now() - this.touchData.startTime;
+                    const velocity = Math.abs(deltaX) / deltaTime;
+                    
+                    // Very low threshold for easier swiping
+                    const threshold = 20; // Much lower than before
+                    const shouldSlide = Math.abs(deltaX) > threshold || velocity > 0.2;
+                    
+                    this.track.style.transition = 'transform 0.3s ease-out';
+                    
+                    if (shouldSlide) {
+                        if (deltaX > 0 && this.currentSlide > 0) {
+                            this.prevSlide();
+                        } else if (deltaX < 0 && this.currentSlide < this.totalSlides - 1) {
+                            this.nextSlide();
+                        } else {
+                            this.updateCarousel(false);
+                        }
+                    } else {
+                        this.updateCarousel(false);
+                    }
+                    
+                    this.startAutoPlay();
+                }, { passive: true });
+
+                // Arrow buttons
+                document.querySelector('.carousel-arrow.prev')?.addEventListener('click', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.prevSlide();
+                });
+
+                document.querySelector('.carousel-arrow.next')?.addEventListener('click', e => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.nextSlide();
+                });
+
+                // Dots
+                this.dots.forEach((dot, index) => {
+                    dot.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.goToSlide(index);
+                    });
+                });
+
+                // Auto-play
+                if (window.innerWidth <= 768) {
+                    this.startAutoPlay();
+                }
+            }
+
+            updateCarousel(animate = true) {
+                if (animate && this.isTransitioning) return;
+                if (animate) this.isTransitioning = true;
+                
+                const slideWidth = this.track.parentElement.offsetWidth;
+                
+                if (animate) {
+                    this.track.style.transition = 'transform 0.3s ease-out';
+                }
+                
+                this.track.style.transform = `translateX(${-this.currentSlide * slideWidth}px)`;
+                
+                this.slides.forEach((slide, index) => {
+                    slide.classList.toggle('active', index === this.currentSlide);
+                });
+                
+                this.dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+
+                if (animate) {
+                    setTimeout(() => {
+                        this.isTransitioning = false;
+                        this.track.style.transition = '';
+                    }, 300);
+                }
+            }
+
+            goToSlide(slideIndex) {
+                if (slideIndex >= 0 && slideIndex < this.totalSlides && slideIndex !== this.currentSlide && !this.isTransitioning) {
+                    this.currentSlide = slideIndex;
+                    this.updateCarousel(true);
+                }
+            }
+
+            nextSlide() {
+                const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+                this.goToSlide(nextIndex);
+            }
+
+            prevSlide() {
+                const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.goToSlide(prevIndex);
+            }
+
+            startAutoPlay() {
+                if (window.innerWidth <= 768) {
+                    this.stopAutoPlay();
+                    this.autoplayInterval = setInterval(() => {
+                        if (!this.isTransitioning && !this.touchData.isDragging && !document.hidden) {
+                            this.nextSlide();
+                        }
+                    }, 6000);
+                }
+            }
+
+            stopAutoPlay() {
+                if (this.autoplayInterval) {
+                    clearInterval(this.autoplayInterval);
+                    this.autoplayInterval = null;
+                }
+            }
+        }
+
+        // Initialize carousel
+        setTimeout(() => new Carousel(), 100);
+
+        // Language selector and translation runtime are handled by `js/shared.js`.
+
+        // Animation observer
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+
+        // Observe elements for animations
+        document.querySelectorAll('.service-card, .about-text, .advisor-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
