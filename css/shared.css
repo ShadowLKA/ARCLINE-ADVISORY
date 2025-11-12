@@ -108,8 +108,8 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    height: 36px;
-    padding: 0 12px;
+    height: 38px;
+    padding: 0 14px;
     background: white;
     color: #667eea;
     border-radius: 50px;
@@ -117,15 +117,40 @@
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 600;
-    transition: all 0.22s ease;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: 100%;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+    letter-spacing: 0.2px;
+    position: relative;
+    overflow: hidden;
+}
+
+.language-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    z-index: -1;
 }
 
 .language-btn:hover {
-    background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
     color: white;
+    border-color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+}
+
+.language-btn:hover::before {
+    left: 0;
+}
+
+.language-btn:active {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102,126,234,0.25);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
 }
 
 .language-btn .globe-icon {
@@ -140,58 +165,107 @@
     letter-spacing: 0.3px;
 }
 
+/* Dropdown animation keyframes - Simple fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.language-dropdown.active .language-option {
+    animation: fadeIn 0.25s ease forwards;
+}
+
+.language-dropdown.active .language-option:nth-child(1) {
+    animation-delay: 0.0s;
+}
+
+.language-dropdown.active .language-option:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.language-dropdown.active .language-option:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
 .language-dropdown {
     position: absolute;
     top: calc(100% + 8px);
     left: 50%;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(102, 126, 234, 0.1);
     opacity: 0;
     visibility: hidden;
-    transform: translate(-50%, -8px);
-    transition: all 0.25s cubic-bezier(0.3, 0, 0.3, 1);
+    transform: translate(-50%, -8px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     z-index: 1000;
     width: var(--lang-dropdown-width);
     min-width: var(--lang-dropdown-width);
     max-width: var(--lang-dropdown-width);
-    padding: 6px 0;
+    padding: 8px 0;
     text-align: center;
     margin: 0 auto;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(102, 126, 234, 0.1);
 }
 
 .language-dropdown.active {
     opacity: 1;
     visibility: visible;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0) scale(1);
 }
 
 .language-option {
-    padding: 8px 12px;
+    padding: 10px 14px;
     cursor: pointer;
     transition: all 0.2s ease;
-    display: block; /* make each option fill the dropdown width */
+    display: block;
     width: 100%;
     box-sizing: border-box;
     color: #333;
     white-space: nowrap;
     font-size: 0.9rem;
     text-align: center;
-}
-.language-option {
     overflow: hidden;
     text-overflow: ellipsis;
+    position: relative;
+    font-weight: 500;
+    opacity: 0;
+}
+
+.language-option::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    top: 2px;
+    bottom: 2px;
+    background: rgba(102, 126, 234, 0.08);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: -1;
+    border-radius: 6px;
 }
 
 .language-option:hover {
-    background: rgba(102,126,234,0.08);
     color: #667eea;
 }
 
+.language-option:hover::before {
+    opacity: 1;
+}
+
 .language-option.active {
-    background: rgba(102,126,234,0.12);
     color: #667eea;
-    font-weight: 500;
+    font-weight: 600;
+}
+
+.language-option.active::before {
+    opacity: 1;
 }
 
 /* Mobile styles */
