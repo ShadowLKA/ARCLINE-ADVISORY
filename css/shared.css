@@ -229,6 +229,7 @@
     color: #333;
     white-space: nowrap;
     font-size: 0.9rem;
+    line-height: 1.4;
     text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -240,10 +241,10 @@
 .language-option::before {
     content: '';
     position: absolute;
-    left: 6px;
-    right: 6px;
-    top: 2px;
-    bottom: 2px;
+    left: 8px;
+    right: 8px;
+    top: 3px;
+    bottom: 3px;
     background: rgba(102, 126, 234, 0.08);
     opacity: 0;
     transition: opacity 0.2s ease;
