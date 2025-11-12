@@ -19,22 +19,9 @@
         .container{max-width:1200px;margin:0 auto;padding:0 20px}
         .container-wide{max-width:1400px;margin:0 auto;padding:0 20px}
         nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);z-index:1000;padding:1rem 0;box-shadow:0 2px 20px rgba(0,0,0,0.1);transition:all 0.3s ease}
-        .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 2rem;
-        }
-        .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
+
+
+
         .mobile-menu-btn.active span:nth-child(1){transform:rotate(-45deg) translate(-5px,6px)}
         .mobile-menu-btn.active span:nth-child(2){opacity:0;transform:translateX(20px)}
         .mobile-menu-btn.active span:nth-child(3){transform:rotate(45deg) translate(-5px,-6px)}
@@ -213,7 +200,9 @@
                         <li><a href="#" onclick="navigateToSection('services')" data-translate="nav_services">Services</a></li>
                         <li><a href="#" onclick="navigateToSection('contact')" data-translate="nav_contact">Contact</a></li>
                     </ul>
-                    <div class="language-selector">
+                    <div class="language-selector" style="
+    margin-left: 100px;
+">
                         <button class="language-btn">
                             <span class="globe-icon">🌐</span>
                             <span class="current-lang">EN</span>
