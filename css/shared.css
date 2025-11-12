@@ -1,7 +1,7 @@
 /* Navigation container */
 .nav-container {
     display: grid;
-    grid-template-columns: 220px auto 220px;
+    grid-template-columns: 280px auto 220px;
     align-items: center;
     width: 100%;
     box-sizing: border-box;
@@ -34,7 +34,7 @@
 
 .logo {
     flex-shrink: 0;
-    margin-right: 2rem;
+    margin-right: 1rem;
     font-size: 1.5rem;
     white-space: nowrap;
     font-weight: bold;
@@ -196,6 +196,15 @@
 
 /* Mobile styles */
 @media (max-width: 768px) {
+    /* Ensure content isn't hidden behind fixed nav on mobile */
+    body {
+        padding-top: var(--nav-height);
+    }
+
+    /* Make hero fit available viewport height minus nav height to avoid clipping */
+    .hero {
+        min-height: calc(100vh - var(--nav-height));
+    }
     .nav-right .language-selector {
         display: none;
     }
@@ -470,4 +479,64 @@
         padding: 10px 20px;
         font-size: 0.9rem;
     }
+}
+
+/* Additional mobile refinements: remove large unused vertical areas and ensure mobile menu fits below nav */
+@media (max-width: 768px) {
+    /* Prevent hero from taking full viewport (100vh) which often leaves large unused space
+       when nav is fixed or when address bars collapse on mobile browsers. Let it size to content. */
+    .hero {
+        min-height: auto !important;
+        height: auto !important;
+        padding-top: 1.25rem;
+        padding-bottom: 2rem;
+        display: block;
+    }
+
+    /* Ensure hero content is vertically spaced but doesn't create empty area */
+    .hero .hero-content {
+        padding-top: 0 !important;
+    }
+
+    /* Place mobile menu directly under the nav and limit its height to remaining viewport so no large blank area appears */
+    .mobile-menu {
+        top: var(--nav-height);
+        height: calc(100vh - var(--nav-height));
+        padding: 1.25rem;
+        overflow-y: auto;
+    }
+
+    /* Ensure container paddings don't add extra vertical whitespace on mobile */
+    .container, .container-wide {
+        padding-top: 0;
+    }
+
+    /* Safe-area support for iOS devices */
+    body, .mobile-menu {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /* Slightly reduce hero font sizes on very small screens to avoid wrapping that pushes content off-screen */
+    .hero h1 { font-size: 1.8rem; line-height: 1.05; }
+    .hero p { font-size: 0.95rem; }
+}
+
+/* Force-hide the top-bar language selector on mobile to avoid duplication with the mobile menu.
+   This uses high-specificity selectors and !important to override any page-level or inline rules. */
+@media (max-width: 768px) {
+    .nav-container .nav-right > .language-selector,
+    header .nav-right > .language-selector,
+    .nav-right > .language-selector {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        width: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+:root {
+    --nav-height: 80px; /* used on small screens to offset fixed nav */
 }
