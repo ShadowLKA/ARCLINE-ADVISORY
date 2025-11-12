@@ -146,11 +146,21 @@ function initializeMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
     
     if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', function() {
+        // Ensure click/tap reliably toggles the mobile menu. stopPropagation to avoid accidental closures.
+        mobileMenuBtn.addEventListener('click', function(event) {
+            event.stopPropagation();
             this.classList.toggle('active');
             mobileMenu.classList.toggle('active');
             document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
         });
+
+        // Also support touchstart for some mobile browsers that prefer it
+        mobileMenuBtn.addEventListener('touchstart', function(event) {
+            event.stopPropagation();
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }, { passive: false });
 
         // Close mobile menu on link click
         document.querySelectorAll('.mobile-menu a').forEach(link => {
@@ -163,6 +173,66 @@ function initializeMobileMenu() {
     }
 }
 
+// Compute actual navbar height and set CSS variable so mobile layout offsets correctly
+function syncNavHeight() {
+    try {
+        const nav = document.getElementById('navbar');
+        if (nav) {
+            const height = nav.offsetHeight || 80;
+            document.documentElement.style.setProperty('--nav-height', height + 'px');
+            // Apply an inline padding-top on body for narrow viewports to ensure the nav doesn't cover content
+            if (window.innerWidth <= 768) {
+                document.body.style.paddingTop = height + 'px';
+            } else {
+                document.body.style.paddingTop = '';
+            }
+        }
+    } catch (e) {
+        console.warn('syncNavHeight error', e);
+    }
+}
+
+// Hide top-bar language selectors on small screens and ensure the mobile-menu copy is visible
+function updateTopLanguageVisibility() {
+    try {
+        const topSelectors = document.querySelectorAll('.nav-right .language-selector');
+        const mobileSelectors = document.querySelectorAll('.mobile-menu .language-selector');
+        const isMobile = window.innerWidth <= 768;
+
+        topSelectors.forEach(el => {
+            if (isMobile) {
+                // hide using inline styles to override page-specific CSS
+                el.style.display = 'none';
+                el.style.visibility = 'hidden';
+                el.style.opacity = '0';
+                el.style.pointerEvents = 'none';
+                el.style.width = '0';
+                el.style.margin = '0';
+                el.style.padding = '0';
+            } else {
+                el.style.display = '';
+                el.style.visibility = '';
+                el.style.opacity = '';
+                el.style.pointerEvents = '';
+                el.style.width = '';
+                el.style.margin = '';
+                el.style.padding = '';
+            }
+        });
+
+        mobileSelectors.forEach(el => {
+            if (isMobile) {
+                el.style.display = '';
+            } else {
+                // leave mobile copy visible on desktop (harmless) but no need to change
+                el.style.display = '';
+            }
+        });
+    } catch (e) {
+        console.warn('updateTopLanguageVisibility error', e);
+    }
+}
+
 // Shared navigation function
 function navigateToSection(section) {
     window.location.href = '../#' + section;
@@ -170,6 +240,16 @@ function navigateToSection(section) {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Sync nav height before initializing UI so layout offsets are correct on mobile
+    syncNavHeight();
+    // Re-sync on resize/orientation change
+    window.addEventListener('resize', syncNavHeight);
+    window.addEventListener('orientationchange', syncNavHeight);
+
     initializeLanguageSelector();
     initializeMobileMenu();
+    // Ensure top language selector visibility is correct on load
+    updateTopLanguageVisibility();
+    window.addEventListener('resize', updateTopLanguageVisibility);
+    window.addEventListener('orientationchange', updateTopLanguageVisibility);
 });
