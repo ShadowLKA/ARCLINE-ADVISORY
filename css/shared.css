@@ -1,3 +1,35 @@
+/* Global button styles - remove outline and tap highlights */
+button {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    box-shadow: none;
+}
+
+button:focus {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+}
+
+button:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+button:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+}
+
+button::-moz-focus-inner {
+    outline: none;
+    border: none;
+}
+
 /* Navigation container */
 .nav-container {
     display: grid;
@@ -117,12 +149,40 @@
     cursor: pointer;
     font-size: 0.9rem;
     font-weight: 600;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: color 0.35s ease, box-shadow 0.35s ease;
     width: 100%;
     box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
     letter-spacing: 0.2px;
     position: relative;
     overflow: hidden;
+    z-index: 1;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.language-btn:focus {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.language-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.language-btn:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+}
+
+.language-btn::-moz-focus-inner {
+    outline: none;
+    border: none;
 }
 
 .language-btn::before {
@@ -133,24 +193,19 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    transition: left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: left 0.4s ease-in-out;
+    will-change: left;
     z-index: -1;
+    pointer-events: none;
 }
 
 .language-btn:hover {
     color: white;
-    border-color: #667eea;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.35);
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
 }
 
 .language-btn:hover::before {
     left: 0;
-}
-
-.language-btn:active {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
 }
 
 .language-btn .globe-icon {
@@ -201,7 +256,7 @@
     opacity: 0;
     visibility: hidden;
     transform: translate(-50%, -8px) scale(0.95);
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: all 0.3s ease-in-out;
     z-index: 1000;
     width: var(--lang-dropdown-width);
     min-width: var(--lang-dropdown-width);
@@ -319,13 +374,40 @@
     padding: 0;
     margin-left: 1rem;
     z-index: 1001;
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.mobile-menu-btn:focus {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+}
+
+.mobile-menu-btn:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+.mobile-menu-btn:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: none;
+}
+
+.mobile-menu-btn::-moz-focus-inner {
+    outline: none;
+    border: none;
 }
 
 .mobile-menu-btn span {
     width: 100%;
     height: 2px;
     background-color: #333;
-    transition: all 0.3s linear;
+    transition: all 0.35s ease-in-out;
     position: relative;
     transform-origin: 1px;
 }
@@ -358,7 +440,7 @@
     transform: translateY(-100%);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    transition: all 0.4s ease-in-out;
     overflow-y: auto;
     z-index: 999;
 }
@@ -380,7 +462,7 @@
     margin: 1.5rem 0;
     transform: translateY(20px);
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.35s ease;
 }
 
 .mobile-menu.active li {
