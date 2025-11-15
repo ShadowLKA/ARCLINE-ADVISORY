@@ -8,7 +8,8 @@ async function initializeLanguageSelector() {
     const translations = {};
     const baseUrl = window.location.pathname.includes('/Program') || 
                    window.location.pathname.includes('/Strategic') || 
-                   window.location.pathname.includes('/Execution') ? '../' : '';
+                   window.location.pathname.includes('/Execution') ||
+                   window.location.pathname.includes('/Consultation') ? '../' : '';
 
     // Diagnostic: show computed baseUrl so it's easy to debug fetch path issues
     console.debug('[i18n] computed baseUrl =', baseUrl, 'current pathname=', window.location.pathname);
@@ -192,46 +193,7 @@ function syncNavHeight() {
     }
 }
 
-// Hide top-bar language selectors on small screens and ensure the mobile-menu copy is visible
-function updateTopLanguageVisibility() {
-    try {
-        const topSelectors = document.querySelectorAll('.nav-right .language-selector');
-        const mobileSelectors = document.querySelectorAll('.mobile-menu .language-selector');
-        const isMobile = window.innerWidth <= 768;
-
-        topSelectors.forEach(el => {
-            if (isMobile) {
-                // hide using inline styles to override page-specific CSS
-                el.style.display = 'none';
-                el.style.visibility = 'hidden';
-                el.style.opacity = '0';
-                el.style.pointerEvents = 'none';
-                el.style.width = '0';
-                el.style.margin = '0';
-                el.style.padding = '0';
-            } else {
-                el.style.display = '';
-                el.style.visibility = '';
-                el.style.opacity = '';
-                el.style.pointerEvents = '';
-                el.style.width = '';
-                el.style.margin = '';
-                el.style.padding = '';
-            }
-        });
-
-        mobileSelectors.forEach(el => {
-            if (isMobile) {
-                el.style.display = '';
-            } else {
-                // leave mobile copy visible on desktop (harmless) but no need to change
-                el.style.display = '';
-            }
-        });
-    } catch (e) {
-        console.warn('updateTopLanguageVisibility error', e);
-    }
-}
+// Remove old updateTopLanguageVisibility - fixed selector works on all screens now
 
 // Shared navigation function
 function navigateToSection(section) {
@@ -248,8 +210,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     initializeLanguageSelector();
     initializeMobileMenu();
-    // Ensure top language selector visibility is correct on load
-    updateTopLanguageVisibility();
-    window.addEventListener('resize', updateTopLanguageVisibility);
-    window.addEventListener('orientationchange', updateTopLanguageVisibility);
 });
