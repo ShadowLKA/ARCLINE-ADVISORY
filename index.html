@@ -14,6 +14,9 @@
         .container{max-width:1200px;margin:0 auto;padding:0 20px}
         nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);z-index:1000;padding:1rem 0;box-shadow:0 2px 20px rgba(0,0,0,.1);transition:all .3s ease}
         .nav-container{display:flex;justify-content:space-between;align-items:center}
+        .nav-left{display:flex;align-items:center;gap:2rem}
+        .nav-center{flex:1}
+        .nav-right{display:flex;align-items:center;gap:1rem;margin-left:auto}
         .logo{font-size:1.8rem;font-weight:bold;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .nav-links{display:flex;list-style:none;gap:2rem}
         .nav-links a{text-decoration:none;color:#333;font-weight:500;transition:color .3s ease}
@@ -43,6 +46,8 @@
         .hero-buttons{display:flex;gap:1rem;justify-content:center;opacity:0;animation:slideUp 1s ease .9s forwards}
         .btn-primary{background:white!important;color:#667eea!important;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s ease;border:none;outline:none;display:inline-block;cursor:pointer}
         .btn-primary:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,.2)}
+        .btn-consultation{background:white!important;color:#667eea!important;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s ease;border:none;outline:none;display:inline-block;cursor:pointer;margin-top:1rem;opacity:0;animation:slideUp 1s ease 1.1s forwards}
+        .btn-consultation:hover{transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,.2)}
         .btn-secondary{background:transparent!important;color:white!important;border:2px solid white;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all .3s ease;outline:none;display:inline-block;cursor:pointer}
         .btn-secondary:hover{background:white!important;color:#667eea!important}
         @keyframes slideUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
@@ -115,6 +120,7 @@
             .hero p{font-size:1.1rem;margin-bottom:2.5rem;padding:0 10px}
             .hero-buttons{flex-direction:column;align-items:center;gap:1rem;padding:0 20px}
             .btn-primary,.btn-secondary{width:100%;max-width:280px;text-align:center;padding:1rem 2rem;font-size:1rem}
+            .btn-consultation{width:100%;max-width:280px!important;text-align:center;padding:1rem 2rem!important;font-size:1rem!important}
             section{padding:3rem 0}
             .section-title{font-size:2rem;margin-bottom:2rem;padding:0 10px}
             .section-subtitle{font-size:1.1rem;margin-bottom:3rem;padding:0 10px}
@@ -213,6 +219,7 @@
                     <a href="#services" class="btn-primary" data-translate="hero_btn_services">Our Services</a>
                     <a href="#about" class="btn-secondary" data-translate="hero_btn_learn">Learn More</a>
                 </div>
+                <a href="Consultation/" class="btn-consultation" data-translate="hero_schedule_consultation">Schedule a Consultation</a>
             </div>
         </div>
     </section>
