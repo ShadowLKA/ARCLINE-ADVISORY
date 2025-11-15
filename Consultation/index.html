@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Schedule Consultation - ARCLINE ADVISORY</title>
+    <meta name="description" content="Schedule a strategic consultation with Arcline Advisory. Discuss your challenges, goals, and how we can support your organization.">
+    <link rel="stylesheet" href="../css/shared.css">
+    <!-- Supabase Configuration -->
+    <script src="../js/config.js"></script>
+    <script type="module" src="../js/supabase-config.js"></script>
+    <script src="../js/shared.js" defer></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        p, h1, h2, h3, h4, h5, h6, span, li, td, th, input, textarea, select {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        input, textarea, select {
+            -webkit-touch-callout: default;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .container-wide {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .hero {
+            height: 70vh;
+            min-height: 500px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.1)" points="0,0 1000,400 1000,1000 0,600"/></svg>');
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(1deg);
+            }
+        }
+
+        .hero-content {
+            color: white;
+            z-index: 10;
+            position: relative;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-alt {
+            padding: 5rem 0;
+            background: #f8f9fa;
+        }
+
+        /* Consultation Form Styles */
+        .consultation-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Segoe UI', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        /* Timeline/Process */
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .step h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .step p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* FAQ Styles */
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background: #f0f1fa;
+            color: #667eea;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .benefit-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                height: 60vh;
+                min-height: 400px;
+                margin-top: 70px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .consultation-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .section {
+                padding: 3rem 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .consultation-form {
+                padding: 1.5rem 1rem;
+            }
+
+            .faq-question {
+                padding: 1rem;
+            }
+
+            .faq-answer {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-left">
+                    <a href="../" class="logo" data-translate="site_brand">ARCLINE ADVISORY</a>
+                </div>
+                <div class="nav-center">
+                    <ul class="nav-links">
+                        <li><a href="../" data-translate="nav_home">Home</a></li>
+                        <li><a href="../#about" data-translate="nav_about">About</a></li>
+                        <li><a href="../#services" data-translate="nav_services">Services</a></li>
+                        <li><a href="../#contact" data-translate="nav_contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="nav-right">
+                    <div class="language-selector">
+                        <button class="language-btn">
+                            <span class="globe-icon">🌐</span>
+                            <span class="current-lang">EN</span>
+                        </button>
+                        <div class="language-dropdown">
+                            <div class="language-option active" data-lang="en">English</div>
+                            <div class="language-option" data-lang="ge">ქართული</div>
+                            <div class="language-option" data-lang="ru">Русский</div>
+                        </div>
+                    </div>
+                    <div class="mobile-menu-btn" id="mobileMenuBtn">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="../" data-translate="nav_home">Home</a></li>
+            <li><a href="../#about" data-translate="nav_about">About</a></li>
+            <li><a href="../#services" data-translate="nav_services">Services</a></li>
+            <li><a href="../#contact" data-translate="nav_contact">Contact</a></li>
+        </ul>
+        <div class="language-selector">
+            <button class="language-btn">
+                <span class="globe-icon">🌐</span>
+                <span class="current-lang">EN</span>
+            </button>
+            <div class="language-dropdown">
+                <div class="language-option active" data-lang="en">English</div>
+                <div class="language-option" data-lang="ge">ქართული</div>
+                <div class="language-option" data-lang="ru">Русский</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container-wide">
+            <div class="hero-content">
+                <h1 data-translate="consultation_hero_title">Schedule Your Strategic Consultation</h1>
+                <p data-translate="consultation_hero_desc">Connect with our senior advisors to discuss your strategic challenges, explore opportunities, and chart a path forward together.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Consultation Form Section -->
+        <section class="section">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem; color: #333;" data-translate="consultation_form_title">Let's Talk</h2>
+                <p style="text-align: center; color: #666; margin-bottom: 3rem; font-size: 1.1rem;" data-translate="consultation_form_subtitle">Tell us about your organization and what you'd like to discuss. One of our advisors will reach out within 24 hours.</p>
+
+                <form class="consultation-form" id="consultationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" data-translate="form_name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-translate="form_email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="organization" data-translate="form_organization">Organization</label>
+                            <input type="text" id="organization" name="organization">
+                        </div>
+                        <div class="form-group">
+                            <label for="role" data-translate="form_role">Your Role</label>
+                            <input type="text" id="role" name="role">
+                        </div>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="topic" data-translate="form_topic">Primary Topic of Interest</label>
+                        <select id="topic" name="topic" required>
+                            <option value="" data-translate="form_topic_select">-- Select a topic --</option>
+                            <option value="diplomacy" data-translate="form_topic_diplomacy">Strategic Diplomacy</option>
+                            <option value="risk" data-translate="form_topic_risk">Geopolitical Risk</option>
+                            <option value="market" data-translate="form_topic_market">Market Expansion</option>
+                            <option value="other" data-translate="form_topic_other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="message" data-translate="form_message">Tell us about your challenge or opportunity</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" data-translate="consultation_form_submit">Schedule Consultation</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="section-alt">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #333;" data-translate="consultation_process_title">Our Consultation Process</h2>
+
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4 data-translate="consultation_step1_title">Discovery Call</h4>
+                        <p data-translate="consultation_step1_desc">Initial conversation to understand your organization and objectives.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4 data-translate="consultation_step2_title">Assessment</h4>
+                        <p data-translate="consultation_step2_desc">We analyze your situation and identify key strategic priorities.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4 data-translate="consultation_step3_title">Recommendations</h4>
+                        <p data-translate="consultation_step3_desc">Customized insights and actionable recommendations tailored to your needs.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <h4 data-translate="consultation_step4_title">Next Steps</h4>
+                        <p data-translate="consultation_step4_desc">Partner with us for ongoing strategic support and implementation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="section">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #333;" data-translate="consultation_benefits_title">Why Consult with Arcline</h2>
+
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎯</div>
+                        <h3 data-translate="benefit_1_title">Senior Expertise</h3>
+                        <p data-translate="benefit_1_desc">Direct access to senior advisors with decades of global experience in strategy and geopolitics.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🌐</div>
+                        <h3 data-translate="benefit_2_title">Global Networks</h3>
+                        <p data-translate="benefit_2_desc">Leverage our established relationships with decision-makers across government, multilateral institutions, and industry.</p>
+                    </div>
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🔒</div>
+                        <h3 data-translate="benefit_3_title">Confidentiality</h3>
+                        <p data-translate="benefit_3_desc">Complete discretion and confidentiality in all discussions and recommendations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section-alt">
+            <div class="container" style="max-width: 800px;">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #333;" data-translate="consultation_faq_title">Frequently Asked Questions</h2>
+
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        <span data-translate="faq_q1">What should I prepare for our consultation?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-translate="faq_a1">We recommend having a clear overview of your organization's current situation, key challenges, and strategic objectives. However, our advisors can guide you through discovery, so no extensive preparation is required.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-translate="faq_q2">How long is a typical consultation?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-translate="faq_a2">Initial consultations typically run 60-90 minutes, allowing sufficient time to understand your needs and provide meaningful insights. Ongoing engagements can be customized to your requirements.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-translate="faq_q3">What is your typical response time?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-translate="faq_a3">We aim to respond to all consultation requests within 24 hours. For urgent matters, please indicate your timeline in the message field.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span data-translate="faq_q4">Is there a cost for an initial consultation?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-translate="faq_a4">Initial consultations are designed to be exploratory conversations at no cost. If you decide to move forward with an engagement, we'll discuss terms and scope with you directly.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <h2 data-translate="consultation_cta_title">Ready to Begin Your Strategic Journey?</h2>
+            <p data-translate="consultation_cta_desc">Submit the form above or reach out directly to schedule your consultation with one of our senior advisors.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-translate="footer_copyright">&copy; 2025 Arcline Advisory. All rights reserved. | Global Strategy for Health, Governance, and Innovation</p>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { submitConsultationForm } from '../js/supabase-config.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const form = document.getElementById('consultationForm');
+            const submitButton = form?.querySelector('.btn-submit');
+            const originalButtonText = submitButton?.textContent || 'Schedule Consultation';
+            
+            if (form) {
+                form.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Disable submit button to prevent double submissions
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = 'Submitting...';
+                    }
+                    
+                    const formData = {
+                        name: document.getElementById('name').value.trim(),
+                        email: document.getElementById('email').value.trim(),
+                        organization: document.getElementById('organization').value.trim(),
+                        role: document.getElementById('role').value.trim(),
+                        topic: document.getElementById('topic').value,
+                        message: document.getElementById('message').value.trim()
+                    };
+
+                    try {
+                        // Submit to Supabase
+                        const result = await submitConsultationForm(formData);
+                        
+                        if (result.success) {
+                            // Show success message
+                            alert('Thank you for scheduling a consultation! We will contact you within 24 hours.');
+                            form.reset();
+                        } else {
+                            // Show error message
+                            alert('Sorry, there was an error submitting your consultation request. Please try again or contact us directly.');
+                            console.error('Submission error:', result.error);
+                        }
+                    } catch (error) {
+                        console.error('Unexpected error:', error);
+                        alert('Sorry, there was an unexpected error. Please try again or contact us directly.');
+                    } finally {
+                        // Re-enable submit button
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.textContent = originalButtonText;
+                        }
+                    }
+                });
+            }
+
+            // FAQ Toggle Functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', function() {
+                    const item = this.parentElement;
+                    // Close other items
+                    document.querySelectorAll('.faq-item').forEach(faq => {
+                        if (faq !== item) {
+                            faq.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Navbar scroll effect
+            let ticking = false;
+            function updateNavbar() {
+                const navbar = document.getElementById('navbar');
+                if (navbar) {
+                    if (window.scrollY > 50) {
+                        navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
+                    } else {
+                        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                        navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+                    }
+                }
+                ticking = false;
+            }
+
+            function requestNavbarUpdate() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNavbar);
+                    ticking = true;
+                }
+            }
+
+            window.addEventListener('scroll', requestNavbarUpdate, { passive: true });
+
+            // Benefit cards animation
+            document.querySelectorAll('.benefit-card').forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
